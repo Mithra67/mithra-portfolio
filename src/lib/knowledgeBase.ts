@@ -25,7 +25,7 @@ const replies: Reply[] = [
   {
     match: (q) => has(q, "project", "build", "portfolio", "case"),
     answer: () =>
-      projects.map((p) => `• ${p.title} — ${p.tagline}`).join("\n"),
+      projects.map((p) => `• ${p.title} — ${p.subtitle}`).join("\n"),
   },
   {
     match: (q) => has(q, "education", "study", "college", "degree", "gpa"),

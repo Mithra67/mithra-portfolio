@@ -11,7 +11,7 @@ import {
   SiKubernetes,
   SiDocker,
   SiApachekafka,
-  SiSonarqube,
+  SiSonarqubeserver,
   SiSonatype,
   SiJfrog,
   SiSpringboot,
@@ -140,7 +140,7 @@ export const skills: Skill[] = [
   { name: "Kubernetes", Icon: SiKubernetes, color: "#326CE5", category: "devops" },
   { name: "Docker", Icon: SiDocker, color: "#2496ED", category: "devops" },
   { name: "Kafka", Icon: SiApachekafka, color: "#E30022", category: "devops" },
-  { name: "SonarQube", Icon: SiSonarqube, color: "#4E9BCD", category: "devops" },
+  { name: "SonarQube", Icon: SiSonarqubeserver, color: "#4E9BCD", category: "devops" },
   { name: "Nexus", Icon: SiSonatype, color: "#00BFFF", category: "devops" },
   { name: "JFrog", Icon: SiJfrog, color: "#40BE46", category: "devops" },
 
