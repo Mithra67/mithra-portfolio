@@ -1,57 +1,92 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading } from "@/components/ui/Reveal";
-import { skills } from "@/lib/data";
+import { skills, skillCategories, type SkillCategory } from "@/lib/data";
 
 export function Skills() {
+  const [active, setActive] = useState<SkillCategory | "all">("all");
+  const filtered = active === "all" ? skills : skills.filter((s) => s.category === active);
+
   return (
     <section id="skills" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Expertise"
           title="An orbital grid of capabilities"
-          description="Hover any skill — each card breathes with its own rhythm and lights up in its brand color."
+          description="Filter by domain — each card breathes with its own rhythm and lights up in its brand color."
         />
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {skills.map((s, i) => (
-            <motion.div
-              key={s.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.04 }}
-              animate={{ y: [0, -8, 0] }}
-              style={{ animationDelay: `${i * 0.2}s` }}
-              whileHover={{ scale: 1.06 }}
-            >
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 3 + (i % 4) * 0.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: (i % 5) * 0.3,
-                }}
-                className="glass group flex h-32 flex-col items-center justify-center gap-2 rounded-2xl p-4 transition-all hover:border-[var(--hover-c)]"
-                style={
-                  {
-                    ["--hover-c" as string]: s.color,
-                  } as React.CSSProperties
-                }
-              >
-                <s.Icon
-                  className="h-8 w-8 text-foreground/80 transition-all duration-300 group-hover:scale-110"
-                  style={{ color: s.color }}
-                />
-                <span className="text-sm font-medium">{s.name}</span>
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{ boxShadow: `0 0 30px -5px ${s.color}66` }}
-                />
-              </motion.div>
-            </motion.div>
+
+        <div className="mb-10 flex flex-wrap justify-center gap-2">
+          <FilterPill active={active === "all"} onClick={() => setActive("all")}>
+            All
+          </FilterPill>
+          {skillCategories.map((c) => (
+            <FilterPill key={c.id} active={active === c.id} onClick={() => setActive(c.id)}>
+              {c.label}
+            </FilterPill>
           ))}
         </div>
+
+        <motion.div layout className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((s, i) => (
+              <motion.div
+                key={s.name}
+                layout
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.85 }}
+                transition={{ duration: 0.35, delay: (i % 12) * 0.03 }}
+                whileHover={{ scale: 1.06 }}
+              >
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{
+                    duration: 3 + (i % 4) * 0.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: (i % 5) * 0.3,
+                  }}
+                  className="glass group relative flex h-32 flex-col items-center justify-center gap-2 rounded-2xl p-4 transition-all"
+                >
+                  <s.Icon
+                    className="h-8 w-8 transition-all duration-300 group-hover:scale-110"
+                    style={{ color: s.color }}
+                  />
+                  <span className="text-center text-xs font-medium leading-tight">{s.name}</span>
+                  <div
+                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{ boxShadow: `0 0 30px -5px ${s.color}80` }}
+                  />
+                </motion.div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+function FilterPill({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-all ${
+        active
+          ? "border-primary bg-primary text-primary-foreground glow-primary"
+          : "border-glass-border bg-card/30 text-muted-foreground hover:bg-primary/10 hover:text-foreground"
+      }`}
+    >
+      {children}
+    </button>
   );
 }
