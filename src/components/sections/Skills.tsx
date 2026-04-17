@@ -37,27 +37,30 @@ export function Skills() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.85 }}
                 transition={{ duration: 0.35, delay: (i % 12) * 0.03 }}
-                whileHover={{ scale: 1.06 }}
+                whileHover={{ scale: 1.15 }}
+                className="flex items-center justify-center"
               >
                 <motion.div
-                  animate={{ y: [0, -8, 0] }}
+                  animate={{ y: [0, -10, 0] }}
                   transition={{
                     duration: 3 + (i % 4) * 0.5,
                     repeat: Infinity,
                     ease: "easeInOut",
                     delay: (i % 5) * 0.3,
                   }}
-                  className="glass group relative flex h-32 flex-col items-center justify-center gap-2 rounded-2xl p-4 transition-all"
+                  className="group relative flex h-28 flex-col items-center justify-center gap-2 p-2"
                 >
-                  <s.Icon
-                    className="h-8 w-8 transition-all duration-300 group-hover:scale-110"
-                    style={{ color: s.color }}
-                  />
-                  <span className="text-center text-xs font-medium leading-tight">{s.name}</span>
                   <div
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    style={{ boxShadow: `0 0 30px -5px ${s.color}80` }}
+                    className="pointer-events-none absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-90"
+                    style={{ background: s.color }}
                   />
+                  <s.Icon
+                    className="relative h-10 w-10 transition-all duration-300 group-hover:scale-110"
+                    style={{ color: s.color, filter: `drop-shadow(0 4px 12px ${s.color}40)` }}
+                  />
+                  <span className="relative text-center text-[11px] font-medium leading-tight text-muted-foreground transition-colors group-hover:text-foreground">
+                    {s.name}
+                  </span>
                 </motion.div>
               </motion.div>
             ))}
