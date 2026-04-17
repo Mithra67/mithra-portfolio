@@ -63,8 +63,8 @@
 }
 
 :root.light {
-  --background: oklch(0.985 0.005 285);
-  --foreground: oklch(0.18 0.012 280);
+  --background: oklch(0.95 0.035 305);
+  --foreground: oklch(0.2 0.04 295);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.012 280);
   --popover: oklch(1 0 0);
