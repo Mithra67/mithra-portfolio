@@ -1,26 +1,48 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ThemeProvider } from "@/lib/theme";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { Experience } from "@/components/sections/Experience";
+import { Academics } from "@/components/sections/Academics";
+import { Skills } from "@/components/sections/Skills";
+import { Projects } from "@/components/sections/Projects";
+import { Contact } from "@/components/sections/Contact";
+import { DigitalGuardian } from "@/components/sections/DigitalGuardian";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Sangamithra D — Product Developer Portfolio" },
+      {
+        name: "description",
+        content:
+          "Strategic Product Developer engineering high-performance, scalable enterprise applications with role-based security and seamless UX.",
+      },
+      { property: "og:title", content: "Sangamithra D — Product Developer" },
+      {
+        property: "og:description",
+        content: "Premium portfolio: React 19, TypeScript, RBAC, enterprise UX.",
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <ThemeProvider>
+      <div className="min-h-screen">
+        <Navbar />
+        <main>
+          <Hero />
+          <Experience />
+          <Academics />
+          <Skills />
+          <Projects />
+          <Contact />
+        </main>
+        <DigitalGuardian />
+      </div>
+    </ThemeProvider>
+  );
 }
