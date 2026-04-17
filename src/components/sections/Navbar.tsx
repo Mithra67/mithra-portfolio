@@ -3,10 +3,11 @@ import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 
 const links = [
-  { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
+  { href: "#academics", label: "Academics" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
+  { href: "#certifications", label: "Certs" },
   { href: "#contact", label: "Contact" },
 ];
 
