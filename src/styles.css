@@ -135,18 +135,20 @@
   .glow-strong {
     box-shadow: 0 0 40px -5px color-mix(in oklab, var(--color-primary) 60%, transparent);
   }
-  /* Hover glow background — the card surface itself lights up on hover */
+  /* Hover glow background — the card surface itself lights up on hover.
+     Cards may set --card-accent (any CSS color) to override the primary purple. */
   .card-hover-glow {
     position: relative;
+    --card-accent: var(--color-primary);
     transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
   }
   .card-hover-glow:hover {
-    background: color-mix(in oklab, var(--color-primary) 14%, var(--color-glass));
-    border-color: color-mix(in oklab, var(--color-primary) 70%, transparent);
+    background: color-mix(in oklab, var(--card-accent) 16%, var(--color-glass));
+    border-color: color-mix(in oklab, var(--card-accent) 75%, transparent);
     box-shadow:
-      0 0 0 1px color-mix(in oklab, var(--color-primary) 50%, transparent),
-      0 20px 60px -20px color-mix(in oklab, var(--color-primary) 60%, transparent),
-      inset 0 1px 0 0 color-mix(in oklab, white 8%, transparent);
+      0 0 0 1px color-mix(in oklab, var(--card-accent) 55%, transparent),
+      0 22px 60px -20px color-mix(in oklab, var(--card-accent) 65%, transparent),
+      inset 0 1px 0 0 color-mix(in oklab, white 9%, transparent);
     transform: translateY(-2px);
   }
   .pulse-dot {

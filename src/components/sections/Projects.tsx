@@ -22,6 +22,7 @@ export function Projects() {
             <motion.article
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 240, damping: 18 }}
+              style={{ ["--card-accent" as string]: featured.accent }}
               className="card-hover-glow glass group relative mb-8 grid overflow-hidden rounded-3xl md:grid-cols-2"
             >
               <div className="relative aspect-[16/10] overflow-hidden md:aspect-auto">
@@ -95,6 +96,7 @@ export function Projects() {
               <motion.article
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 240, damping: 18 }}
+                style={{ ["--card-accent" as string]: p.accent }}
                 className="card-hover-glow glass group relative flex h-full flex-col overflow-hidden rounded-2xl"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
