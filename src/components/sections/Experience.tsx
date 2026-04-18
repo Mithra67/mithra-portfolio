@@ -33,6 +33,8 @@ export function Experience() {
           <ul className="space-y-12">
             {experience.map((e, i) => {
               const left = i % 2 === 0;
+              const accents = ["#A855F7", "#06B6D4", "#10B981", "#F59E0B"];
+              const accent = accents[i % accents.length];
               return (
                 <Reveal key={e.company} delay={i * 0.06}>
                   <li className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12">
@@ -81,10 +83,14 @@ export function Experience() {
                       <motion.div
                         whileHover={{ y: -4 }}
                         transition={{ type: "spring", stiffness: 240, damping: 18 }}
+                        style={{ ["--card-accent" as string]: accent }}
                         className="card-hover-glow glass relative overflow-hidden rounded-2xl p-6"
                       >
                         {/* gradient corner accent */}
-                        <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-3xl" />
+                        <div
+                          className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-30 blur-3xl"
+                          style={{ background: accent }}
+                        />
 
                         <div className="mb-3 flex items-center gap-2 text-xs text-primary">
                           <Briefcase className="h-3.5 w-3.5" />

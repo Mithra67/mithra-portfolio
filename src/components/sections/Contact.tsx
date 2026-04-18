@@ -28,15 +28,17 @@ export function Contact() {
           </p>
         </motion.div>
 
-        {/* Asymmetric grid */}
-        <div className="grid gap-4 md:grid-cols-6">
+        {/* Compact balanced bento — no awkward empty gaps */}
+        <div className="grid gap-4 md:grid-cols-3 md:grid-rows-2">
+          {/* Email — hero tile, spans 2 cols x 2 rows */}
           <motion.a
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             href={`mailto:${profile.email}`}
-            className="card-hover-glow glass group relative col-span-1 flex flex-col justify-between overflow-hidden rounded-3xl p-7 md:col-span-4 md:row-span-2 md:min-h-[280px]"
+            style={{ ["--card-accent" as string]: "#A855F7" }}
+            className="card-hover-glow glass group relative flex flex-col justify-between overflow-hidden rounded-3xl p-7 md:col-span-2 md:row-span-2 md:min-h-[260px]"
           >
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
@@ -46,62 +48,64 @@ export function Contact() {
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Drop a line — usually a reply within a day.</p>
-              <p className="mt-2 break-all text-2xl font-bold md:text-3xl">{profile.email}</p>
+              <p className="mt-2 break-all text-xl font-bold md:text-2xl">{profile.email}</p>
             </div>
           </motion.a>
 
+          {/* LinkedIn */}
           <SocialTile
             href={profile.links.linkedin}
             label="LinkedIn"
             handle="/in/sangamithra-d"
             Icon={Linkedin}
-            colspan="md:col-span-2"
+            accent="#0A66C2"
             delay={0.1}
           />
 
+          {/* GitHub */}
           <SocialTile
             href={profile.links.github}
             label="GitHub"
             handle="github.com"
             Icon={Github}
-            colspan="md:col-span-2"
+            accent="#8B5CF6"
             delay={0.15}
           />
 
+          {/* Location */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="card-hover-glow glass col-span-1 rounded-3xl p-6 md:col-span-3"
+            style={{ ["--card-accent" as string]: "#06B6D4" }}
+            className="card-hover-glow glass rounded-3xl p-6"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
               <MapPin className="h-3 w-3" /> Based in
             </span>
-            <p className="mt-3 text-2xl font-bold">India · Remote-friendly</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Working across IST · open to GMT, EST, CET overlaps.
-            </p>
+            <p className="mt-3 text-lg font-bold">India · Remote</p>
+            <p className="mt-1 text-xs text-muted-foreground">IST · GMT, EST, CET overlaps.</p>
           </motion.div>
 
+          {/* Status */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="card-hover-glow glass col-span-1 rounded-3xl p-6 md:col-span-3"
+            style={{ ["--card-accent" as string]: "#10B981" }}
+            className="card-hover-glow glass rounded-3xl p-6"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inset-0 rounded-full bg-primary pulse-dot" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              Status
+              Available
             </span>
-            <p className="mt-3 text-2xl font-bold">Available for new product work</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Best fit: enterprise React, RBAC, design-system led teams.
-            </p>
+            <p className="mt-3 text-lg font-bold">Open for product work</p>
+            <p className="mt-1 text-xs text-muted-foreground">Enterprise React · RBAC · Design systems.</p>
           </motion.div>
         </div>
 
@@ -128,14 +132,14 @@ function SocialTile({
   label,
   handle,
   Icon,
-  colspan,
+  accent,
   delay,
 }: {
   href: string;
   label: string;
   handle: string;
   Icon: React.ComponentType<{ className?: string }>;
-  colspan: string;
+  accent: string;
   delay: number;
 }) {
   return (
@@ -147,17 +151,27 @@ function SocialTile({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={`card-hover-glow glass group relative col-span-1 flex flex-col justify-between rounded-3xl p-6 ${colspan}`}
+      style={{ ["--card-accent" as string]: accent }}
+      className="card-hover-glow glass group relative flex flex-col justify-between rounded-3xl p-6"
     >
       <div className="flex items-center justify-between">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
+        <div
+          className="flex h-10 w-10 items-center justify-center rounded-xl"
+          style={{
+            background: `color-mix(in oklab, ${accent} 18%, transparent)`,
+            color: accent,
+          }}
+        >
           <Icon className="h-5 w-5" />
         </div>
-        <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+        <ArrowUpRight
+          className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          style={{ ["--tw-text-opacity" as string]: 1 }}
+        />
       </div>
-      <div className="mt-6">
+      <div className="mt-4">
         <p className="text-xs uppercase tracking-wider text-muted-foreground">{label}</p>
-        <p className="mt-1 text-lg font-bold">{handle}</p>
+        <p className="mt-1 text-base font-bold">{handle}</p>
       </div>
     </motion.a>
   );

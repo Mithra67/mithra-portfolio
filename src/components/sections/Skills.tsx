@@ -53,7 +53,7 @@ export function Skills() {
         </div>
 
         {/* Pyramid */}
-        <motion.div layout className="flex flex-col items-center gap-6 sm:gap-7">
+        <motion.div layout className="flex flex-col items-center gap-3 sm:gap-4">
           <AnimatePresence mode="popLayout">
             {rows.map((row, rIdx) => (
               <motion.div
@@ -63,7 +63,7 @@ export function Skills() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4, delay: rIdx * 0.05 }}
-                className="flex flex-wrap items-center justify-center gap-4 sm:gap-6"
+                className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
               >
                 {row.map((s, i) => {
                   const idx = rIdx * 5 + i;
@@ -82,7 +82,7 @@ export function Skills() {
                           ease: "easeInOut",
                           delay: (idx % 5) * 0.3,
                         }}
-                        className="group relative flex w-20 flex-col items-center gap-1.5 sm:w-24"
+                        className="group relative flex w-16 flex-col items-center gap-1 sm:w-20"
                       >
                         {/* Aura */}
                         <div
