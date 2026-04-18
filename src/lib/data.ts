@@ -60,7 +60,7 @@ export const profile = {
   name: "Sangamithra D",
   role: "Product Developer",
   bio: "Strategic Product Developer dedicated to engineering high-performance, scalable enterprise applications with a core emphasis on role-based security architectures and seamless user experiences.",
-  email: "sangamithra.d@example.com",
+  email: "duraisamysangamithra19@gmail.com",
   links: {
     linkedin: "https://linkedin.com/in/sangamithra-d/",
     github: "https://github.com/",
@@ -84,15 +84,15 @@ export const experience: ExperienceItem[] = [
     role: "Product Developer",
     period: "Dec 2024 — Present",
     description:
-      "Spearheading enterprise UI development with React 19 + TypeScript. Architecting RBAC layers, performant data dashboards, and design-system primitives consumed across product teams.",
+      "Engineered scalable frontend systems using React & TypeScript across multiple product modules and implemented RBAC-driven UI architecture for secure, role-based access control.",
     type: "Full-time",
     active: true,
     highlights: [
-      "Owned RBAC + permission modeling for the platform",
-      "Shipped performance dashboards with Apache ECharts",
-      "Reduced first-load by 38% via route-level code-splitting",
+      "Built interactive dashboards with advanced 2D/3D visualizations and drill-down analytics",
+      "Integrated REST APIs with efficient state, error, and data handling",
+      "Contributed to greenfield feature design, driving product enhancements and UX improvements",
     ],
-    stack: ["React 19", "TypeScript", "Redux Toolkit", "ECharts", "Spring Boot"],
+    stack: ["React", "TypeScript", "Redux Toolkit", "ECharts", "Three.js", "REST APIs"],
   },
   {
     company: "Stark Institutions",
@@ -151,14 +151,13 @@ export const education = [
 ];
 
 export const certifications = [
-  { name: "Full Stack Developer", issuer: "DevOpsLabs", year: "2024", Icon: LuAward },
-  { name: "Data Analytics", issuer: "Bharathiar University", year: "2024", Icon: SiPostgresql },
-  { name: "Certified Diamond Grading", issuer: "IGI", year: "2023", Icon: LuGem },
-  { name: "Python Certification", issuer: "Stark Institutions", year: "2024", Icon: SiPython },
-  { name: "React Advanced Patterns", issuer: "Self-paced · 2025", year: "2025", Icon: SiReact },
-  { name: "TypeScript Mastery", issuer: "Self-paced · 2025", year: "2025", Icon: SiTypescript },
-  { name: "Prompt Engineering for Devs", issuer: "Anthropic Academy", year: "2025", Icon: SiAnthropic },
-  { name: "Cloud Native Foundations", issuer: "DevOpsLabs Internal", year: "2025", Icon: SiDocker },
+  { name: "Full Stack Developer", issuer: "Stark Institutions", year: "2024", Icon: LuAward, accent: "#A855F7" },
+  { name: "Data Analytics", issuer: "Self-paced", year: "2024", Icon: SiPostgresql, accent: "#06B6D4" },
+  { name: "Diamond Grading", issuer: "Diamonds India", year: "2023", Icon: LuGem, accent: "#F59E0B" },
+  { name: "Python Certification", issuer: "Self-paced", year: "2024", Icon: SiPython, accent: "#3B82F6" },
+  { name: "React Advanced Patterns", issuer: "Self-paced · 2025", year: "2025", Icon: SiReact, accent: "#61DBFB" },
+  { name: "TypeScript Mastery", issuer: "Self-paced · 2025", year: "2025", Icon: SiTypescript, accent: "#3178C6" },
+  { name: "Prompt Engineering for Devs", issuer: "Anthropic Academy", year: "2025", Icon: SiAnthropic, accent: "#D97757" },
 ];
 
 export type SkillCategory =
@@ -292,23 +291,25 @@ export const projects: Project[] = [
   },
   {
     title: "Developer Sprint Flow",
-    subtitle: "Flow dashboards",
+    subtitle: "End-to-end sprint command center",
     description:
-      "Responsive, interactive dashboards for sprint planning — focused on data visualization, smart filters, and a frictionless authoring experience for engineering managers.",
-    tags: ["React JS", "SCSS", "UI/UX"],
+      "A complete sprint operations dashboard — date-wise sprint planning, live progress burndown, team worklog tracking, threaded collaboration on tickets, and AI-generated + manually authored Jira tickets in one unified view.",
+    tags: ["React", "SCSS", "Jira API", "Dashboards", "AI Tickets"],
     category: "Dashboard",
     period: "Feb 2025",
     image: projectSprint,
     accent: "#06B6D4",
     metrics: [
-      { label: "Filters", value: "12" },
-      { label: "Charts", value: "9" },
+      { label: "Sprint views", value: "6" },
+      { label: "Live charts", value: "9" },
+      { label: "AI tickets", value: "150+" },
     ],
     stageTools: [
-      { name: "Wireframe", Icon: SiFigma, color: "#F24E1E" },
-      { name: "Develop", Icon: SiReact, color: "#61DBFB" },
+      { name: "Plan", Icon: SiJira, color: "#4F8FE0" },
+      { name: "Design", Icon: SiFigma, color: "#F24E1E" },
+      { name: "Build", Icon: SiReact, color: "#61DBFB" },
       { name: "Review", Icon: SiBruno, color: "#F37021" },
-      { name: "Commit", Icon: SiGithub, color: "#E5E5E5" },
+      { name: "Ship", Icon: SiGithub, color: "#E5E5E5" },
     ],
   },
   {
@@ -336,5 +337,5 @@ export const heroStats = [
   { value: "3+", label: "Years building", Icon: LuRocket },
   { value: "9.0", label: "Master's CGPA", Icon: LuMedal },
   { value: "40+", label: "Tools mastered", Icon: LuZap },
-  { value: "8", label: "Certifications", Icon: LuTrophy },
+  { value: "7", label: "Certifications", Icon: LuTrophy },
 ];
