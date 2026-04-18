@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Heart } from "lucide-react";
 import { profile } from "@/lib/data";
 
 export function Contact() {
@@ -7,11 +7,10 @@ export function Contact() {
     <section id="contact" className="relative overflow-hidden px-6 pb-12 pt-24">
       {/* ambient glow */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96">
-        <div className="mx-auto h-full w-[80%] rounded-full bg-primary/20 blur-3xl" />
+        <div className="aurora-blob mx-auto h-full w-[80%] rounded-full bg-primary/20 blur-3xl" />
       </div>
 
       <div className="mx-auto max-w-6xl">
-        {/* Big marquee headline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,18 +22,21 @@ export function Contact() {
           <h2 className="text-[clamp(2.5rem,8vw,6rem)] font-extrabold leading-[0.95] tracking-tight">
             Let's build <span className="text-gradient">something great.</span>
           </h2>
+          <p className="mx-auto mt-5 max-w-xl text-sm text-muted-foreground">
+            I'm currently taking on a small number of product engagements for 2025 — enterprise
+            React, RBAC platforms, and design-system led teams.
+          </p>
         </motion.div>
 
         {/* Asymmetric grid */}
         <div className="grid gap-4 md:grid-cols-6">
-          {/* Email — large card */}
           <motion.a
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             href={`mailto:${profile.email}`}
-            className="glass group relative col-span-1 flex flex-col justify-between overflow-hidden rounded-3xl p-7 transition-all hover:glow-primary md:col-span-4 md:row-span-2 md:min-h-[280px]"
+            className="card-hover-glow glass group relative col-span-1 flex flex-col justify-between overflow-hidden rounded-3xl p-7 md:col-span-4 md:row-span-2 md:min-h-[280px]"
           >
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
@@ -48,7 +50,6 @@ export function Contact() {
             </div>
           </motion.a>
 
-          {/* LinkedIn */}
           <SocialTile
             href={profile.links.linkedin}
             label="LinkedIn"
@@ -58,7 +59,6 @@ export function Contact() {
             delay={0.1}
           />
 
-          {/* GitHub */}
           <SocialTile
             href={profile.links.github}
             label="GitHub"
@@ -68,13 +68,12 @@ export function Contact() {
             delay={0.15}
           />
 
-          {/* Location */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass col-span-1 rounded-3xl p-6 md:col-span-3"
+            className="card-hover-glow glass col-span-1 rounded-3xl p-6 md:col-span-3"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
               <MapPin className="h-3 w-3" /> Based in
@@ -85,13 +84,12 @@ export function Contact() {
             </p>
           </motion.div>
 
-          {/* Status */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="glass col-span-1 rounded-3xl p-6 md:col-span-3"
+            className="card-hover-glow glass col-span-1 rounded-3xl p-6 md:col-span-3"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
               <span className="relative flex h-2 w-2">
@@ -107,12 +105,18 @@ export function Contact() {
           </motion.div>
         </div>
 
-        {/* Footer line */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-3 border-t border-glass-border pt-6 text-xs text-muted-foreground sm:flex-row">
-          <span>© {new Date().getFullYear()} {profile.name}. Crafted with intent.</span>
-          <span className="flex items-center gap-2">
-            Built with React 19 · TypeScript · Framer Motion
-          </span>
+        {/* Footer line — refined, no "built with" */}
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-glass-border pt-8 text-xs text-muted-foreground sm:flex-row">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inset-0 rounded-full bg-primary pulse-dot" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            </span>
+            <span className="font-semibold tracking-[0.2em] text-foreground">
+              SANGAMITHRA D
+            </span>
+          </div>
+          <span>© {new Date().getFullYear()} · Designed & engineered with <Heart className="inline h-3 w-3 fill-primary text-primary" /> in India</span>
         </div>
       </div>
     </section>
@@ -143,7 +147,7 @@ function SocialTile({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={`glass group relative col-span-1 flex flex-col justify-between rounded-3xl p-6 transition-all hover:glow-primary ${colspan}`}
+      className={`card-hover-glow glass group relative col-span-1 flex flex-col justify-between rounded-3xl p-6 ${colspan}`}
     >
       <div className="flex items-center justify-between">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
