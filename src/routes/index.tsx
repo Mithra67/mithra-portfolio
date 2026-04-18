@@ -9,6 +9,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
 import { DigitalGuardian } from "@/components/sections/DigitalGuardian";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -33,6 +34,7 @@ function Index() {
   return (
     <ThemeProvider>
       <div className="min-h-screen">
+        <ScrollProgress />
         <Navbar />
         <main>
           <Hero />

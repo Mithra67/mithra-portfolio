@@ -1,21 +1,41 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Github, Linkedin, MapPin, Sparkles } from "lucide-react";
-import { profile } from "@/lib/data";
+import { useRef } from "react";
+import { profile, heroStats, skills } from "@/lib/data";
 
 export function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const orbY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const titleY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  // Marquee skill names — pulled from real data, so it stays in sync
+  const marquee = skills.slice(0, 18).map((s) => s.name);
+
   return (
     <section
       id="top"
-      className="relative overflow-hidden px-6 pb-24 pt-36 md:pt-44"
+      ref={ref}
+      className="relative overflow-hidden px-6 pb-28 pt-36 md:pt-44"
     >
-      {/* ambient orbs */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-primary/30 blur-3xl" />
-        <div className="absolute right-0 top-40 h-96 w-96 rounded-full bg-primary-glow/25 blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
-      </div>
+      {/* Animated grid backdrop */}
+      <div className="pointer-events-none absolute inset-0 -z-20 grid-fade" />
 
-      <div className="mx-auto max-w-6xl">
+      {/* Aurora orbs with parallax */}
+      <motion.div
+        style={{ y: orbY }}
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
+        <div className="aurora-blob absolute -left-24 top-20 h-72 w-72 rounded-full bg-primary/40 blur-3xl" />
+        <div className="aurora-blob absolute right-0 top-40 h-96 w-96 rounded-full bg-primary-glow/30 blur-3xl" style={{ animationDelay: "-3s" }} />
+        <div className="aurora-blob absolute bottom-0 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl" style={{ animationDelay: "-6s" }} />
+      </motion.div>
+
+      <motion.div style={{ y: titleY, opacity: titleOpacity }} className="mx-auto max-w-6xl">
         {/* Status bar */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -27,16 +47,13 @@ export function Hero() {
             <span className="absolute inset-0 rounded-full bg-primary pulse-dot" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          <span className="text-muted-foreground">
-            Open to product collaborations · 2025
-          </span>
+          <span className="text-muted-foreground">Open to product collaborations · 2025</span>
           <span className="h-3 w-px bg-glass-border" />
           <span className="inline-flex items-center gap-1 text-foreground/80">
             <MapPin className="h-3 w-3 text-primary" /> India
           </span>
         </motion.div>
 
-        {/* Centered display name */}
         <div className="text-center">
           <motion.p
             initial={{ opacity: 0 }}
@@ -47,19 +64,34 @@ export function Hero() {
             Product · Design · Engineering
           </motion.p>
 
+          {/* Animated split-letter name */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            initial="hidden"
+            animate="show"
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.05, delayChildren: 0.15 } },
+            }}
             className="mt-6 text-[clamp(2.75rem,9vw,7rem)] font-extrabold leading-[0.95] tracking-tight"
           >
-            <span className="text-gradient">{profile.name}</span>
+            {profile.name.split("").map((ch, i) => (
+              <motion.span
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 40, rotateX: -90 },
+                  show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+                }}
+                className={`inline-block ${ch === " " ? "w-[0.4em]" : "text-gradient"}`}
+              >
+                {ch === " " ? "\u00A0" : ch}
+              </motion.span>
+            ))}
           </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
             className="mx-auto mt-5 inline-flex flex-wrap items-center justify-center gap-2 text-base text-muted-foreground md:text-lg"
           >
             <Tag>Product Developer</Tag>
@@ -70,7 +102,7 @@ export function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
             className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-muted-foreground"
           >
             {profile.bio}
@@ -79,7 +111,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
+            transition={{ duration: 0.7, delay: 0.8 }}
             className="mt-9 flex flex-wrap items-center justify-center gap-3"
           >
             <a
@@ -106,19 +138,62 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Stat strip */}
+        {/* Animated stat strip with hover glow */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="glass mx-auto mt-16 grid max-w-4xl grid-cols-2 divide-glass-border rounded-2xl text-center sm:grid-cols-4 sm:divide-x"
+          transition={{ duration: 0.8, delay: 1 }}
+          className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4"
         >
-          <Stat value="3+" label="Years building" />
-          <Stat value="9.0" label="Master's CGPA" />
-          <Stat value="30+" label="Tools mastered" />
-          <Stat value="4" label="Certifications" />
+          {heroStats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 280, damping: 18 }}
+              className="card-hover-glow glass relative overflow-hidden rounded-2xl p-5 text-center"
+              style={{ animationDelay: `${i * 0.1}s` }}
+            >
+              <s.Icon className="mx-auto mb-2 h-5 w-5 text-primary" />
+              <div className="text-2xl font-extrabold text-gradient md:text-3xl">{s.value}</div>
+              <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                {s.label}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
+      </motion.div>
+
+      {/* Live skill marquee — gives a "moving" feel to the page */}
+      <div className="relative mt-20 overflow-hidden">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
+        <div className="marquee-track flex w-max gap-3 whitespace-nowrap">
+          {[...marquee, ...marquee].map((name, i) => (
+            <span
+              key={i}
+              className="rounded-full border border-glass-border bg-card/30 px-4 py-1.5 text-xs text-muted-foreground"
+            >
+              {name}
+            </span>
+          ))}
+        </div>
       </div>
+
+      {/* Scroll cue */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 0.8 }}
+        className="mt-12 flex items-center justify-center"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="flex h-9 w-5 items-start justify-center rounded-full border border-glass-border p-1"
+        >
+          <span className="h-1.5 w-1 rounded-full bg-primary" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
@@ -150,16 +225,5 @@ function IconLink({
     >
       {children}
     </a>
-  );
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="px-4 py-5">
-      <div className="text-2xl font-extrabold text-gradient md:text-3xl">{value}</div>
-      <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-        {label}
-      </div>
-    </div>
   );
 }
