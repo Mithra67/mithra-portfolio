@@ -63,28 +63,28 @@
 }
 
 :root.light {
-  --background: oklch(0.95 0.035 305);
+  --background: oklch(0.93 0.045 305);
   --foreground: oklch(0.2 0.04 295);
-  --card: oklch(1 0 0);
+  --card: oklch(0.985 0.012 305);
   --card-foreground: oklch(0.18 0.012 280);
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.99 0.008 305);
   --popover-foreground: oklch(0.18 0.012 280);
   --primary: oklch(0.55 0.27 305);
   --primary-foreground: oklch(0.99 0 0);
   --primary-glow: oklch(0.7 0.22 310);
-  --secondary: oklch(0.94 0.01 285);
+  --secondary: oklch(0.92 0.025 300);
   --secondary-foreground: oklch(0.18 0.012 280);
-  --muted: oklch(0.94 0.01 285);
-  --muted-foreground: oklch(0.45 0.02 280);
+  --muted: oklch(0.92 0.022 300);
+  --muted-foreground: oklch(0.42 0.03 285);
   --accent: oklch(0.55 0.27 305);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.62 0.24 27);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.88 0.015 285);
-  --input: oklch(0.94 0.01 285);
+  --border: oklch(0.84 0.03 300);
+  --input: oklch(0.94 0.018 300);
   --ring: oklch(0.55 0.27 305);
-  --glass: oklch(1 0 0 / 0.55);
-  --glass-border: oklch(0.55 0.27 305 / 0.3);
+  --glass: oklch(1 0 0 / 0.6);
+  --glass-border: oklch(0.55 0.27 305 / 0.4);
 }
 
 @layer base {
@@ -112,13 +112,21 @@
     background: var(--color-glass);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
-    border: 1px solid var(--color-glass-border);
+    border: 1.5px solid var(--color-glass-border);
+    box-shadow:
+      0 1px 0 0 color-mix(in oklab, white 6%, transparent) inset,
+      0 0 0 1px color-mix(in oklab, var(--color-primary) 12%, transparent),
+      0 12px 40px -18px color-mix(in oklab, var(--color-primary) 35%, transparent);
   }
   .glass-strong {
-    background: color-mix(in oklab, var(--color-card) 65%, transparent);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid var(--color-glass-border);
+    background: color-mix(in oklab, var(--color-card) 70%, transparent);
+    backdrop-filter: blur(22px) saturate(170%);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    border: 1.5px solid var(--color-glass-border);
+    box-shadow:
+      0 1px 0 0 color-mix(in oklab, white 8%, transparent) inset,
+      0 0 0 1px color-mix(in oklab, var(--color-primary) 18%, transparent),
+      0 22px 60px -20px color-mix(in oklab, var(--color-primary) 50%, transparent);
   }
   .text-gradient {
     background: linear-gradient(120deg, var(--color-primary-glow), var(--color-primary), var(--color-primary-glow));
@@ -142,15 +150,45 @@
     --card-accent: var(--color-primary);
     transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
   }
+  .card-hover-glow::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg,
+      color-mix(in oklab, var(--card-accent) 70%, transparent),
+      color-mix(in oklab, var(--card-accent) 10%, transparent) 40%,
+      color-mix(in oklab, var(--color-primary-glow) 40%, transparent));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .card-hover-glow:hover::before { opacity: 1; }
   .card-hover-glow:hover {
-    background: color-mix(in oklab, var(--card-accent) 16%, var(--color-glass));
+    background: color-mix(in oklab, var(--card-accent) 18%, var(--color-glass));
     border-color: color-mix(in oklab, var(--card-accent) 75%, transparent);
     box-shadow:
       0 0 0 1px color-mix(in oklab, var(--card-accent) 55%, transparent),
-      0 22px 60px -20px color-mix(in oklab, var(--card-accent) 65%, transparent),
-      inset 0 1px 0 0 color-mix(in oklab, white 9%, transparent);
-    transform: translateY(-2px);
+      0 22px 60px -18px color-mix(in oklab, var(--card-accent) 70%, transparent),
+      0 0 80px -20px color-mix(in oklab, var(--card-accent) 55%, transparent),
+      inset 0 1px 0 0 color-mix(in oklab, white 10%, transparent);
+    transform: translateY(-3px);
   }
+  /* GitHub icon brand-correct contrast */
+  :root.light .gh-icon { color: oklch(0.15 0.01 280); }
+  :root.dark .gh-icon, :root .gh-icon { color: oklch(0.98 0 0); }
+  /* Typing dots for AI assistant */
+  .typing-dot {
+    width: 6px; height: 6px; border-radius: 9999px;
+    background: var(--color-primary);
+    animation: typing-bounce 1.2s infinite ease-in-out;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
   .pulse-dot {
     box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-primary) 70%, transparent);
     animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
