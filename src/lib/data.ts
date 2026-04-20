@@ -63,7 +63,7 @@ export const profile = {
   email: "duraisamysangamithra19@gmail.com",
   links: {
     linkedin: "https://linkedin.com/in/sangamithra-d/",
-    github: "https://github.com/",
+    github: "https://github.com/Mithra67",
   },
 };
 
@@ -110,7 +110,7 @@ export const experience: ExperienceItem[] = [
   {
     company: "Computira Soft Solutions",
     role: "Junior Web Developer",
-    period: "Oct — Mar 2023",
+    period: "Oct 2022 — Mar 2023",
     description:
       "Contributed to scalable web solutions. Drove UI optimization, architectural modeling, and mission-critical bug fixing.",
     type: "Junior",
@@ -118,34 +118,43 @@ export const experience: ExperienceItem[] = [
       "Refactored legacy components into a modern React stack",
       "Cut critical-path bug count by 40% in two sprints",
     ],
-    stack: ["React", "SCSS", "JavaScript"],
+    stack: ["React", "SCSS", "Java"],
   },
   {
     company: "Freelance",
     role: "Digital Strategist & Blogger",
-    period: "Nov — Dec 2024",
+    period: "Nov 2024 — Present",
     description:
       "Authored high-impact SEO content and presentations for international clients, focused on conversion architecture and brand visibility.",
-    type: "Contract",
+    type: "Remote",
     highlights: [
       "SEO content powering inbound for 4 international clients",
       "Crafted decks closing pilot engagements",
     ],
-    stack: ["SEO", "Content", "Brand"],
+    stack: ["SEO", "Content", "Brand", "PPT", "Canva", "Figma", "Word"],
   },
 ];
 
 export const education = [
   {
+    school: "Bharathiar University",
+    degree: "M.Sc. Computer Science",
+    period: "2024 – 2026",
+    score: "9.0 / 10 CGPA",
+    accent: false,
+  },
+  {
     school: "SNMV CAS",
-    degree: "Gold Medalist — Bachelor's",
+    degree: "Gold Medalist — B.Sc. Computer Science",
+    period: "2020 – 2023",
     score: "9.014 GPA",
     accent: true,
   },
   {
-    school: "Bharathiar University",
-    degree: "Master's",
-    score: "9.0 / 10 CGPA",
+    school: "Pkd Matriculation Hr. Sec School",
+    degree: "Rank Holder — Higher Secondary",
+    period: "2018 – 2020",
+    score: "95%",
     accent: false,
   },
 ];

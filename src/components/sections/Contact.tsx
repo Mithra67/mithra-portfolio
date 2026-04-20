@@ -66,10 +66,10 @@ export function Contact() {
           <SocialTile
             href={profile.links.github}
             label="GitHub"
-            handle="github.com"
+            handle="@Mithra67"
             Icon={Github}
-            accent="#111111"
-            iconClassName="gh-icon"
+            accent="#8B949E"
+            iconColorClass="text-foreground"
             delay={0.15}
           />
 
@@ -135,7 +135,7 @@ function SocialTile({
   Icon,
   accent,
   delay,
-  iconClassName,
+  iconColorClass,
 }: {
   href: string;
   label: string;
@@ -143,7 +143,7 @@ function SocialTile({
   Icon: React.ComponentType<{ className?: string }>;
   accent: string;
   delay: number;
-  iconClassName?: string;
+  iconColorClass?: string;
 }) {
   return (
     <motion.a
@@ -162,10 +162,10 @@ function SocialTile({
           className="flex h-10 w-10 items-center justify-center rounded-xl"
           style={{
             background: `color-mix(in oklab, ${accent} 18%, transparent)`,
-            color: accent,
+            color: iconColorClass ? undefined : accent,
           }}
         >
-          <Icon className={`h-5 w-5 ${iconClassName ?? ""}`} />
+          <Icon className={`h-5 w-5 ${iconColorClass ?? ""}`} />
         </div>
         <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </div>

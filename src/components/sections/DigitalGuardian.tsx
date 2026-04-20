@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Send, Sparkles, X } from "lucide-react";
-import { answerQuestion, suggestedQuestions } from "@/lib/knowledgeBase";
+import { getAetherResponse } from "@/lib/ai.server";
+import { suggestedQuestions } from "@/lib/knowledgeBase";
 import avatar from "@/assets/avatar.jpg";
 
-type Msg = { id: number; role: "user" | "bot"; text: string; pending?: boolean };
+type Msg = { id: number; role: "user" | "bot"; text: string; displayBuffer?: string };
 
 const ASSISTANT_NAME = "Aether";
 
@@ -17,29 +18,63 @@ export function DigitalGuardian() {
       id: 0,
       role: "bot",
       text: `Hey, I'm ${ASSISTANT_NAME} — I'll answer anything about my work, stack, or how to collaborate.`,
+      displayBuffer: `Hey, I'm ${ASSISTANT_NAME} — I'll answer anything about my work, stack, or how to collaborate.`,
     },
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [messages, open, isTyping]);
 
-  const send = (text: string) => {
+  const typeMessage = useCallback(async (msgId: number, fullText: string) => {
+    let currentText = "";
+    const speed = 25; // ms per character
+    
+    for (let i = 0; i < fullText.length; i++) {
+      currentText += fullText[i];
+      setMessages((m) =>
+        m.map((msg) => (msg.id === msgId ? { ...msg, displayBuffer: currentText } : msg))
+      );
+      
+      // Variable speed for natural feel
+      const delay = fullText[i] === "." || fullText[i] === "?" ? 300 : speed;
+      await new Promise((r) => setTimeout(r, delay));
+    }
+  }, []);
+
+  const send = async (text: string) => {
     const q = text.trim();
     if (!q || isTyping) return;
+    
     const userId = Date.now();
-    setMessages((m) => [...m, { id: userId, role: "user", text: q }]);
+    setMessages((m) => [...m, { id: userId, role: "user", text: q, displayBuffer: q }]);
     setInput("");
     setIsTyping(true);
 
-    // Natural typing delay based on response length
-    const reply = answerQuestion(q);
-    const delay = Math.min(900 + reply.length * 8, 2200);
-    window.setTimeout(() => {
-      setMessages((m) => [...m, { id: userId + 1, role: "bot", text: reply }]);
+    try {
+      const reply = await getAetherResponse({ data: { question: q } });
+      const botId = userId + 1;
+      
+      setMessages((m) => [...m, { id: botId, role: "bot", text: reply, displayBuffer: "" }]);
       setIsTyping(false);
-    }, delay);
+      
+      await typeMessage(botId, reply);
+    } catch (error) {
+      console.error("AI Error:", error);
+      setIsTyping(false);
+      setMessages((m) => [
+        ...m,
+        { 
+          id: Date.now(), 
+          role: "bot", 
+          text: "I'm having a bit of trouble connecting to my central node. Could you try asking again?",
+          displayBuffer: "I'm having a bit of trouble connecting to my central node. Could you try asking again?"
+        },
+      ]);
+    }
   };
 
   return (
@@ -80,7 +115,7 @@ export function DigitalGuardian() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold tracking-tight">{ASSISTANT_NAME}</div>
-                  <div className="text-[11px] text-muted-foreground">AI companion · drag me anywhere</div>
+                  <div className="text-[11px] text-muted-foreground">Premium AI Gateway · Claude 3.5</div>
                 </div>
               </div>
               <button
@@ -92,7 +127,7 @@ export function DigitalGuardian() {
               </button>
             </div>
 
-            <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+            <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4 scrollbar-thin">
               <AnimatePresence initial={false}>
                 {messages.map((m) => (
                   <motion.div
@@ -109,7 +144,7 @@ export function DigitalGuardian() {
                           : "rounded-bl-md border border-glass-border bg-card/60 text-foreground backdrop-blur"
                       }`}
                     >
-                      {m.text}
+                      {m.displayBuffer || m.text}
                     </div>
                   </motion.div>
                 ))}
@@ -173,3 +208,4 @@ export function DigitalGuardian() {
     </>
   );
 }
+

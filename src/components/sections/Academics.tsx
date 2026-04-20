@@ -9,7 +9,7 @@ export function Academics() {
     <section id="academics" className="px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <SectionHeading eyebrow="Academic Path" title="Built on a foundation of excellence" />
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-3">
           {education.map((e, i) => (
             <Reveal key={e.school} delay={i * 0.1}>
               <motion.div
@@ -26,6 +26,7 @@ export function Academics() {
                 <GraduationCap className="mb-4 h-6 w-6 text-primary" />
                 <h3 className="text-lg font-bold">{e.school}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{e.degree}</p>
+                {e.period && <p className="mt-0.5 text-xs text-muted-foreground">{e.period}</p>}
                 <p className="mt-4 text-2xl font-extrabold text-gradient">{e.score}</p>
               </motion.div>
             </Reveal>
