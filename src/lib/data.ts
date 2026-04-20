@@ -141,21 +141,21 @@ export const education = [
     degree: "M.Sc. Computer Science",
     period: "2024 – 2026",
     score: "9.0 / 10 CGPA",
-    accent: false,
+    badge: "",
   },
   {
     school: "SNMV CAS",
-    degree: "Gold Medalist — B.Sc. Computer Science",
+    degree: "B.Sc. Computer Science",
     period: "2020 – 2023",
     score: "9.014 GPA",
-    accent: true,
+    badge: "Gold Medalist",
   },
   {
     school: "Pkd Matriculation Hr. Sec School",
-    degree: "Rank Holder — Higher Secondary",
+    degree: "Higher Secondary",
     period: "2018 – 2020",
     score: "95%",
-    accent: false,
+    badge: "Rank Holder",
   },
 ];
 

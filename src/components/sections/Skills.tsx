@@ -90,8 +90,8 @@ export function Skills() {
                           style={{ background: s.color }}
                         />
                         <s.Icon
-                          className="relative h-9 w-9 transition-all duration-300 group-hover:scale-110 sm:h-10 sm:w-10"
-                          style={{ color: s.color, filter: `drop-shadow(0 4px 12px ${s.color}50)` }}
+                          className={`relative h-9 w-9 transition-all duration-300 group-hover:scale-110 sm:h-10 sm:w-10 ${s.name === "GitHub" ? "gh-icon" : ""}`}
+                          style={{ color: s.name === "GitHub" ? undefined : s.color, filter: s.name === "GitHub" ? undefined : `drop-shadow(0 4px 12px ${s.color}50)` }}
                         />
                         <span className="relative text-center text-[10px] font-medium leading-tight text-muted-foreground transition-colors group-hover:text-foreground sm:text-[11px]">
                           {s.name}
@@ -119,7 +119,8 @@ function FilterPill({
   children: React.ReactNode;
 }) {
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.95 }}
       onClick={onClick}
       className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-all ${
         active
@@ -128,6 +129,6 @@ function FilterPill({
       }`}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }

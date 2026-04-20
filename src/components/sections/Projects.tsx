@@ -68,6 +68,7 @@ function TiltCard({ project: p }: { project: Project }) {
         ["--card-accent" as string]: p.accent,
       }}
       whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 240, damping: 18 }}
       className="card-hover-glow glass group relative flex h-full flex-col overflow-hidden rounded-2xl"
     >
