@@ -3,34 +3,78 @@ import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { education } from "@/lib/data";
 import { GraduationCap, Award } from "lucide-react";
 
+const ACCENT = "#A855F7";
+
 export function Academics() {
-  const accents = ["#A855F7", "#06B6D4", "#F59E0B"];
+  
   return (
-    <section id="academics" className="px-6 py-24">
+    <section id="academics" className="relative px-6 py-24">
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute -left-20 top-1/2 -z-10 h-72 w-72 rounded-full blur-3xl opacity-10" style={{ background: "oklch(0.62 0.27 300)" }} />
+
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="Academic Path" title="Built on a foundation of excellence" />
+        <SectionHeading
+          eyebrow="Academic Path"
+          title="Ranked, decorated, relentless"
+          description="Three institutions. Top scores. Two badges earned"
+        />
         <div className="grid gap-6 md:grid-cols-3">
-          {education.map((e, i) => (
-            <Reveal key={e.school} delay={i * 0.1} className="h-full">
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                style={{ ["--card-accent" as string]: accents[i % accents.length] }}
-                className="card-hover-glow glass relative flex h-full flex-col overflow-hidden rounded-2xl p-6"
-              >
-                {e.badge && (
-                  <div className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-primary/15 px-2.5 py-1 text-[11px] font-semibold text-primary">
-                    <Award className="h-3 w-3" /> {e.badge}
+          {education.map((e, i) => {
+            const accent = ACCENT;
+            return (
+              <Reveal key={e.school + e.degree} delay={i * 0.1} className="h-full">
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                  style={{ ["--card-accent" as string]: accent }}
+                  className="card-hover-glow glass relative flex h-full flex-col overflow-hidden rounded-2xl p-6"
+                >
+                  {/* Top accent line */}
+                  <div className="absolute inset-x-0 top-0 h-[2px]" style={{ background: accent }} />
+
+                  {/* Header with Icon and Badge */}
+                  <div className="flex items-start justify-between">
+                    <div 
+                      className="flex h-10 w-10 items-center justify-center rounded-xl"
+                      style={{ 
+                        background: `color-mix(in oklab, ${accent} 15%, transparent)`,
+                        color: accent 
+                      }}
+                    >
+                      <GraduationCap className="h-5 w-5" />
+                    </div>
+                    
+                    {e.badge && (
+                      <div 
+                        className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider"
+                        style={{ 
+                          background: `color-mix(in oklab, ${accent} 12%, transparent)`,
+                          color: accent,
+                          border: `1px solid color-mix(in oklab, ${accent} 25%, transparent)`
+                        }}
+                      >
+                        <Award className="h-3 w-3" /> {e.badge}
+                      </div>
+                    )}
                   </div>
-                )}
-                <GraduationCap className="mb-4 h-6 w-6 text-primary" />
-                <h3 className="text-lg font-bold">{e.school}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{e.degree}</p>
-                {e.period && <p className="mt-0.5 text-xs text-muted-foreground">{e.period}</p>}
-                <p className="mt-4 text-2xl font-extrabold text-gradient">{e.score}</p>
-              </motion.div>
-            </Reveal>
-          ))}
+
+                  <div className="mt-5 flex-1">
+                    <h3 className="text-lg font-bold leading-tight">{e.school}</h3>
+                    <p className="mt-1.5 text-sm font-medium text-muted-foreground">{e.degree}</p>
+                    {e.period && (
+                      <p className="mt-1 text-xs text-muted-foreground opacity-80">{e.period}</p>
+                    )}
+                  </div>
+
+                  <div className="mt-6 border-t border-glass-border pt-4">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/70">Achievement</p>
+                    <p className="mt-1 text-2xl font-black text-gradient">{e.score}</p>
+                  </div>
+                </motion.div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

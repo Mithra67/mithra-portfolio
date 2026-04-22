@@ -8,7 +8,7 @@ import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
-import { DigitalGuardian } from "@/components/sections/DigitalGuardian";
+import { AetherChat } from "@/components/sections/AetherChat";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 export const Route = createFileRoute("/")({
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen">
+      <div className="min-h-screen overflow-x-clip">
         <ScrollProgress />
         <Navbar />
         <main>
@@ -45,7 +45,7 @@ function Index() {
           <Certifications />
           <Contact />
         </main>
-        <DigitalGuardian />
+        <AetherChat />
       </div>
     </ThemeProvider>
   );

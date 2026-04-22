@@ -1,141 +1,146 @@
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { experience } from "@/lib/data";
-import { Briefcase, Sparkles } from "lucide-react";
+import { Briefcase, Sparkles, Building2, Calendar } from "lucide-react";
 
 export function Experience() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 80%", "end 20%"],
-  });
-  const lineHeight = useSpring(scrollYProgress, { stiffness: 80, damping: 20 });
-
   return (
-    <section id="experience" className="relative px-6 py-24">
-      <div className="mx-auto max-w-5xl">
+    <section id="experience" className="relative px-6 py-24 md:py-32">
+      {/* Background glow logic */}
+      <div className="pointer-events-none absolute left-0 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px]" />
+      <div className="pointer-events-none absolute right-0 bottom-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-primary-glow/5 blur-[120px]" />
+
+      <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow="Experience"
-          title="A track record of shipping"
-          description="Roles where I shaped product, performance, and security from the inside out."
+          eyebrow="Work History"
+          title="Product-shaped, role by role."
+          description="Every engagement left a product more secure, more performant, or more loved."
         />
 
-        <div ref={ref} className="relative">
-          {/* base line */}
-          <div className="absolute left-4 top-0 h-full w-px bg-glass-border md:left-1/2" />
-          {/* animated progress line */}
-          <motion.div
-            style={{ scaleY: lineHeight, transformOrigin: "top" }}
-            className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-primary via-primary-glow to-primary md:left-1/2"
-          />
-
-          <ul className="space-y-12">
-            {experience.map((e, i) => {
-              const left = i % 2 === 0;
-              const accents = ["#A855F7", "#06B6D4", "#10B981", "#F59E0B"];
-              const accent = accents[i % accents.length];
-              return (
-                <Reveal key={e.company} delay={i * 0.06}>
-                  <li className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12">
-                    {/* Node */}
-                    <motion.span
-                      whileInView={{ scale: [0.6, 1.3, 1] }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.7 }}
-                      className="absolute left-4 top-5 z-10 -translate-x-1/2 md:left-1/2"
-                    >
-                      <span className="relative flex h-4 w-4 items-center justify-center">
-                        <span className="absolute inset-0 rounded-full bg-primary/40 pulse-dot" />
-                        <span className="relative h-3 w-3 rounded-full bg-primary glow-primary" />
-                      </span>
-                    </motion.span>
-
-                    {/* Meta side */}
-                    <div className={left ? "md:text-right md:pr-12" : "md:order-2 md:pl-12"}>
-                      <div
-                        className={`flex items-center gap-2 ${
-                          left ? "md:justify-end" : ""
-                        }`}
-                      >
-                        <span className="rounded-full bg-primary/15 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
-                          {e.period}
-                        </span>
-                        {e.active && (
-                          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-0.5 text-[11px] font-semibold text-primary-foreground glow-primary">
-                            <span className="relative flex h-1.5 w-1.5">
-                              <span className="absolute inset-0 rounded-full bg-white pulse-dot" />
-                              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
-                            </span>
-                            Active now
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="mt-3 text-2xl font-bold leading-tight">{e.role}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        <span className="font-semibold text-foreground">{e.company}</span> ·{" "}
-                        {e.type}
-                      </p>
-                    </div>
-
-                    {/* Card side */}
-                    <div className={left ? "md:pl-12" : "md:order-1 md:pr-12"}>
-                      <motion.div
-                        whileHover={{ y: -4 }}
-                        transition={{ type: "spring", stiffness: 240, damping: 18 }}
-                        style={{ ["--card-accent" as string]: accent }}
-                        className="card-hover-glow glass relative overflow-hidden rounded-2xl p-6"
-                      >
-                        {/* gradient corner accent */}
-                        <div
-                          className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-30 blur-3xl"
-                          style={{ background: accent }}
-                        />
-
-                        <div className="mb-3 flex items-center gap-2 text-xs text-primary">
-                          <Briefcase className="h-3.5 w-3.5" />
-                          <span className="font-semibold uppercase tracking-wider">Mission</span>
-                        </div>
-
-                        <p className="text-sm leading-relaxed text-muted-foreground">
-                          {e.description}
-                        </p>
-
-                        {e.highlights && e.highlights.length > 0 && (
-                          <ul className="mt-4 space-y-1.5">
-                            {e.highlights.map((h) => (
-                              <li
-                                key={h}
-                                className="flex items-start gap-2 text-xs text-foreground/85"
-                              >
-                                <Sparkles className="mt-0.5 h-3 w-3 shrink-0 text-primary" />
-                                <span>{h}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-
-                        {e.stack && e.stack.length > 0 && (
-                          <div className="mt-4 flex flex-wrap gap-1.5">
-                            {e.stack.map((s) => (
-                              <span
-                                key={s}
-                                className="rounded-full border border-glass-border bg-background/40 px-2 py-0.5 text-[10px] text-muted-foreground"
-                              >
-                                {s}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </motion.div>
-                    </div>
-                  </li>
-                </Reveal>
-              );
-            })}
-          </ul>
+        <div className="mt-16 space-y-32">
+          {experience.map((e, i) => (
+            <ExperienceEntry key={i} e={e} index={i} />
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ExperienceEntry({ e, index }: { e: any; index: number }) {
+  const accents = ["#06B6D4", "#A855F7", "#10B981", "#F59E0B"];
+  const accent = accents[index % accents.length];
+
+  return (
+    <div className="relative grid grid-cols-1 gap-8 md:grid-cols-[1fr_1.5fr] md:gap-16">
+      {/* Left Column: Sticky Role Info */}
+      <div className="md:sticky md:top-32 md:h-fit">
+        <Reveal delay={0.1}>
+          <div className="relative">
+            {/* Active Indicator */}
+            {e.active && (
+              <div className="mb-6 flex w-fit items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-emerald-400 ring-1 ring-emerald-500/20 glow-emerald">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                Active MISSION
+              </div>
+            )}
+
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
+              <Calendar className="h-3.5 w-3.5" />
+              {e.period}
+            </div>
+
+            <h3 className="mt-4 text-3xl font-black tracking-tight md:text-4xl">
+              {e.role}
+            </h3>
+            
+            <div 
+              className="mt-4 flex items-center gap-2.5 text-lg font-bold"
+              style={{ color: accent }}
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10">
+                <Building2 className="h-5 w-5" />
+              </div>
+              {e.company}
+            </div>
+
+            <div className="mt-6 flex items-center gap-2 rounded-full border border-glass-border bg-card/30 w-fit px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+              {e.type} Engagement
+            </div>
+
+            {/* Decorative Connection Line (Desktop only) */}
+            <div className="absolute -left-8 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-glass-border to-transparent md:block" />
+          </div>
+        </Reveal>
+      </div>
+
+      {/* Right Column: Scrolling Details */}
+      <div className="space-y-10">
+        <Reveal delay={0.2}>
+          <div className="glass-strong card-hover-glow relative overflow-hidden rounded-3xl p-8 md:p-10">
+            {/* Subtle corner glow */}
+            <div 
+              className="absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-[0.08] blur-[80px]" 
+              style={{ backgroundColor: accent }}
+            />
+
+            <div className="mb-6 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              <Briefcase className="h-4 w-4" />
+              Mission Scope
+            </div>
+
+            <p className="text-lg leading-relaxed text-foreground/90 font-medium">
+              {e.description}
+            </p>
+
+            {e.highlights && (
+              <div className="mt-10 space-y-6">
+                <div className="h-px w-12 bg-primary/30" />
+                <ul className="space-y-5">
+                  {e.highlights.map((h: string, idx: number) => (
+                    <motion.li 
+                      key={idx}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="flex items-start gap-4 group"
+                    >
+                      <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform group-hover:scale-110">
+                        <Sparkles className="h-3 w-3" />
+                      </div>
+                      <span className="text-[15px] leading-relaxed text-muted-foreground font-medium group-hover:text-foreground/90 transition-colors">
+                        {h}
+                      </span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            
+            {e.stack && (
+              <div className="mt-12">
+                <div className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  Architected With
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {e.stack.map((s: string) => (
+                    <span 
+                      key={s}
+                      className="rounded-lg border border-glass-border bg-card/60 px-3 py-1.5 text-[11px] font-bold tracking-wide text-foreground/80 hover:border-primary/40 hover:text-primary transition-all"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </Reveal>
+      </div>
+    </div>
   );
 }

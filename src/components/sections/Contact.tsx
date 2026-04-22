@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Heart } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Heart } from "lucide-react";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 import { profile } from "@/lib/data";
 
 export function Contact() {
@@ -19,26 +21,26 @@ export function Contact() {
           className="mb-16 text-center"
         >
           <p className="mb-3 text-xs uppercase tracking-[0.4em] text-primary">Get in touch</p>
-          <h2 className="text-[clamp(2.5rem,8vw,6rem)] font-extrabold leading-[0.95] tracking-tight">
+          <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.95] tracking-tight">
             Let's build <span className="text-gradient">something great.</span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-sm text-muted-foreground">
-            I'm currently taking on a small number of product engagements for 2025 — enterprise
+            I'm currently taking on a small number of product engagements for 2026 — enterprise
             React, RBAC platforms, and design-system led teams.
           </p>
         </motion.div>
 
-        {/* Compact balanced bento — no awkward empty gaps */}
-        <div className="grid gap-4 md:grid-cols-3 md:grid-rows-2">
-          {/* Email — hero tile, spans 2 cols x 2 rows */}
+        {/* Balanced bento — 3x2 layout */}
+        <div className="grid gap-4 md:grid-cols-3">
+          {/* Email — wide bar across 2 cols */}
           <motion.a
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            href={`mailto:${profile.email}`}
+            href={`mailto:${profile.email}?subject=Inquiry from Portfolio — Sangamithra D&body=Hi Mithra,`}
             style={{ ["--card-accent" as string]: "#A855F7" }}
-            className="card-hover-glow glass group relative flex flex-col justify-between overflow-hidden rounded-3xl p-7 md:col-span-2 md:row-span-2 md:min-h-[260px]"
+            className="card-hover-glow glass group relative flex flex-col justify-between overflow-hidden rounded-3xl p-6 md:col-span-2"
           >
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
@@ -46,9 +48,15 @@ export function Contact() {
               </span>
               <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Drop a line — usually a reply within a day.</p>
-              <p className="mt-2 break-all text-xl font-bold md:text-2xl">{profile.email}</p>
+            <div className="mt-6 flex items-center justify-between gap-4">
+              <div className="flex-1">
+                <p className="text-xs text-muted-foreground">Usually a reply within a day.</p>
+                <p className="mt-1 break-all text-lg font-bold">{profile.email}</p>
+              </div>
+              <div className="hidden h-8 w-px rounded-full bg-glass-border md:block" />
+              <p className="hidden text-right text-[10px] font-bold uppercase tracking-widest text-primary/60 md:block">
+                Direct Line
+              </p>
             </div>
           </motion.a>
 
@@ -57,20 +65,9 @@ export function Contact() {
             href={profile.links.linkedin}
             label="LinkedIn"
             handle="/in/sangamithra-d"
-            Icon={Linkedin}
+            Icon={FaLinkedin}
             accent="#0A66C2"
             delay={0.1}
-          />
-
-          {/* GitHub */}
-          <SocialTile
-            href={profile.links.github}
-            label="GitHub"
-            handle="@Mithra67"
-            Icon={Github}
-            accent="#8B949E"
-            iconColorClass="text-foreground"
-            delay={0.15}
           />
 
           {/* Location */}
@@ -78,7 +75,7 @@ export function Contact() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             style={{ ["--card-accent" as string]: "#06B6D4" }}
             className="card-hover-glow glass rounded-3xl p-6"
           >
@@ -86,7 +83,7 @@ export function Contact() {
               <MapPin className="h-3 w-3" /> Based in
             </span>
             <p className="mt-3 text-lg font-bold">India · Remote</p>
-            <p className="mt-1 text-xs text-muted-foreground">IST · GMT, EST, CET overlaps.</p>
+            <p className="mt-1 text-xs text-muted-foreground">Global Availability.</p>
           </motion.div>
 
           {/* Status */}
@@ -94,7 +91,7 @@ export function Contact() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.25 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             style={{ ["--card-accent" as string]: "#10B981" }}
             className="card-hover-glow glass rounded-3xl p-6"
           >
@@ -105,9 +102,20 @@ export function Contact() {
               </span>
               Available
             </span>
-            <p className="mt-3 text-lg font-bold">Open for product work</p>
-            <p className="mt-1 text-xs text-muted-foreground">Enterprise React · RBAC · Design systems.</p>
+            <p className="mt-3 text-lg font-bold">Product Work</p>
+            <p className="mt-1 text-xs text-muted-foreground">Open for 2026 roles.</p>
           </motion.div>
+
+          {/* GitHub */}
+          <SocialTile
+            href={profile.links.github}
+            label="GitHub"
+            handle="@Mithra67"
+            Icon={SiGithub}
+            accent="#8B949E"
+            iconColorClass="text-foreground"
+            delay={0.25}
+          />
         </div>
 
         {/* Footer line — refined, no "built with" */}
@@ -121,7 +129,7 @@ export function Contact() {
               SANGAMITHRA D
             </span>
           </div>
-          <span>© {new Date().getFullYear()} · Designed & engineered with <Heart className="inline h-3 w-3 fill-primary text-primary" /> in India</span>
+          <span suppressHydrationWarning>© {new Date().getFullYear()} · Designed & engineered with <Heart className="inline h-3 w-3 fill-primary text-primary" /> in India</span>
         </div>
       </div>
     </section>

@@ -9,8 +9,8 @@ export function Certifications() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Certifications"
-          title="Continuous learning, certified"
-          description="A growing library of credentials — from full-stack engineering to applied AI."
+          title="Every skill, stamped and verified."
+          description="React, TypeScript, Python, and Prompt Engineering — each credential tied to tools I ship with daily."
         />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {certifications.map((c, i) => (
