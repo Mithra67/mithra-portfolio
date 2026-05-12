@@ -179,6 +179,7 @@ export const certifications = [
 ];
 
 export type SkillLevel = "worked" | "familiar";
+export type SkillCategory = "frontend" | "architecture" | "devops" | "backend" | "productivity" | "ai" | "vibe";
 export type Skill = { 
   name: string; 
   Icon: IconType; 

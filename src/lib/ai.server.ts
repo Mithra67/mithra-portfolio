@@ -71,26 +71,31 @@ export const getAetherResponse = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { question } = data;
 
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.LOVABLE_API_KEY;
 
     if (apiKey) {
       try {
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
+        const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
           method: "POST",
           headers: {
-            "x-api-key": apiKey,
+            "Lovable-API-Key": apiKey,
+            "X-Lovable-AIG-SDK": "vercel-ai-sdk",
             "content-type": "application/json",
-            "anthropic-version": "2023-06-01",
           },
           body: JSON.stringify({
-            model: "claude-sonnet-4-6",
+            model: "google/gemini-3-flash-preview",
             max_tokens: 512,
-            system: MITHRA_PERSONA,
-            messages: [{ role: "user", content: question }],
+            messages: [
+              { role: "system", content: MITHRA_PERSONA },
+              { role: "user", content: question },
+            ],
           }),
         });
-        const result = await response.json();
-        if (result.content?.[0]?.text) return result.content[0].text as string;
+        if (response.ok) {
+          const result = await response.json();
+          const text = result.choices?.[0]?.message?.content;
+          if (typeof text === "string" && text.trim()) return text;
+        }
       } catch {
         // fall through to smart fallback
       }
