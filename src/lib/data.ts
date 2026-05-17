@@ -178,7 +178,7 @@ export const certifications = [
   { name: "Prompt Engineering for Devs", issuer: "Self-Paced", year: "2025", Icon: SiAnthropic, accent: "#F97316" },
 ];
 
-export type SkillLevel = "worked" | "familiar";
+export type SkillLevel = "core" | "production" | "familiar";
 export type SkillCategory = "frontend" | "architecture" | "devops" | "backend" | "productivity" | "ai" | "vibe";
 export type Skill = { 
   name: string; 
