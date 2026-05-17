@@ -1,32 +1,26 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown, MapPin, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, ChevronDown, Download, MapPin, Sparkles } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { profile, heroStats, skills } from "@/lib/data";
 import avatarImg from "@/assets/image.jfif";
 
 export function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const orbY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
   const marquee = useMemo(() => skills.slice(0, 18).map((s) => s.name), []);
   const nameChars = useMemo(() => profile.name.split(""), []);
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden px-6 pb-28 pt-32 md:pt-40">
+    <section id="top" className="relative overflow-hidden px-6 pb-28 pt-32 md:pt-40">
       <div className="pointer-events-none absolute inset-0 -z-20 grid-fade" />
 
-      <motion.div style={{ y: orbY }} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="aurora-blob absolute -left-24 top-20 h-72 w-72 rounded-full bg-primary/40 blur-3xl" />
         <div className="aurora-blob absolute right-0 top-40 h-96 w-96 rounded-full bg-primary-glow/30 blur-3xl" style={{ animationDelay: "-3s" }} />
         <div className="aurora-blob absolute bottom-0 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl" style={{ animationDelay: "-6s" }} />
-      </motion.div>
+      </div>
 
-      <motion.div style={{ y: titleY, opacity: titleOpacity }} className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl">
 
         {/* ── Two-column hero ── */}
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start lg:gap-12">
@@ -49,7 +43,7 @@ export function Hero() {
                 Available
               </div>
               <div className="flex items-center gap-3 border-l border-glass-border bg-card/60 px-3 py-1.5 text-muted-foreground transition-colors group-hover:bg-card/80">
-                <span>Open for 2026 Collaborations</span>
+                <span>Open for Collaborations</span>
                 <span className="h-3 w-px bg-glass-border" />
                 <span className="inline-flex items-center gap-1.5 font-medium text-foreground/80">
                   <MapPin className="h-3 w-3 text-primary" /> India
@@ -63,7 +57,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-4 text-xs uppercase tracking-[0.5em] text-primary"
             >
-              Product · Design · Engineering
+              Frontend · UX · AI Integrations
             </motion.p>
 
             {/* Animated name */}
@@ -97,9 +91,9 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.6 }}
               className="mt-5 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
             >
-              <Tag>Product Developer</Tag>
-              <Tag>React 19 · TypeScript</Tag>
-              <Tag>RBAC Architect</Tag>
+              <Tag>Frontend Engineer</Tag>
+              <Tag>React · TypeScript</Tag>
+              <Tag>UX · AI Integrations</Tag>
             </motion.div>
 
             <motion.p
@@ -124,6 +118,12 @@ export function Hero() {
               >
                 View Projects
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href={`mailto:${profile.email}?subject=Resume%20request%20%E2%80%94%20Sangamithra%20D&body=Hi%20Mithra%2C%20could%20you%20share%20your%20latest%20resume%3F`}
+                className="inline-flex items-center gap-2 rounded-full border border-glass-border bg-card/30 px-5 py-3 text-sm font-medium hover:bg-primary/10"
+              >
+                <Download className="h-4 w-4 text-primary" /> Request Resume
               </a>
               <a
                 href="#contact"
@@ -202,7 +202,7 @@ export function Hero() {
             );
           })}
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* ── Skill marquee ── */}
       <div className="mx-auto mt-20 max-w-6xl overflow-hidden px-6">

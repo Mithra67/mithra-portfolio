@@ -81,7 +81,7 @@ function localFallback(question: string): string {
     return ASSISTANT_INFO;
     
   if (/stack|tech|tool|framework|language/.test(q))
-    return `Mithra's core stack revolves around **React 19, TypeScript**, and Redux Toolkit. She specializes in data visualization using ECharts and Three.js. Her infrastructure experience includes Docker, Kubernetes, and Kafka.`;
+    return `Mithra's core stack revolves around **React, TypeScript**, and Redux Toolkit. She specializes in data visualization using ECharts and Three.js. Her infrastructure experience includes Docker, Kubernetes, and Kafka.`;
     
   if (/experience|job|work|career|company/.test(q))
     return `She is currently a **Product Developer at DEVOPSLABS**, focused on RBAC-driven architectures and scalable enterprise dashboards. Her previous experience includes freelance consulting and internships at Stark Institutions.`;
@@ -102,7 +102,7 @@ function localFallback(question: string): string {
     return `Mithra is actively exploring product engineering opportunities for 2026. She is also available for high-impact freelance engagements.`;
     
   if (/skill|rbac|security|architecture|speciali[sz]|strongest|strength/.test(q))
-    return `Her primary specialization is **RBAC / ABAC architecture**, designing scalable permission models for enterprise applications. This is typically implemented alongside React 19 and deep data visualization layers.`;
+    return `Her primary specialization is **RBAC / ABAC architecture**, designing scalable permission models for enterprise applications. This is typically implemented alongside React and deep data visualization layers.`;
     
   if (/type|kind|looking for|prefer/.test(q))
     return `She prefers working with Engineering-heavy teams in SaaS, FinTech, or AI-product spaces that prioritize security and high-performance UI.`;
@@ -129,12 +129,13 @@ export function AetherChat() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [showDots, setShowDots] = useState(false);
+  const INTRO = `Hey — I'm Mithra's AI assistant. Ask me about projects, frontend engineering, AI work, UX thinking, or roles Mithra is targeting.`;
   const [messages, setMessages] = useState<Msg[]>([
     {
       id: 0,
       role: "bot",
-      text: `Greetings. I am ${ASSISTANT_NAME}, Mithra's portfolio assistant. Ask me anything about her skills, projects, or professional experience.`,
-      displayBuffer: `Greetings. I am ${ASSISTANT_NAME}, Mithra's portfolio assistant. Ask me anything about her skills, projects, or professional experience.`,
+      text: INTRO,
+      displayBuffer: INTRO,
     },
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -317,6 +318,27 @@ export function AetherChat() {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Quick prompts */}
+            {messages.length <= 1 && !isTyping && (
+              <div className="flex flex-wrap gap-1.5 px-5 pb-3">
+                {[
+                  "What's Mithra's core stack?",
+                  "Walk me through her best project",
+                  "Is she available for roles?",
+                  "How does she think about UX?",
+                  "Currently exploring",
+                ].map((q) => (
+                  <button
+                    key={q}
+                    onClick={() => send(q)}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-foreground/80 transition hover:border-primary/40 hover:bg-primary/15 hover:text-primary"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* Input Island */}
             <div className="p-5 pt-0">
