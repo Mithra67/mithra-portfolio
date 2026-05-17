@@ -104,13 +104,13 @@ export const getAetherResponse = createServerFn({ method: "POST" })
     const q = question.toLowerCase();
 
     if (/\b(hi|hey|hello|yo)\b/.test(q)) {
-      return `Hey! I'm Mithra — ask me anything about my work, stack, or how to get in touch. I don't bite 😄`;
+      return `Hey! I'm Mithra's AI assistant — ask me about her projects, frontend engineering work, AI builds, UX thinking, or the kind of roles she's after.`;
     }
     if (/stack|tech|tool|framework|language/.test(q)) {
-      return `My core stack is **React 19 + TypeScript**, with Redux Toolkit for state and ECharts / Three.js for data viz. On the infra side I work with Docker, Kubernetes, and Kafka. What part are you curious about?`;
+      return `Her core stack is **React + TypeScript** with Redux Toolkit, Tailwind, and Framer Motion. She regularly integrates AI APIs (Claude, Gemini, OpenAI) and works with ECharts / Three.js for data viz. What part are you curious about?`;
     }
     if (/experience|job|work|career|company|role/.test(q)) {
-      return `I'm currently a **Product Developer at DEVOPSLABS** (Dec 2024 – now), building scalable frontend systems and RBAC-driven architectures. Before that I interned at Stark Institutions and did frontend work at Computira Soft Solutions.`;
+      return `She's currently a **Product Developer at DEVOPSLABS** (Dec 2024 – now), building scalable React + TypeScript frontends and RBAC-driven UI. Earlier roles include Stark Institutions (full-stack intern) and Computira Soft Solutions (junior web dev).`;
     }
     if (/project|build|portfolio|case study/.test(q)) {
       return `A few I'm proud of:\n- **Guardian AI** — a Claude-powered assistant with streaming + RAG\n- **DevPerf Analyser** — developer productivity tracking with real-time metrics\n- **Sprint Flow** — full sprint command center with AI-generated Jira tickets\n\nWant details on any of these?`;
