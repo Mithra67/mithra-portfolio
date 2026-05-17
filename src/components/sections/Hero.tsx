@@ -1,32 +1,26 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown, MapPin, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, ChevronDown, Download, MapPin, Sparkles } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { profile, heroStats, skills } from "@/lib/data";
 import avatarImg from "@/assets/image.jfif";
 
 export function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const orbY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
   const marquee = useMemo(() => skills.slice(0, 18).map((s) => s.name), []);
   const nameChars = useMemo(() => profile.name.split(""), []);
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden px-6 pb-28 pt-32 md:pt-40">
+    <section id="top" className="relative overflow-hidden px-6 pb-28 pt-32 md:pt-40">
       <div className="pointer-events-none absolute inset-0 -z-20 grid-fade" />
 
-      <motion.div style={{ y: orbY }} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="aurora-blob absolute -left-24 top-20 h-72 w-72 rounded-full bg-primary/40 blur-3xl" />
         <div className="aurora-blob absolute right-0 top-40 h-96 w-96 rounded-full bg-primary-glow/30 blur-3xl" style={{ animationDelay: "-3s" }} />
         <div className="aurora-blob absolute bottom-0 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl" style={{ animationDelay: "-6s" }} />
-      </motion.div>
+      </div>
 
-      <motion.div style={{ y: titleY, opacity: titleOpacity }} className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl">
 
         {/* ── Two-column hero ── */}
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start lg:gap-12">
