@@ -20,15 +20,16 @@ function buildPyramid<T>(items: T[]): T[][] {
 }
 
 export function Skills() {
-  const [activeLevel, setActiveLevel] = useState<SkillLevel>("worked");
+  const [activeLevel, setActiveLevel] = useState<SkillLevel>("core");
   const [activeCategory, setActiveCategory] = useState<SkillCategory | "all">("all");
 
-  // Derive dynamic descriptions
-  const description = activeLevel === "worked" 
-    ? "The tools I reach for in production. Battle-tested, deeply understood, and consistently shipped."
-    : "Technologies I've mastered or specialized in for specific architectural needs and complex data workflows.";
+  const description =
+    activeLevel === "core"
+      ? "The tools I lead with every day — deep expertise, shipped repeatedly in production."
+      : activeLevel === "production"
+        ? "Tools I've used to ship real, business-critical work."
+        : "Technologies I've explored and can ramp up on quickly when a project needs them.";
 
-  // Filter skills by level AND category
   const filtered = useMemo(() => {
     return skills.filter((s) => {
       const matchLevel = s.level === activeLevel;
@@ -37,7 +38,6 @@ export function Skills() {
     });
   }, [activeLevel, activeCategory]);
 
-  // Only show categories that actually have skills in the current level
   const availableCategories = useMemo(() => {
     const ids = new Set(skills.filter(s => s.level === activeLevel).map(s => s.category));
     return skillCategories.filter(c => ids.has(c.id));
@@ -45,28 +45,32 @@ export function Skills() {
 
   const rows = useMemo(() => buildPyramid(filtered), [filtered]);
 
+  const levelLabel: Record<SkillLevel, string> = {
+    core: "Core Expertise",
+    production: "Production Experience",
+    familiar: "Exploring / Familiar",
+  };
+
   return (
     <section id="skills" className="relative px-6 py-24">
-      {/* ambient backdrop */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl opacity-50" />
 
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           eyebrow="Expertise"
-          title={activeLevel === "worked" ? "Worked With" : "Technical Breadth"}
+          title={levelLabel[activeLevel]}
           description={description}
         />
 
-        {/* Primary Level Switcher */}
         <div className="mb-12 flex justify-center">
-          <div className="inline-flex rounded-2xl bg-card/30 p-1.5 border border-glass-border shadow-xl backdrop-blur-md">
-            {(["worked", "familiar"] as const).map((l) => (
+          <div className="inline-flex flex-wrap justify-center rounded-2xl bg-card/30 p-1.5 border border-glass-border shadow-xl backdrop-blur-md">
+            {(["core", "production", "familiar"] as const).map((l) => (
               <button
                 key={l}
                 onClick={() => { setActiveLevel(l); setActiveCategory("all"); }}
-                className={`relative rounded-xl px-6 py-2.5 text-sm font-bold transition-all duration-300 ${
-                  activeLevel === l 
-                    ? "text-primary-foreground" 
+                className={`relative rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-300 ${
+                  activeLevel === l
+                    ? "text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -77,9 +81,7 @@ export function Skills() {
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <span className="relative z-10 capitalize">
-                  {l === "worked" ? "Worked With" : "Familiar"}
-                </span>
+                <span className="relative z-10">{levelLabel[l]}</span>
               </button>
             ))}
           </div>
