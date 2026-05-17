@@ -319,6 +319,27 @@ export function AetherChat() {
               </AnimatePresence>
             </div>
 
+            {/* Quick prompts */}
+            {messages.length <= 1 && !isTyping && (
+              <div className="flex flex-wrap gap-1.5 px-5 pb-3">
+                {[
+                  "What's Mithra's core stack?",
+                  "Walk me through her best project",
+                  "Is she available for roles?",
+                  "How does she think about UX?",
+                  "Currently exploring",
+                ].map((q) => (
+                  <button
+                    key={q}
+                    onClick={() => send(q)}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-foreground/80 transition hover:border-primary/40 hover:bg-primary/15 hover:text-primary"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* Input Island */}
             <div className="p-5 pt-0">
               <form
