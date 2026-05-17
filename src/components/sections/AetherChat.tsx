@@ -251,7 +251,7 @@ export function AetherChat() {
                 <div className="flex items-center gap-3.5">
                   <div className="relative">
                     <div className="h-10 w-10 overflow-hidden rounded-full border border-primary/30 ring-2 ring-primary/10">
-                       <img src={aetherAvatar} alt={ASSISTANT_NAME} className="h-full w-full object-cover" />
+                       <img src={aetherAvatar} alt="Aether assistant avatar" className="h-full w-full object-cover" />
                     </div>
                     <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
