@@ -69,7 +69,9 @@ export function Hero() {
                 show: { transition: { staggerChildren: 0.05, delayChildren: 0.15 } },
               }}
               className="text-[clamp(2.6rem,5.5vw,4.8rem)] font-extrabold leading-[1.05] tracking-tight"
+              aria-label="Sangamithra D — Frontend Engineer"
             >
+              <span className="sr-only">Sangamithra D — Frontend Engineer</span>
               {nameChars.map((ch, i) => (
                 <motion.span
                   key={i}

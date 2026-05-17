@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mithra-dev-world.lovable.app/sitemap.xml

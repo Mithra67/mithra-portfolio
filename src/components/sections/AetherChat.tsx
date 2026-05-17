@@ -216,6 +216,7 @@ export function AetherChat() {
         whileTap={{ scale: 0.94 }}
         whileHover={{ scale: 1.06 }}
         onClick={() => setOpen((o) => !o)}
+        aria-label={open ? "Close chat assistant" : "Open chat assistant"}
         className="pointer-events-auto fixed bottom-6 right-6 flex h-16 w-16 cursor-grab items-center justify-center rounded-full border border-white/20 shadow-2xl backdrop-blur-md active:cursor-grabbing"
         style={{ 
           background: "linear-gradient(135deg, oklch(0.6 0.28 300 / 0.9), oklch(0.7 0.2 310 / 0.8))",
@@ -224,7 +225,7 @@ export function AetherChat() {
       >
         <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full bg-primary/20 blur-2xl" />
         <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/30 p-0.5">
-           <img src={aetherAvatar} alt="Aether Avatar" className="h-full w-full rounded-full object-cover shadow-inner" />
+           <img src={aetherAvatar} alt="Aether assistant avatar" className="h-full w-full rounded-full object-cover shadow-inner" />
         </div>
         <span className="pointer-events-none absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-primary shadow-lg ring-1 ring-white/20">
           <Sparkles className="h-2.5 w-2.5 text-white" />
@@ -250,7 +251,7 @@ export function AetherChat() {
                 <div className="flex items-center gap-3.5">
                   <div className="relative">
                     <div className="h-10 w-10 overflow-hidden rounded-full border border-primary/30 ring-2 ring-primary/10">
-                       <img src={aetherAvatar} alt={ASSISTANT_NAME} className="h-full w-full object-cover" />
+                       <img src={aetherAvatar} alt="Aether assistant avatar" className="h-full w-full object-cover" />
                     </div>
                     <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -266,6 +267,7 @@ export function AetherChat() {
                 </div>
                 <button
                   onClick={() => setOpen(false)}
+                  aria-label="Close chat"
                   className="rounded-full bg-white/5 p-2 text-muted-foreground transition-all hover:bg-white/10 hover:text-white"
                 >
                   <X className="h-4 w-4" />
@@ -350,12 +352,14 @@ export function AetherChat() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={`Ask ${ASSISTANT_NAME}…`}
+                  aria-label="Ask a question"
                   disabled={isTyping}
                   className="flex-1 bg-transparent py-2 text-sm text-white outline-none placeholder:text-muted-foreground/60 disabled:opacity-60"
                 />
                 <motion.button
                   type="submit"
                   disabled={isTyping || !input.trim()}
+                  aria-label="Send message"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-colors hover:bg-primary-glow disabled:opacity-40 disabled:hover:scale-100"
