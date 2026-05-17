@@ -196,7 +196,7 @@ export function Hero() {
             );
           })}
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* ── Skill marquee ── */}
       <div className="mx-auto mt-20 max-w-6xl overflow-hidden px-6">
