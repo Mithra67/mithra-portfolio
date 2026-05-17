@@ -161,23 +161,21 @@ function TiltCard({ project: p }: { project: Project }) {
               {/* Merged Interactive Workflow */}
               <WorkflowRow stageTools={p.stageTools} aiTools={p.aiTools} className="mt-6" />
 
-              {/* Project CTA */}
-              <div className="mt-4 flex items-center justify-end">
-                {p.href ? (
-                  <a
-                    href={p.href}
-                    target={p.href.startsWith("http") ? "_blank" : undefined}
-                    rel={p.href.startsWith("http") ? "noreferrer" : undefined}
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-glass-border bg-primary/10 px-4 py-1.5 text-[11px] font-semibold text-primary transition hover:bg-primary/20"
-                  >
-                    {p.hrefLabel ?? "View Application"} <ArrowUpRight className="h-3 w-3" />
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-glass-border bg-background/20 px-3 py-1.5 text-[11px] text-muted-foreground">
-                    <Lock className="h-3 w-3" /> {p.hrefLabel ?? "Private Repo"}
-                  </span>
-                )}
+              {/* Private project disclosure */}
+              <div className="mt-4 flex flex-col items-stretch gap-2 rounded-xl border border-glass-border bg-background/40 p-3">
+                <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-primary">
+                  <Lock className="h-3 w-3" /> Enterprise Project · Private Repository
+                </div>
+                <p className="text-[11px] text-muted-foreground">
+                  Source unavailable due to company confidentiality. Case study available on request.
+                </p>
+                <a
+                  href={`mailto:duraisamysangamithra19@gmail.com?subject=Case%20study%20request%20%E2%80%94%20${encodeURIComponent(p.title)}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex w-fit items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1.5 text-[11px] font-semibold text-primary transition hover:bg-primary/25"
+                >
+                  Request case study <ArrowUpRight className="h-3 w-3" />
+                </a>
               </div>
             </motion.div>
           )}
