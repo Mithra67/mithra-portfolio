@@ -216,6 +216,7 @@ export function AetherChat() {
         whileTap={{ scale: 0.94 }}
         whileHover={{ scale: 1.06 }}
         onClick={() => setOpen((o) => !o)}
+        aria-label={open ? "Close chat assistant" : "Open chat assistant"}
         className="pointer-events-auto fixed bottom-6 right-6 flex h-16 w-16 cursor-grab items-center justify-center rounded-full border border-white/20 shadow-2xl backdrop-blur-md active:cursor-grabbing"
         style={{ 
           background: "linear-gradient(135deg, oklch(0.6 0.28 300 / 0.9), oklch(0.7 0.2 310 / 0.8))",
