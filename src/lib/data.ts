@@ -64,8 +64,8 @@ import projectClaude from "@/assets/project-claude.jpg";
 
 export const profile = {
   name: "Sangamithra D",
-  role: "Product Developer",
-  bio: "Strategic Product Developer dedicated to engineering high-performance, scalable enterprise applications with a core emphasis on role-based security architectures and seamless user experiences.",
+  role: "Frontend Engineer · React + TypeScript",
+  bio: "Frontend engineer building scalable React + TypeScript apps for enterprise teams — performant dashboards, role-based UI architecture, thoughtful UX, and AI integrations that ship to production.",
   email: "duraisamysangamithra19@gmail.com",
   links: {
     linkedin: "https://linkedin.com/in/sangamithra-d/",
