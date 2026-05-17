@@ -191,20 +191,20 @@ export type Skill = {
 };
 
 export const skills: Skill[] = [
-  { name: "React", Icon: SiReact, color: "#61DBFB", category: "frontend", level: "production", url: "https://react.dev" },
-  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6", category: "frontend", level: "production", url: "https://www.typescriptlang.org" },
-  { name: "JavaScript", Icon: JavascriptIcon as IconType, color: "#F7DF1E", category: "frontend", level: "production", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-  { name: "Redux Toolkit", Icon: SiRedux, color: "#764ABC", category: "frontend", level: "production", url: "https://redux-toolkit.js.org" },
+  { name: "React", Icon: SiReact, color: "#61DBFB", category: "frontend", level: "core", url: "https://react.dev" },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6", category: "frontend", level: "core", url: "https://www.typescriptlang.org" },
+  { name: "JavaScript", Icon: JavascriptIcon as IconType, color: "#F7DF1E", category: "frontend", level: "core", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+  { name: "Redux Toolkit", Icon: SiRedux, color: "#764ABC", category: "frontend", level: "core", url: "https://redux-toolkit.js.org" },
   { name: "Three.js", Icon: SiThreedotjs, color: "#FFFFFF", category: "frontend", level: "familiar", url: "https://threejs.org" },
   { name: "Apache ECharts", Icon: SiApacheecharts, color: "#AA0201", category: "frontend", level: "familiar", url: "https://echarts.apache.org" },
   { name: "Chart.js", Icon: SiChartdotjs, color: "#FF6384", category: "frontend", level: "familiar", url: "https://www.chartjs.org" },
-  { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4", category: "frontend", level: "production", url: "https://tailwindcss.com" },
+  { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4", category: "frontend", level: "core", url: "https://tailwindcss.com" },
   { name: "SCSS", Icon: SiSass, color: "#CC6699", category: "frontend", level: "production", url: "https://sass-lang.com" },
   { name: "Bootstrap", Icon: SiBootstrap, color: "#7952B3", category: "frontend", level: "production", url: "https://getbootstrap.com" },
   { name: "Vite", Icon: SiVite, color: "#646CFF", category: "frontend", level: "production", url: "https://vitejs.dev" },
-  { name: "Framer Motion", Icon: SiFramer, color: "#E64BFF", category: "frontend", level: "production", url: "https://www.framer.com/motion" },
+  { name: "Framer Motion", Icon: SiFramer, color: "#E64BFF", category: "frontend", level: "core", url: "https://www.framer.com/motion" },
 
-  { name: "RBAC", Icon: LuShieldCheck, color: "#3B82F6", category: "architecture", level: "production" },
+  { name: "RBAC", Icon: LuShieldCheck, color: "#3B82F6", category: "architecture", level: "core" },
   { name: "ABAC", Icon: LuShieldAlert, color: "#8B5CF6", category: "architecture", level: "familiar" },
 
   { name: "Kubernetes", Icon: SiKubernetes, color: "#326CE5", category: "devops", level: "familiar", url: "https://kubernetes.io" },
@@ -226,12 +226,12 @@ export const skills: Skill[] = [
   { name: "PowerPoint", Icon: PowerPointIcon as IconType, color: "#D35230", category: "productivity", level: "production", url: "https://www.microsoft.com/microsoft-365/powerpoint" },
   { name: "Jira", Icon: SiJira, color: "#4F8FE0", category: "productivity", level: "production", url: "https://www.atlassian.com/software/jira" },
   { name: "Confluence", Icon: SiConfluence, color: "#4F8FE0", category: "productivity", level: "production", url: "https://www.atlassian.com/software/confluence" },
-  { name: "Figma", Icon: FigmaIcon as IconType, color: "#F24E1E", category: "productivity", level: "production", url: "https://www.figma.com" },
+  { name: "Figma", Icon: FigmaIcon as IconType, color: "#F24E1E", category: "productivity", level: "core", url: "https://www.figma.com" },
   { name: "Canva", Icon: SiCanva, color: "#00C4CC", category: "productivity", level: "production", url: "https://www.canva.com" },
   { name: "GitHub", Icon: SiGithub, color: "#E5E5E5", category: "productivity", level: "production", url: "https://github.com" },
 
-  { name: "Claude", Icon: ClaudeIcon as IconType, color: "#D97757", category: "ai", level: "production", url: "https://claude.ai" },
-  { name: "ChatGPT", Icon: ChatGPTIcon as IconType, color: "#10A37F", category: "ai", level: "production", url: "https://chat.openai.com" },
+  { name: "Claude", Icon: ClaudeIcon as IconType, color: "#D97757", category: "ai", level: "core", url: "https://claude.ai" },
+  { name: "ChatGPT", Icon: ChatGPTIcon as IconType, color: "#10A37F", category: "ai", level: "core", url: "https://chat.openai.com" },
   { name: "Gemini", Icon: GeminiIcon as IconType, color: "#4285F4", category: "ai", level: "production", url: "https://gemini.google.com" },
   { name: "Deepseek", Icon: DeepseekIcon as IconType, color: "#4D6EFE", category: "ai", level: "production", url: "https://www.deepseek.com" },
   { name: "Copilot", Icon: CopilotIcon as IconType, color: "#10A37F", category: "vibe", level: "production", url: "https://copilot.microsoft.com" },
