@@ -1,0 +1,7 @@
+# Sangamithra D — Portfolio
+
+> Frontend engineer building scalable React + TypeScript apps — enterprise dashboards, role-based UI, UX-led frontend, and AI integrations.
+
+## Pages
+
+- [Home](/): Portfolio overview with experience, skills, projects, certifications, and contact.
