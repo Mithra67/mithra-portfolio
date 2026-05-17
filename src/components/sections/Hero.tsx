@@ -43,7 +43,7 @@ export function Hero() {
                 Available
               </div>
               <div className="flex items-center gap-3 border-l border-glass-border bg-card/60 px-3 py-1.5 text-muted-foreground transition-colors group-hover:bg-card/80">
-                <span>Open for 2026 Collaborations</span>
+                <span>Open for Collaborations</span>
                 <span className="h-3 w-px bg-glass-border" />
                 <span className="inline-flex items-center gap-1.5 font-medium text-foreground/80">
                   <MapPin className="h-3 w-3 text-primary" /> India
@@ -57,7 +57,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-4 text-xs uppercase tracking-[0.5em] text-primary"
             >
-              Product · Design · Engineering
+              Frontend · UX · AI Integrations
             </motion.p>
 
             {/* Animated name */}
@@ -91,9 +91,9 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.6 }}
               className="mt-5 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
             >
-              <Tag>Product Developer</Tag>
-              <Tag>React 19 · TypeScript</Tag>
-              <Tag>RBAC Architect</Tag>
+              <Tag>Frontend Engineer</Tag>
+              <Tag>React · TypeScript</Tag>
+              <Tag>UX · AI Integrations</Tag>
             </motion.div>
 
             <motion.p
@@ -118,6 +118,12 @@ export function Hero() {
               >
                 View Projects
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href={`mailto:${profile.email}?subject=Resume%20request%20%E2%80%94%20Sangamithra%20D&body=Hi%20Mithra%2C%20could%20you%20share%20your%20latest%20resume%3F`}
+                className="inline-flex items-center gap-2 rounded-full border border-glass-border bg-card/30 px-5 py-3 text-sm font-medium hover:bg-primary/10"
+              >
+                <Download className="h-4 w-4 text-primary" /> Request Resume
               </a>
               <a
                 href="#contact"
