@@ -129,12 +129,13 @@ export function AetherChat() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [showDots, setShowDots] = useState(false);
+  const INTRO = `Hey — I'm Mithra's AI assistant. Ask me about projects, frontend engineering, AI work, UX thinking, or roles Mithra is targeting.`;
   const [messages, setMessages] = useState<Msg[]>([
     {
       id: 0,
       role: "bot",
-      text: `Greetings. I am ${ASSISTANT_NAME}, Mithra's portfolio assistant. Ask me anything about her skills, projects, or professional experience.`,
-      displayBuffer: `Greetings. I am ${ASSISTANT_NAME}, Mithra's portfolio assistant. Ask me anything about her skills, projects, or professional experience.`,
+      text: INTRO,
+      displayBuffer: INTRO,
     },
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
