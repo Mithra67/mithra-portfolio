@@ -278,7 +278,7 @@ export const projects: Project[] = [
     subtitle: "Conversational AI, built around your knowledge",
     description:
       "An AI co-pilot built on Claude that grounds answers in a private knowledge base. Streaming responses, tool-use, and a draggable floating UI make it feel like a true product surface, not a chat widget.",
-    tags: ["Claude", "Anthropic API", "React 19", "Streaming", "RAG"],
+    tags: ["Claude", "Anthropic API", "React", "Streaming", "RAG"],
     category: "AI Product",
     period: "Mar 2026",
     image: projectClaude,
