@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Sangamithra D — Product Developer" },
       {
         property: "og:description",
-        content: "Premium portfolio: React 19, TypeScript, RBAC, enterprise UX.",
+        content: "Premium portfolio: React, TypeScript, RBAC, enterprise UX.",
       },
     ],
   }),
