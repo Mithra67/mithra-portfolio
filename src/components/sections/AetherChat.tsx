@@ -267,6 +267,7 @@ export function AetherChat() {
                 </div>
                 <button
                   onClick={() => setOpen(false)}
+                  aria-label="Close chat"
                   className="rounded-full bg-white/5 p-2 text-muted-foreground transition-all hover:bg-white/10 hover:text-white"
                 >
                   <X className="h-4 w-4" />
