@@ -352,12 +352,14 @@ export function AetherChat() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={`Ask ${ASSISTANT_NAME}…`}
+                  aria-label="Ask a question"
                   disabled={isTyping}
                   className="flex-1 bg-transparent py-2 text-sm text-white outline-none placeholder:text-muted-foreground/60 disabled:opacity-60"
                 />
                 <motion.button
                   type="submit"
                   disabled={isTyping || !input.trim()}
+                  aria-label="Send message"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-colors hover:bg-primary-glow disabled:opacity-40 disabled:hover:scale-100"
