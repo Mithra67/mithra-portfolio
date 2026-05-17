@@ -225,7 +225,7 @@ export function AetherChat() {
       >
         <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full bg-primary/20 blur-2xl" />
         <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/30 p-0.5">
-           <img src={aetherAvatar} alt="Aether Avatar" className="h-full w-full rounded-full object-cover shadow-inner" />
+           <img src={aetherAvatar} alt="Aether assistant avatar" className="h-full w-full rounded-full object-cover shadow-inner" />
         </div>
         <span className="pointer-events-none absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-primary shadow-lg ring-1 ring-white/20">
           <Sparkles className="h-2.5 w-2.5 text-white" />
