@@ -149,7 +149,7 @@ export function Hero() {
             initial={{ opacity: 0, x: 50, scale: 0.94 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-[360px] flex-shrink-0 lg:w-[380px] xl:w-[420px]"
+            className="relative w-full max-w-[320px] flex-shrink-0 lg:w-[340px] xl:w-[360px]"
           >
             {/* Ambient glow */}
             <div className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-gradient-to-br from-primary/35 via-primary-glow/20 to-transparent blur-3xl" />
@@ -167,12 +167,24 @@ export function Hero() {
                   src={avatarImg}
                   alt="Sangamithra D"
                   fetchPriority="high"
-                  className="h-[460px] w-full object-cover object-top"
+                  decoding="async"
+                  className="h-[420px] w-full object-cover object-top"
+                  style={{ imageRendering: "auto", filter: "contrast(1.04) saturate(1.05)" }}
+                />
+                {/* Subtle grain overlay to mask compression artifacts */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-overlay"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
+                    backgroundSize: "3px 3px",
+                  }}
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card/80 to-transparent" />
               </div>
             </div>
           </motion.div>
+
         </div>
 
         {/* ── Stats strip ── */}
