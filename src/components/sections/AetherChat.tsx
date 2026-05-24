@@ -160,18 +160,24 @@ export function AetherChat() {
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
-    let currentText = "";
-    for (let i = 0; i < fullText.length; i++) {
-      if (controller.signal.aborted) break;
-      currentText += fullText[i];
+    // Chunked reveal — fast, smooth, never blocks the UI for long
+    const CHUNK = 3;
+    for (let i = 0; i < fullText.length; i += CHUNK) {
+      if (controller.signal.aborted) return;
+      const slice = fullText.slice(0, i + CHUNK);
       setMessages((m) =>
-        m.map((msg) => (msg.id === msgId ? { ...msg, displayBuffer: currentText } : msg))
+        m.map((msg) => (msg.id === msgId ? { ...msg, displayBuffer: slice } : msg))
       );
-      const delay = fullText[i] === "." || fullText[i] === "?" || fullText[i] === "!" ? 260 : 18;
       await new Promise<void>((resolve) => {
-        const id = setTimeout(resolve, delay);
+        const id = setTimeout(resolve, 14);
         controller.signal.addEventListener("abort", () => clearTimeout(id), { once: true });
       });
+    }
+    // Ensure full text is shown at the end
+    if (!controller.signal.aborted) {
+      setMessages((m) =>
+        m.map((msg) => (msg.id === msgId ? { ...msg, displayBuffer: fullText } : msg))
+      );
     }
   }, []);
 
@@ -187,8 +193,11 @@ export function AetherChat() {
 
     let reply = "";
     try {
-      const result = await getAetherResponse({ data: { question: q } });
-      reply = typeof result === "string" && result ? result : localFallback(q);
+      const result = await Promise.race([
+        getAetherResponse({ data: { question: q } }),
+        new Promise<string>((_, reject) => setTimeout(() => reject(new Error("timeout")), 18000)),
+      ]);
+      reply = typeof result === "string" && result.trim() ? result : localFallback(q);
     } catch {
       reply = localFallback(q);
     }
@@ -199,7 +208,7 @@ export function AetherChat() {
     try {
       await typeMessage(botId, reply);
     } catch {
-      // typewrite interrupted
+      // typewriter interrupted
     } finally {
       setIsTyping(false);
     }
