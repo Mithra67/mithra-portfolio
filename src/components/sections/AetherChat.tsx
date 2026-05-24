@@ -336,9 +336,10 @@ export function AetherChat() {
                 {[
                   "What's Mithra's core stack?",
                   "Walk me through her best project",
+                  "What are her strengths?",
+                  "What's her biggest weakness?",
+                  "Tell me about her soft skills",
                   "Is she available for roles?",
-                  "How does she think about UX?",
-                  "Currently exploring",
                 ].map((q) => (
                   <button
                     key={q}
