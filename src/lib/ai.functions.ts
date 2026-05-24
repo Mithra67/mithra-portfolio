@@ -1,4 +1,3 @@
-'use server';
 import { createServerFn } from "@tanstack/react-start";
 import { profile, experience, projects, education, certifications } from "./data";
 
