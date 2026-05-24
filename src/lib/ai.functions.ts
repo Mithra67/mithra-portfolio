@@ -30,13 +30,24 @@ AVAILABILITY:
 - Remote-first from India, IST (GMT+5:30) — overlaps with EST, CET, GMT
 - Open to hybrid in India
 
-STRENGTHS:
+TECHNICAL STRENGTHS:
 - Scalable React + TypeScript apps and component architecture
 - Enterprise dashboards with 2D/3D data visualisations and drill-downs
 - Role-based UI access control (RBAC) for security-sensitive products
 - UX thinking — usability, empty states, error/loading flows, accessibility
 - AI integrations: Claude, Gemini, OpenAI, prompt design, RAG-style assistants
 - Performance optimisation and clean rendering patterns
+
+SOFT SKILLS:
+- Leadership — comfortable leading features end-to-end and mentoring peers
+- Strong communication — translates business intent into clean technical decisions
+- Ownership & accountability — treats every module like her own product
+- Continuous learner — picks up new stacks and ships fast
+- Collaboration across design, backend, and QA
+- Problem-solving mindset and calm under shipping pressure
+
+WEAKNESS (how she actually answers this):
+- She doesn't frame anything as a fixed weakness. Her honest answer: "There's nothing I feel I can't do — anything I'm weak at, I treat as the next thing to master. I keep practising until that gap becomes a strength." Deliver that sentiment in her voice (first-person, confident, not arrogant). You may add ONE concrete example of something she actively worked on turning around (e.g. public speaking, deep backend systems, 3D/Three.js) — but always close on the growth mindset, never on the gap.
 
 CURRENTLY EXPLORING:
 - AI agents and tool-using assistants
@@ -151,6 +162,15 @@ export const getAetherResponse = createServerFn({ method: "POST" })
     }
     if (/type|kind|looking for|prefer|want/.test(q)) {
       return `I'm looking for product engineering roles where I can own complex UI architecture — ideally in enterprise SaaS, fintech, or AI-product companies. Teams that care about security and performance are my kind of people.`;
+    }
+    if (/weakness|weak|flaw|struggle|improve|bad at/.test(q)) {
+      return `Honestly? There's nothing I feel I genuinely can't do. Anything I'm weak at, I treat as the next thing to master — I keep practising until that gap turns into a strength. That mindset is the reason I've been able to move across React, TypeScript, RBAC architecture, AI integrations, and dashboards without getting stuck.`;
+    }
+    if (/strength|strong|good at|best at|superpower/.test(q)) {
+      return `Technically: **React + TypeScript architecture**, **RBAC/security-first UI**, enterprise dashboards, and shipping AI integrations end-to-end.\n\nBeyond code: **ownership** — I treat every module like my own product — plus calm communication, leadership on features, and a learning loop that never stops.`;
+    }
+    if (/soft skill|leadership|communication|teamwork|collaborat|personality|work style/.test(q)) {
+      return `A few that recruiters usually care about:\n- **Leadership** — I lead features end-to-end and mentor peers\n- **Strong communication** — I translate business intent into clean technical decisions\n- **Ownership & accountability** across design, backend, and QA\n- **Continuous learner** — I pick up new stacks and ship fast\n- **Calm under shipping pressure**`;
     }
 
     return `That's a good one — I don't have a polished answer for that right now. Hit me at **${profile.email}** and I'll get back to you properly.`;
