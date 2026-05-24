@@ -70,6 +70,8 @@ export const getAetherResponse = createServerFn({ method: "POST" })
     const apiKey = process.env.LOVABLE_API_KEY;
 
     if (apiKey) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
       try {
         const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
           method: "POST",
@@ -79,20 +81,24 @@ export const getAetherResponse = createServerFn({ method: "POST" })
           },
           body: JSON.stringify({
             model: "google/gemini-2.5-flash",
+            max_tokens: 320,
             messages: [
               { role: "system", content: MITHRA_PERSONA },
               { role: "user", content: question },
             ],
           }),
+          signal: controller.signal,
         });
+        clearTimeout(timeout);
         if (response.ok) {
           const result = await response.json();
           const text = result.choices?.[0]?.message?.content;
           if (typeof text === "string" && text.trim()) return text;
         } else {
-          console.error("Lovable AI gateway error:", response.status, await response.text().catch(() => ""));
+          console.error("Lovable AI gateway error:", response.status);
         }
       } catch (err) {
+        clearTimeout(timeout);
         console.error("Lovable AI gateway request failed:", err);
       }
     }
