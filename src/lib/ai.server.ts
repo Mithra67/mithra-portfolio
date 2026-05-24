@@ -1,6 +1,6 @@
 'use server';
 import { createServerFn } from "@tanstack/react-start";
-import { profile, experience, projects, skills, education, certifications } from "./data";
+import { profile, experience, projects, education, certifications } from "./data";
 
 const MITHRA_PERSONA = `
 You are Mithra's AI assistant on her portfolio site. You speak ABOUT Mithra (Sangamithra D), a frontend engineer specialising in React + TypeScript, scalable enterprise dashboards, UX thinking, and AI integrations.
