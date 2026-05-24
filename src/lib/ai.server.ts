@@ -74,13 +74,11 @@ export const getAetherResponse = createServerFn({ method: "POST" })
         const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
           method: "POST",
           headers: {
-            "Lovable-API-Key": apiKey,
-            "X-Lovable-AIG-SDK": "vercel-ai-sdk",
-            "content-type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "google/gemini-3-flash-preview",
-            max_tokens: 512,
+            model: "google/gemini-2.5-flash",
             messages: [
               { role: "system", content: MITHRA_PERSONA },
               { role: "user", content: question },
@@ -91,9 +89,11 @@ export const getAetherResponse = createServerFn({ method: "POST" })
           const result = await response.json();
           const text = result.choices?.[0]?.message?.content;
           if (typeof text === "string" && text.trim()) return text;
+        } else {
+          console.error("Lovable AI gateway error:", response.status, await response.text().catch(() => ""));
         }
-      } catch {
-        // fall through to smart fallback
+      } catch (err) {
+        console.error("Lovable AI gateway request failed:", err);
       }
     }
 
