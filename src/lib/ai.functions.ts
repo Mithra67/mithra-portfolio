@@ -163,6 +163,15 @@ export const getAetherResponse = createServerFn({ method: "POST" })
     if (/type|kind|looking for|prefer|want/.test(q)) {
       return `I'm looking for product engineering roles where I can own complex UI architecture — ideally in enterprise SaaS, fintech, or AI-product companies. Teams that care about security and performance are my kind of people.`;
     }
+    if (/weakness|weak|flaw|struggle|improve|bad at/.test(q)) {
+      return `Honestly? There's nothing I feel I genuinely can't do. Anything I'm weak at, I treat as the next thing to master — I keep practising until that gap turns into a strength. That mindset is the reason I've been able to move across React, TypeScript, RBAC architecture, AI integrations, and dashboards without getting stuck.`;
+    }
+    if (/strength|strong|good at|best at|superpower/.test(q)) {
+      return `Technically: **React + TypeScript architecture**, **RBAC/security-first UI**, enterprise dashboards, and shipping AI integrations end-to-end.\n\nBeyond code: **ownership** — I treat every module like my own product — plus calm communication, leadership on features, and a learning loop that never stops.`;
+    }
+    if (/soft skill|leadership|communication|teamwork|collaborat|personality|work style/.test(q)) {
+      return `A few that recruiters usually care about:\n- **Leadership** — I lead features end-to-end and mentor peers\n- **Strong communication** — I translate business intent into clean technical decisions\n- **Ownership & accountability** across design, backend, and QA\n- **Continuous learner** — I pick up new stacks and ship fast\n- **Calm under shipping pressure**`;
+    }
 
     return `That's a good one — I don't have a polished answer for that right now. Hit me at **${profile.email}** and I'll get back to you properly.`;
   });
