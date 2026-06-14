@@ -10,6 +10,7 @@ import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
 import { AetherChat } from "@/components/sections/AetherChat";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { SectionNav } from "@/components/ui/SectionNav";
 
 const PERSON_SCHEMA = JSON.stringify({
   "@context": "https://schema.org",
@@ -87,6 +88,7 @@ function Index() {
           <Contact />
         </main>
         <AetherChat />
+        <SectionNav />
       </div>
     </ThemeProvider>
   );
