@@ -76,8 +76,8 @@ export function Hero() {
                 <motion.span
                   key={i}
                   variants={{
-                    hidden: { opacity: 0, y: 40, rotateX: -90 },
-                    show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+                    hidden: { opacity: 0, y: 40 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
                   }}
                   className={`inline-block ${ch === " " ? "w-[0.4em]" : "text-gradient"}`}
                 >
