@@ -79,9 +79,13 @@ export function Hero() {
                     hidden: { opacity: 0, y: 40 },
                     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
                   }}
-                  className={`inline-block ${ch === " " ? "w-[0.4em]" : "text-gradient"}`}
+                  className={`inline-block ${ch === " " ? "w-[0.4em]" : ""}`}
                 >
-                  {ch === " " ? "\u00A0" : ch}
+                  {ch === " " ? (
+                    "\u00A0"
+                  ) : (
+                    <span className="text-gradient inline-block">{ch}</span>
+                  )}
                 </motion.span>
               ))}
             </motion.h1>
