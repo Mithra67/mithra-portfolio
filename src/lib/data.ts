@@ -88,11 +88,10 @@ export const experience: ExperienceItem[] = [
   {
     company: "DEVOPSLABS",
     role: "Product Developer",
-    period: "Dec 2024 — Present",
+    period: "Dec 2024 — Apr 2026",
     description:
       "Engineered scalable frontend systems using React & TypeScript across multiple product modules and implemented RBAC-driven UI architecture for secure, role-based access control.",
     type: "Full-time",
-    active: true,
     highlights: [
       "Built interactive dashboards with advanced 2D/3D visualizations and drill-down analytics",
       "Integrated REST APIs with efficient state, error, and data handling",
