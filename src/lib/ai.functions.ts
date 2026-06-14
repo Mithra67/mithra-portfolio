@@ -73,7 +73,13 @@ ${certifications.map(c => `- ${c.name} · ${c.issuer} · ${c.year}`).join('\n')}
 `.trim();
 
 export const getAetherResponse = createServerFn({ method: "POST" })
-  .inputValidator((d: { question: string }) => d)
+  .inputValidator((d: { question: string }) => {
+    if (!d || typeof d.question !== "string") throw new Error("Invalid input");
+    const question = d.question.trim();
+    if (question.length === 0) throw new Error("Question is required");
+    if (question.length > 500) throw new Error("Question too long (max 500 characters)");
+    return { question };
+  })
   .handler(async ({ data }) => {
     const { question } = data;
 
