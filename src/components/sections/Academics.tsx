@@ -59,7 +59,7 @@ export function Academics() {
                           border: `1px solid color-mix(in oklab, ${accent} 25%, transparent)`
                         }}
                       >
-                        <Award className="h-3 w-3" /> {e.badge}
+                        <BadgeIcon className="h-3 w-3" /> {e.badge}
                       </div>
                     )}
                   </div>
