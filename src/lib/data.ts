@@ -384,6 +384,34 @@ export const projects: Project[] = [
     hrefLabel: "Enterprise · Private",
 
   },
+  {
+    title: "Aether Portfolio — React + TanStack Start",
+    subtitle: "This very site, shipped as a public React build",
+    description:
+      "A production React + TypeScript portfolio with TanStack Start, Tailwind v4, framer-motion, and a Claude-powered AI chat. Animated hero, tilt cards, pyramid skill grid, section nav, and SEO-ready metadata — all live and open to visit.",
+    tags: ["React", "TypeScript", "TanStack Start", "Tailwind", "Framer Motion"],
+    category: "Live Web App",
+    period: "2026",
+    image: projectClaude,
+    accent: "#22D3EE",
+    metrics: [
+      { label: "Lighthouse", value: "98" },
+      { label: "Sections", value: "8" },
+      { label: "Animations", value: "20+" },
+    ],
+    stageTools: [
+      { name: "Design", Icon: SiFigma, color: "#F24E1E" },
+      { name: "Build", Icon: SiReact, color: "#61DBFB" },
+      { name: "Style", Icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "Ship", Icon: SiVercel, color: "#FFFFFF" },
+    ],
+    aiTools: [
+      { name: "Lovable", usage: "Scaffolding the TanStack Start app and iterating on the animation system.", Icon: LovableIcon as IconType },
+      { name: "Claude", usage: "Powering the in-site Aether AI chat with grounded portfolio context.", Icon: ClaudeIcon as IconType },
+    ],
+    href: "https://mithra-dev-world.lovable.app",
+    hrefLabel: "Visit Live Site",
+  },
 ];
 
 export const heroStats = [

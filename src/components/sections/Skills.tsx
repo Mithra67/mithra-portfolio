@@ -20,32 +20,37 @@ function buildPyramid<T>(items: T[]): T[][] {
 }
 
 export function Skills() {
-  const [activeLevel, setActiveLevel] = useState<SkillLevel>("core");
+  const [activeLevel, setActiveLevel] = useState<SkillLevel | "all">("all");
   const [activeCategory, setActiveCategory] = useState<SkillCategory | "all">("all");
 
   const description =
-    activeLevel === "core"
-      ? "The tools I lead with every day — deep expertise, shipped repeatedly in production."
-      : activeLevel === "production"
-        ? "Tools I've used to ship real, business-critical work."
-        : "Technologies I've explored and can ramp up on quickly when a project needs them.";
+    activeLevel === "all"
+      ? "Every tool, framework, and platform in my stack — from daily drivers to the ones I've explored on the side."
+      : activeLevel === "core"
+        ? "The tools I lead with every day — deep expertise, shipped repeatedly in production."
+        : activeLevel === "production"
+          ? "Tools I've used to ship real, business-critical work."
+          : "Technologies I've explored and can ramp up on quickly when a project needs them.";
 
   const filtered = useMemo(() => {
     return skills.filter((s) => {
-      const matchLevel = s.level === activeLevel;
+      const matchLevel = activeLevel === "all" || s.level === activeLevel;
       const matchCategory = activeCategory === "all" || s.category === activeCategory;
       return matchLevel && matchCategory;
     });
   }, [activeLevel, activeCategory]);
 
   const availableCategories = useMemo(() => {
-    const ids = new Set(skills.filter(s => s.level === activeLevel).map(s => s.category));
-    return skillCategories.filter(c => ids.has(c.id));
+    const ids = new Set(
+      skills.filter((s) => activeLevel === "all" || s.level === activeLevel).map((s) => s.category),
+    );
+    return skillCategories.filter((c) => ids.has(c.id));
   }, [activeLevel]);
 
   const rows = useMemo(() => buildPyramid(filtered), [filtered]);
 
-  const levelLabel: Record<SkillLevel, string> = {
+  const levelLabel: Record<SkillLevel | "all", string> = {
+    all: "My Tech Stack",
     core: "Core Expertise",
     production: "Production Experience",
     familiar: "Exploring / Familiar",
@@ -57,14 +62,14 @@ export function Skills() {
 
       <div className="mx-auto max-w-5xl">
         <SectionHeading
-          eyebrow="Expertise"
+          eyebrow="Tech Stack"
           title={levelLabel[activeLevel]}
           description={description}
         />
 
         <div className="mb-12 flex justify-center">
           <div className="inline-flex flex-wrap justify-center rounded-2xl bg-card/30 p-1.5 border border-glass-border shadow-xl backdrop-blur-md">
-            {(["core", "production", "familiar"] as const).map((l) => (
+            {(["all", "core", "production", "familiar"] as const).map((l) => (
               <button
                 key={l}
                 onClick={() => { setActiveLevel(l); setActiveCategory("all"); }}
@@ -81,7 +86,7 @@ export function Skills() {
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <span className="relative z-10">{levelLabel[l]}</span>
+                <span className="relative z-10">{l === "all" ? "All Tools" : levelLabel[l]}</span>
               </button>
             ))}
           </div>

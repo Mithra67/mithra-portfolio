@@ -1,12 +1,17 @@
 import { motion } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { education } from "@/lib/data";
-import { GraduationCap, Award } from "lucide-react";
+import { GraduationCap, Award, Trophy, Sparkles, Medal } from "lucide-react";
 
-const ACCENT = "#A855F7";
+// Color-code each badge so the achievement reads at a glance
+const BADGE_STYLE: Record<string, { accent: string; Icon: typeof Award }> = {
+  "Gold Medalist": { accent: "#F5B301", Icon: Trophy },
+  "Pursuing": { accent: "#3B82F6", Icon: Sparkles },
+  "Rank Holder": { accent: "#A855F7", Icon: Medal },
+};
+const DEFAULT_STYLE = { accent: "#A855F7", Icon: Award };
 
 export function Academics() {
-  
   return (
     <section id="academics" className="relative px-6 py-24">
       {/* Ambient background glow */}
@@ -16,11 +21,11 @@ export function Academics() {
         <SectionHeading
           eyebrow="Academic Path"
           title="Ranked, decorated, relentless"
-          description="Three institutions. Top scores. Two badges earned"
+          description="Three institutions. Top scores. Badges earned along the way."
         />
         <div className="grid gap-6 md:grid-cols-3">
           {education.map((e, i) => {
-            const accent = ACCENT;
+            const { accent, Icon: BadgeIcon } = BADGE_STYLE[e.badge ?? ""] ?? DEFAULT_STYLE;
             return (
               <Reveal key={e.school + e.degree} delay={i * 0.1} className="h-full">
                 <motion.div
@@ -54,7 +59,7 @@ export function Academics() {
                           border: `1px solid color-mix(in oklab, ${accent} 25%, transparent)`
                         }}
                       >
-                        <Award className="h-3 w-3" /> {e.badge}
+                        <BadgeIcon className="h-3 w-3" /> {e.badge}
                       </div>
                     )}
                   </div>

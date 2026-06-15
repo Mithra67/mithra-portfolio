@@ -6,7 +6,7 @@ const SECTIONS: { id: string; label: string }[] = [
   { id: "top", label: "Home" },
   { id: "experience", label: "Experience" },
   { id: "academics", label: "Academics" },
-  { id: "skills", label: "Skills" },
+  { id: "skills", label: "Tech Stack" },
   { id: "projects", label: "Projects" },
   { id: "certifications", label: "Certifications" },
   { id: "contact", label: "Contact" },
