@@ -9,7 +9,7 @@ import avatarImg from "@/assets/image.jfif";
 const links = [
   { href: "#experience", label: "Experience" },
   { href: "#academics", label: "Academics" },
-  { href: "#skills", label: "Skills" },
+  { href: "#skills", label: "Tech Stack" },
   { href: "#projects", label: "Projects" },
   { href: "#certifications", label: "Certifications" },
   { href: "#contact", label: "Contact" },
