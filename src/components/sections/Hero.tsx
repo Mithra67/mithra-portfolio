@@ -4,7 +4,7 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { useMemo } from "react";
 import { profile, heroStats, skills } from "@/lib/data";
-import avatarImg from "@/assets/image.jfif";
+import avatarImg from "@/assets/image-hd.jpg";
 
 export function Hero() {
   const marquee = useMemo(() => skills.slice(0, 18).map((s) => s.name), []);
