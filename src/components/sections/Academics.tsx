@@ -20,8 +20,8 @@ export function Academics() {
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           eyebrow="Education"
-          title="Ranked, decorated, relentless."
-          description="Three institutions. Top scores. Badges earned along the way."
+          title="Academic foundations & honors."
+          description="Three institutions. Top scores. Recognitions earned along the way."
         />
         <div className="grid gap-6 md:grid-cols-3">
           {education.map((e, i) => {
