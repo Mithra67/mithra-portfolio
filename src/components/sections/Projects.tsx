@@ -12,8 +12,8 @@ export function Projects() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Selected Projects"
-          title="End-to-end, without shortcuts."
-          description="Each project ships through a deliberate lifecycle — from spec to production."
+          title="Built end-to-end, shipped with care."
+          description="Each project moves through a deliberate lifecycle — from spec to production."
         />
 
         <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">

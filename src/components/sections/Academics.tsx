@@ -20,8 +20,8 @@ export function Academics() {
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           eyebrow="Education"
-          title="Ranked, decorated, relentless."
-          description="Three institutions. Top scores. Badges earned along the way."
+          title="Academic foundations & honors."
+          description="Three institutions. Top scores. Recognitions earned along the way."
         />
         <div className="grid gap-6 md:grid-cols-3">
           {education.map((e, i) => {
@@ -50,18 +50,35 @@ export function Academics() {
                       <GraduationCap className="h-5 w-5" />
                     </div>
                     
-                    {e.badge && (
-                      <div 
-                        className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider"
-                        style={{ 
-                          background: `color-mix(in oklab, ${accent} 12%, transparent)`,
-                          color: accent,
-                          border: `1px solid color-mix(in oklab, ${accent} 25%, transparent)`
-                        }}
-                      >
-                        <BadgeIcon className="h-3 w-3" /> {e.badge}
-                      </div>
-                    )}
+                    {e.badge && (() => {
+                      const isGold = e.badge === "Gold Medalist";
+                      const isRank = e.badge === "Rank Holder";
+                      const shimmerClass = isGold
+                        ? "badge-shimmer-gold"
+                        : isRank
+                        ? "badge-shimmer-violet"
+                        : "";
+                      return (
+                        <div
+                          className="relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.14em]"
+                          style={{
+                            background: `color-mix(in oklab, ${accent} 14%, transparent)`,
+                            border: `1px solid color-mix(in oklab, ${accent} 35%, transparent)`,
+                            boxShadow: shimmerClass
+                              ? `0 0 22px color-mix(in oklab, ${accent} 45%, transparent)`
+                              : undefined,
+                          }}
+                        >
+                          <BadgeIcon
+                            className="h-3.5 w-3.5"
+                            style={{ color: accent, filter: `drop-shadow(0 0 6px ${accent})` }}
+                          />
+                          <span className={shimmerClass} style={!shimmerClass ? { color: accent } : undefined}>
+                            {e.badge}
+                          </span>
+                        </div>
+                      );
+                    })()}
                   </div>
 
                   <div className="mt-5 flex-1">

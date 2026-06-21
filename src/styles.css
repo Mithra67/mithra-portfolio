@@ -218,6 +218,48 @@
   .glow-text {
     text-shadow: 0 0 30px color-mix(in oklab, var(--color-primary) 60%, transparent);
   }
+  /* Shimmering gold sweep for high-honor badges */
+  .badge-shimmer-gold {
+    background-image: linear-gradient(
+      110deg,
+      #b8860b 0%,
+      #f5b301 20%,
+      #fff2a8 38%,
+      #ffd86b 50%,
+      #fff2a8 62%,
+      #f5b301 80%,
+      #b8860b 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer-sweep 3.6s linear infinite;
+    text-shadow: 0 0 18px rgba(245, 179, 1, 0.35);
+  }
+  .badge-shimmer-violet {
+    background-image: linear-gradient(
+      110deg,
+      #6d28d9 0%,
+      #a855f7 22%,
+      #f0abfc 42%,
+      #c084fc 55%,
+      #f0abfc 68%,
+      #a855f7 82%,
+      #6d28d9 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer-sweep 4.2s linear infinite;
+    text-shadow: 0 0 18px rgba(168, 85, 247, 0.4);
+  }
+}
+
+@keyframes shimmer-sweep {
+  from { background-position: 220% 0; }
+  to   { background-position: -120% 0; }
 }
 
 @keyframes gradient-shift {
