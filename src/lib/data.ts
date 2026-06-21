@@ -61,6 +61,7 @@ import projectDevperf from "@/assets/project-devperf.jpg";
 import projectSprint from "@/assets/project-sprint.jpg";
 import projectCareer from "@/assets/project-career.jpg";
 import projectClaude from "@/assets/project-claude.jpg";
+import projectAlgostrive from "@/assets/project-algostrive.jpg";
 
 export const profile = {
   name: "Sangamithra D",
@@ -385,31 +386,32 @@ export const projects: Project[] = [
 
   },
   {
-    title: "Aether Portfolio — React + TanStack Start",
-    subtitle: "This very site, shipped as a public React build",
+    title: "Algostrive Software Solutions — Corporate Website",
+    subtitle: "Production SAP consulting site for a Dubai-based enterprise",
     description:
-      "A production React + TypeScript portfolio with TanStack Start, Tailwind v4, framer-motion, and a Claude-powered AI chat. Animated hero, tilt cards, pyramid skill grid, section nav, and SEO-ready metadata — all live and open to visit.",
-    tags: ["React", "TypeScript", "TanStack Start", "Tailwind", "Framer Motion"],
+      "A full-stack corporate website for Algostrive (SAP BTP, S/4HANA, cloud migration, AI). 15+ SEO-optimized routes across four service hubs and 11 industry verticals, a Supabase-backed inquiry system, and a dark premium theme with gold accents — built for enterprise trust.",
+    tags: ["React 19", "TanStack Start", "TypeScript", "Tailwind", "Supabase", "Framer Motion"],
     category: "Live Web App",
     period: "2026",
-    image: projectClaude,
-    accent: "#22D3EE",
+    image: projectAlgostrive,
+    accent: "#F5B301",
     metrics: [
-      { label: "Lighthouse", value: "98" },
-      { label: "Sections", value: "8" },
-      { label: "Animations", value: "20+" },
+      { label: "Routes", value: "15+" },
+      { label: "Service hubs", value: "4" },
+      { label: "Industries", value: "11" },
     ],
     stageTools: [
       { name: "Design", Icon: SiFigma, color: "#F24E1E" },
       { name: "Build", Icon: SiReact, color: "#61DBFB" },
       { name: "Style", Icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "Backend", Icon: PostgreSQLIcon as IconType, color: "#4F8FBF" },
       { name: "Ship", Icon: SiVercel, color: "#FFFFFF" },
     ],
     aiTools: [
-      { name: "Lovable", usage: "Scaffolding the TanStack Start app and iterating on the animation system.", Icon: LovableIcon as IconType },
-      { name: "Claude", usage: "Powering the in-site Aether AI chat with grounded portfolio context.", Icon: ClaudeIcon as IconType },
+      { name: "Lovable", usage: "Scaffolding the multi-route TanStack Start app and iterating on the service hub layouts.", Icon: LovableIcon as IconType },
+      { name: "ChatGPT", usage: "Drafting SEO metadata, JSON-LD schemas, and SAP service copy across 24+ detail pages.", Icon: ChatGPTIcon as IconType },
     ],
-    href: "https://mithra-dev-world.lovable.app",
+    href: "https://emirates-web-wonder.lovable.app",
     hrefLabel: "Visit Live Site",
   },
 ];

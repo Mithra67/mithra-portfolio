@@ -11,12 +11,12 @@ export function Projects() {
       <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[50rem] w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" style={{ background: "oklch(0.55 0.22 300 / 0.12)" }} />
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          eyebrow="Projects & WorkFlow"
+          eyebrow="Selected Projects"
           title="End-to-end, without shortcuts."
           description="Each project ships through a deliberate lifecycle — from spec to production."
         />
 
-        <div className="grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {projects.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.08}>
               <TiltCard project={p} />
