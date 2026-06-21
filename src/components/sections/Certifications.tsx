@@ -9,7 +9,7 @@ export function Certifications() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Certifications"
-          title="Every skill, stamped and verified."
+          title="Credentials that back the craft."
           description="React, TypeScript, Python, and Prompt Engineering — each credential tied to tools I ship with daily."
         />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
