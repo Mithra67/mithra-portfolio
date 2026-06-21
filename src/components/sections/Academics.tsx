@@ -19,8 +19,8 @@ export function Academics() {
 
       <div className="mx-auto max-w-5xl">
         <SectionHeading
-          eyebrow="Academic Path"
-          title="Ranked, decorated, relentless"
+          eyebrow="Education"
+          title="Ranked, decorated, relentless."
           description="Three institutions. Top scores. Badges earned along the way."
         />
         <div className="grid gap-6 md:grid-cols-3">
