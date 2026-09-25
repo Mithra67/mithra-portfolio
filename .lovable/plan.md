@@ -1,68 +1,23 @@
-I’ll implement this as a targeted upgrade, not a redesign.
+# Private Portfolio Editor
 
-Plan:
+## What will change
+- Keep the existing public portfolio design and sections, but load Experience, Tech Stack, Education, Projects, and Certifications from saved portfolio content.
+- Add a private `/manage` area where Sangamithra can edit existing entries, add new entries, and remove entries in those five sections.
+- Save edits automatically and show clear saving, saved, and error states. Project and technology icons will use curated choices so entries remain visually consistent.
+- Keep Aether's answers in sync with the latest saved portfolio content.
 
-1. Fix the blank-page animation blocker first
-- Replace the shared `Reveal` animation with a safe fail-visible pattern using:
-  - `initial={{ opacity: 0, y: 24 }}`
-  - `whileInView={{ opacity: 1, y: 0 }}`
-  - `viewport={{ once: true, amount: 0.15 }}`
-- Remove fragile `variants` dependency in reveal wrappers.
-- Remove `useScroll` / scroll-linked opacity from the hero and scroll progress so content cannot fade out or stay hidden.
-- Keep every section parent `relative` and make content visible by default if animation does not run.
-- Reduce repeated per-item motion where it adds risk or overhead.
+## Owner-only access and persistence
+- Enable Lovable Cloud for sign-in and durable content storage; no separate user profile data is needed.
+- Restrict account creation and editing to the verified email `duraisamysangamithra19@gmail.com`. Enforce access on the server and in database policies, using a separate role record rather than trusting browser state.
+- Keep the portfolio readable to everyone. Unauthenticated visitors and any other signed-in account cannot change its content.
+- Seed the existing portfolio details into persistent storage so the current content and public experience are preserved.
 
-2. Recruiter-focused hero update
-- Change role/title language to `Frontend Engineer · React + TypeScript`.
-- Change `Open for 2026 Collaborations` to `Open for Collaborations`.
-- Replace `React 19` with `React` everywhere visible and in AI copy.
-- Rewrite the bio to emphasize scalable React apps, frontend engineering, UX thinking, AI integrations, performance optimization, and enterprise dashboards.
-- Add a clear Resume CTA in the hero.
-  - If no resume file exists, create a safe mail/contact CTA labeled for resume request or add a placeholder download route/file only if a resume asset is available.
+## Verification
+- Confirm the public portfolio still displays all existing entries and remains viewable without signing in.
+- Test owner sign-in, edit/add/delete, automatic saving, and persistence after reload.
+- Confirm another account and signed-out visitors cannot write portfolio content.
 
-3. Reorganize skills into honest recruiter categories
-- Replace the current “Worked With / Familiar” pyramid framing with:
-  - Core Expertise
-  - Production Experience
-  - Exploring / Familiar With
-- Move tools into less inflated groups so React, TypeScript, frontend architecture, dashboards, RBAC, API integration, UX, and AI-assisted workflows read as credible strengths.
-- Keep icons and premium visuals but reduce constant floating animation for performance.
-
-4. Rewrite project cards for private enterprise work
-- Keep current project features and visuals.
-- Remove any broken CTA behavior.
-- Label private work as `Enterprise Project · Private Repository`.
-- Add `Source unavailable due to company confidentiality`.
-- Replace CTA with `Case study available on request`.
-- Add clearer content fields for:
-  - business impact
-  - tech stack
-  - responsibilities
-  - measurable outcomes
-- Keep no fake GitHub/live links.
-
-5. Upgrade Aether AI assistant for recruiters
-- Replace robotic intro with:
-  `Hey — I’m Mithra’s AI assistant. Ask me about projects, frontend engineering, AI work, UX thinking, or roles Mithra is targeting.`
-- Update server persona and local fallback to be conversational, concise, and recruiter-friendly.
-- Make responses strong for skills, projects, frontend expertise, AI work, UX/product thinking, strengths, work style, availability, and career goals.
-- Add smart quick prompts plus a small `Currently Exploring` / trending prompt area in the chat UI.
-- Replace outdated `React 19` / Anthropic-specific claims where they no longer match the current Lovable AI Gateway setup.
-
-6. Add recruiter trust and UX case-study sections
-- Add a lightweight UX case-study section after Projects or before Contact.
-- Add testimonial/trust placeholders with honest wording, e.g. `References available on request`, not fake quotes.
-- Add nav links only if spacing remains clean on desktop/mobile.
-
-7. Improve SEO and share metadata
-- Update page title and meta description for Frontend Engineer / React / TypeScript / UX / AI dashboards.
-- Add stronger OG and Twitter card tags.
-- Add Person JSON-LD schema in the route head.
-- Keep one primary H1 in the hero and semantic section headings.
-
-8. UI/UX polish and performance pass
-- Improve CTA visibility, card readability, spacing, mobile layout, and contrast while keeping the premium glassmorphism aesthetic.
-- Keep thicker subtle borders and gradient glow tokens already present.
-- Lazy-load non-critical images where safe; keep the hero portrait prioritized.
-- Avoid heavy scroll-bound animations and reduce unnecessary rerenders.
-- Validate with the preview/console after changes and check that no section remains blank.
+## Technical approach
+- Use a Cloud-backed portfolio content record with public read access and owner-only writes enforced by row-level policies.
+- Use authenticated server-side checks plus a separate `user_roles` table for the editor role; do not rely on client-side email checks or local storage for security.
+- Update the existing sections and Aether data source to read the saved content while preserving the current presentation.
