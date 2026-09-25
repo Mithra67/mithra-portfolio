@@ -1,0 +1,4 @@
+- [ ] Enable Lovable Cloud authentication and persistence for portfolio content.
+- [ ] Create owner-only roles and policies; seed the current content.
+- [ ] Add secure owner sign-in and an editor for experience, skills, education, projects, and certifications.
+- [ ] Connect public sections and Aether to saved data; verify authorization and persistence.
