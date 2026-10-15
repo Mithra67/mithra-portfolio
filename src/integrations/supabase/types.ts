@@ -14,13 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      portfolio_content: {
+        Row: {
+          content: Json
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: { Args: { _role: string; _user_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
