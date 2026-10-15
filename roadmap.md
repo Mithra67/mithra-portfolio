@@ -1,4 +1,5 @@
-- [ ] Enable Lovable Cloud authentication and persistence for portfolio content.
-- [ ] Create owner-only roles and policies; seed the current content.
-- [ ] Add secure owner sign-in and an editor for experience, skills, education, projects, and certifications.
-- [ ] Connect public sections and Aether to saved data; verify authorization and persistence.
+- [ ] Create owner-only content storage, seed existing portfolio details, and retain read-only public access.
+- [ ] Add a private owner sign-in and responsive editor for experience, tech stack, education, projects, and certifications.
+- [ ] Connect the existing public sections and Aether to saved content; test saving and access restrictions.
+- [ ] Verify Aether’s real answer path and remove any behavior that can leave the chat stuck.
+- [ ] Publish the portfolio and make a public GitHub repository containing the project source, excluding secrets and generated files.
