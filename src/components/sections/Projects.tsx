@@ -3,8 +3,10 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { projects, Project } from "@/lib/data";
 import { ArrowRight, ArrowUpRight, Calendar, Lock, Star, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Projects() {
+  const [expandedProject, setExpandedProject] = useState<string | null>(null);
   return (
     <section id="projects" className="relative overflow-hidden px-6 py-24">
       <div className="pointer-events-none absolute inset-0 -z-20 grid-fade opacity-40" />
@@ -19,7 +21,11 @@ export function Projects() {
         <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
           {projects.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.08}>
-              <TiltCard project={p} />
+              <TiltCard
+                project={p}
+                isOpen={expandedProject === p.title}
+                onToggle={() => setExpandedProject((current) => current === p.title ? null : p.title)}
+              />
             </Reveal>
           ))}
         </div>
@@ -28,8 +34,7 @@ export function Projects() {
   );
 }
 
-function TiltCard({ project: p }: { project: Project }) {
-  const [isOpen, setIsOpen] = useState(false);
+function TiltCard({ project: p, isOpen, onToggle }: { project: Project; isOpen: boolean; onToggle: () => void }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const lastFrameRef = useRef(0);
 
@@ -61,7 +66,6 @@ function TiltCard({ project: p }: { project: Project }) {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onClick={() => setIsOpen(!isOpen)}
       style={{
         rotateX,
         rotateY,
@@ -110,13 +114,22 @@ function TiltCard({ project: p }: { project: Project }) {
         style={{ transform: "translateZ(30px)" }}
         className="flex flex-1 flex-col p-6"
       >
-        <h3 className="text-xl font-bold leading-tight">{p.title}</h3>
-        <div className="mt-1 flex items-center justify-between">
-          <p className="text-sm text-primary">{p.subtitle}</p>
-          <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+        <Button
+          type="button"
+          variant="ghost"
+          aria-expanded={isOpen}
+          aria-label={`${isOpen ? "Collapse" : "Expand"} ${p.title}`}
+          onClick={onToggle}
+          className="-mx-2 flex h-auto w-[calc(100%+1rem)] items-center justify-between rounded-lg px-2 py-1 text-left hover:bg-primary/5"
+        >
+          <span className="min-w-0">
+            <span className="block text-xl font-bold leading-tight">{p.title}</span>
+            <span className="mt-1 block text-sm font-normal text-primary">{p.subtitle}</span>
+          </span>
+          <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }} className="ml-3 shrink-0">
             <ChevronDown className="h-4 w-4 text-foreground/60" />
-          </motion.div>
-        </div>
+          </motion.span>
+        </Button>
 
         <AnimatePresence>
           {isOpen && (
