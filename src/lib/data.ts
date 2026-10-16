@@ -176,6 +176,7 @@ export const certifications = [
   { name: "React Advanced Patterns", issuer: "Udemy", year: "2025", Icon: SiReact, accent: "#06B6D4" },
   { name: "TypeScript Mastery", issuer: "Udemy", year: "2025", Icon: SiTypescript, accent: "#EC4899" },
   { name: "Prompt Engineering for Devs", issuer: "Self-Paced", year: "2025", Icon: SiAnthropic, accent: "#F97316" },
+  { name: "Oracle Agentic AI Foundations Associate", issuer: "Oracle", year: "2026", Icon: LuAward, accent: "#D97757" },
 ];
 
 export type SkillLevel = "core" | "production" | "familiar";

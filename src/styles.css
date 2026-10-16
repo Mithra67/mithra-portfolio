@@ -36,33 +36,8 @@
   --font-sans: "Inter", "Roboto", system-ui, sans-serif;
 }
 
-:root.dark, :root {
+:root {
   --radius: 0.875rem;
-  --background: oklch(0.18 0.012 280);
-  --foreground: oklch(0.97 0.005 280);
-  --card: oklch(0.22 0.018 285);
-  --card-foreground: oklch(0.97 0.005 280);
-  --popover: oklch(0.22 0.018 285);
-  --popover-foreground: oklch(0.97 0.005 280);
-  --primary: oklch(0.62 0.27 305);
-  --primary-foreground: oklch(0.99 0 0);
-  --primary-glow: oklch(0.78 0.18 310);
-  --secondary: oklch(0.28 0.025 285);
-  --secondary-foreground: oklch(0.97 0.005 280);
-  --muted: oklch(0.26 0.02 285);
-  --muted-foreground: oklch(0.72 0.02 280);
-  --accent: oklch(0.62 0.27 305);
-  --accent-foreground: oklch(0.99 0 0);
-  --destructive: oklch(0.62 0.24 27);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.32 0.03 290);
-  --input: oklch(0.28 0.025 285);
-  --ring: oklch(0.62 0.27 305);
-  --glass: oklch(0.22 0.02 285 / 0.5);
-  --glass-border: oklch(0.62 0.27 305 / 0.35);
-}
-
-:root.light {
   --background: oklch(0.97 0.012 305);
   --foreground: oklch(0.2 0.04 295);
   --card: oklch(0.96 0.018 300 / 0.92);
@@ -85,6 +60,31 @@
   --ring: oklch(0.55 0.27 305);
   --glass: oklch(0.95 0.016 300 / 0.82);
   --glass-border: oklch(0.55 0.27 305 / 0.5);
+}
+
+:root.dark {
+  --background: oklch(0.18 0.012 280);
+  --foreground: oklch(0.97 0.005 280);
+  --card: oklch(0.22 0.018 285);
+  --card-foreground: oklch(0.97 0.005 280);
+  --popover: oklch(0.22 0.018 285);
+  --popover-foreground: oklch(0.97 0.005 280);
+  --primary: oklch(0.62 0.27 305);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-glow: oklch(0.78 0.18 310);
+  --secondary: oklch(0.28 0.025 285);
+  --secondary-foreground: oklch(0.97 0.005 280);
+  --muted: oklch(0.26 0.02 285);
+  --muted-foreground: oklch(0.72 0.02 280);
+  --accent: oklch(0.62 0.27 305);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.32 0.03 290);
+  --input: oklch(0.28 0.025 285);
+  --ring: oklch(0.62 0.27 305);
+  --glass: oklch(0.22 0.02 285 / 0.5);
+  --glass-border: oklch(0.62 0.27 305 / 0.35);
 }
 
 @layer base {
