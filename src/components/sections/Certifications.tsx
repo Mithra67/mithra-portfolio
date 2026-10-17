@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
-import { certifications } from "@/lib/data";
+import { usePortfolioContent } from "@/lib/portfolio-content";
 import { CheckCircle2 } from "lucide-react";
 
 export function Certifications() {
+  const { content: { certifications } } = usePortfolioContent();
   return (
     <section id="certifications" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">

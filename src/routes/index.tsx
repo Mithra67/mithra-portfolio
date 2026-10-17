@@ -11,6 +11,7 @@ import { Contact } from "@/components/sections/Contact";
 import { AetherChat } from "@/components/sections/AetherChat";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { SectionNav } from "@/components/ui/SectionNav";
+import { PortfolioProvider } from "@/lib/portfolio-content";
 
 const PERSON_SCHEMA = JSON.stringify({
   "@context": "https://schema.org",
@@ -75,21 +76,23 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen overflow-x-clip">
-        <ScrollProgress />
-        <Navbar />
-        <main>
-          <Hero />
-          <Experience />
-          <Academics />
-          <Skills />
-          <Projects />
-          <Certifications />
-          <Contact />
-        </main>
-        <AetherChat />
-        <SectionNav />
-      </div>
+      <PortfolioProvider>
+        <div className="min-h-screen overflow-x-clip">
+          <ScrollProgress />
+          <Navbar />
+          <main>
+            <Hero />
+            <Experience />
+            <Academics />
+            <Skills />
+            <Projects />
+            <Certifications />
+            <Contact />
+          </main>
+          <AetherChat />
+          <SectionNav />
+        </div>
+      </PortfolioProvider>
     </ThemeProvider>
   );
 }

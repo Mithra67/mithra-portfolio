@@ -122,6 +122,7 @@ const PortfolioContext = createContext<PortfolioContextValue | null>(null);
 
 export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [document, setDocument] = useState<PortfolioDocument>(() => initialDocument());
+  const documentRef = useRef(document);
   const [saveState, setSaveState] = useState<SaveState>("loading");
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const saveQueue = useRef(Promise.resolve());
@@ -135,29 +136,30 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
         setSaveState("error");
         return;
       }
-      setDocument(restoreDocument(data.content));
+      const restored = restoreDocument(data.content);
+      documentRef.current = restored;
+      setDocument(restored);
       setSaveState("saved");
     });
     return () => { active = false; };
   }, []);
 
   const replaceSection = useCallback((section: PortfolioSection, records: PortfolioRecord[]) => {
-    setDocument((current) => {
-      const updated = { ...current, [section]: records };
-      setSaveState("saving");
-      if (saveTimer.current) clearTimeout(saveTimer.current);
-      saveTimer.current = setTimeout(() => {
-        saveQueue.current = saveQueue.current.then(async () => {
-          const { error } = await supabase.from("portfolio_content").update({ content: updated }).eq("id", "main");
-          setSaveState(error ? "error" : "saved");
-          if (error) console.error("Portfolio changes could not be saved", error);
-        }).catch((error: unknown) => {
-          console.error("Portfolio changes could not be saved", error);
-          setSaveState("error");
-        });
-      }, 650);
-      return updated;
-    });
+    const updated = { ...documentRef.current, [section]: records };
+    documentRef.current = updated;
+    setDocument(updated);
+    setSaveState("saving");
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      saveQueue.current = saveQueue.current.then(async () => {
+        const { error } = await supabase.from("portfolio_content").update({ content: updated }).eq("id", "main");
+        setSaveState(error ? "error" : "saved");
+        if (error) console.error("Portfolio changes could not be saved", error);
+      }).catch((error: unknown) => {
+        console.error("Portfolio changes could not be saved", error);
+        setSaveState("error");
+      });
+    }, 650);
   }, []);
 
   const value = useMemo(() => ({ content: normalize(document), document, saveState, replaceSection }), [document, saveState, replaceSection]);
