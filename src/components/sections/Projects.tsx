@@ -1,11 +1,13 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
-import { projects, Project } from "@/lib/data";
+import { type Project } from "@/lib/data";
+import { usePortfolioContent } from "@/lib/portfolio-content";
 import { ArrowRight, ArrowUpRight, Calendar, Lock, Star, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Projects() {
+  const { content: { projects } } = usePortfolioContent();
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
   return (
     <section id="projects" className="relative overflow-hidden px-6 py-24">

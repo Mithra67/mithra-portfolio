@@ -1,7 +1,8 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading } from "@/components/ui/Reveal";
-import { skills, skillCategories, type SkillCategory, type SkillLevel } from "@/lib/data";
+import { type SkillCategory, type SkillLevel } from "@/lib/data";
+import { usePortfolioContent } from "@/lib/portfolio-content";
 
 /**
  * Builds a tight, "all-in-one-place" pyramid layout.
@@ -20,6 +21,7 @@ function buildPyramid<T>(items: T[]): T[][] {
 }
 
 export function Skills() {
+  const { content: { skills, skillCategories } } = usePortfolioContent();
   const [activeLevel, setActiveLevel] = useState<SkillLevel | "all">("all");
   const [activeCategory, setActiveCategory] = useState<SkillCategory | "all">("all");
 

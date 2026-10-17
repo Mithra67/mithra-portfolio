@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
-import { education } from "@/lib/data";
+import { usePortfolioContent } from "@/lib/portfolio-content";
 import { GraduationCap, Award, Trophy, Sparkles, Medal } from "lucide-react";
 
 // Color-code each badge so the achievement reads at a glance
@@ -12,6 +12,7 @@ const BADGE_STYLE: Record<string, { accent: string; Icon: typeof Award }> = {
 const DEFAULT_STYLE = { accent: "#A855F7", Icon: Award };
 
 export function Academics() {
+  const { content: { education } } = usePortfolioContent();
   return (
     <section id="academics" className="relative px-6 py-24">
       {/* Ambient background glow */}

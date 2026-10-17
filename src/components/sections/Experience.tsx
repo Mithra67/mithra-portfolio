@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
-import { experience } from "@/lib/data";
+import { usePortfolioContent } from "@/lib/portfolio-content";
 import { Briefcase, Sparkles, Building2, Calendar } from "lucide-react";
 
 export function Experience() {
+  const { content: { experience } } = usePortfolioContent();
   return (
     <section id="experience" className="relative px-6 py-24 md:py-32">
       {/* Background glow logic */}
