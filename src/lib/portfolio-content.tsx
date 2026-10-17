@@ -45,6 +45,7 @@ const iconCatalog: Record<string, IconType> = {
   Award: LuAward,
   Code: LuCode2,
 };
+export const portfolioIconOptions = Object.keys(iconCatalog).sort((left, right) => left.localeCompare(right));
 
 function serializable<T extends { Icon: IconType }>(item: T, iconKey: string): PortfolioRecord {
   const { Icon: _icon, ...fields } = item;

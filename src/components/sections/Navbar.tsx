@@ -66,6 +66,7 @@ export function Navbar() {
                 </a>
               </li>
             ))}
+            <li><a href="/manage" className="relative rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary">Manage</a></li>
           </ul>
 
           {/* Right controls */}
