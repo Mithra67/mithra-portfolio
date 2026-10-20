@@ -150,7 +150,7 @@ export const education = [
     degree: "M.Sc. Computer Science",
     period: "2024 – 2026",
     score: "9.0 / 10 CGPA",
-    badge: "Pursuing",
+    badge: "Rank Holder",
   },
   {
     school: "SNMV College of Arts and Science",
@@ -412,7 +412,7 @@ export const projects: Project[] = [
       { name: "Lovable", usage: "Scaffolding the multi-route TanStack Start app and iterating on the service hub layouts.", Icon: LovableIcon as IconType },
       { name: "ChatGPT", usage: "Drafting SEO metadata, JSON-LD schemas, and SAP service copy across 24+ detail pages.", Icon: ChatGPTIcon as IconType },
     ],
-    href: "https://emirates-web-wonder.lovable.app",
+    href: "https://algostrive-dubai.lovable.app",
     hrefLabel: "Visit Live Site",
   },
 ];

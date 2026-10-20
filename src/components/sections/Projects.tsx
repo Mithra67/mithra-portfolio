@@ -5,9 +5,11 @@ import { type Project } from "@/lib/data";
 import { usePortfolioContent } from "@/lib/portfolio-content";
 import { ArrowRight, ArrowUpRight, Calendar, Lock, Star, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { sortNewestFirst } from "@/lib/portfolio-order";
 
 export function Projects() {
   const { content: { projects } } = usePortfolioContent();
+  const orderedProjects = sortNewestFirst(projects);
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
   return (
     <section id="projects" className="relative overflow-hidden px-6 py-24">
@@ -21,7 +23,7 @@ export function Projects() {
         />
 
         <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
-          {projects.map((p, i) => (
+          {orderedProjects.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.08}>
               <TiltCard
                 project={p}

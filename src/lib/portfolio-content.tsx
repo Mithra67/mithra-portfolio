@@ -12,7 +12,8 @@ import {
   type Skill,
 } from "@/lib/data";
 import type { IconType } from "react-icons";
-import { LuAward, LuCode2 } from "react-icons/lu";
+import { LuAward, LuCode } from "react-icons/lu";
+import type { Json } from "@/integrations/supabase/types";
 
 export type PortfolioSection = "experience" | "skills" | "education" | "projects" | "certifications";
 export type PortfolioRecord = Record<string, unknown>;
@@ -43,7 +44,7 @@ const iconCatalog: Record<string, IconType> = {
     ...(project.aiTools ?? []).map((tool) => [tool.name, tool.Icon]),
   ])),
   Award: LuAward,
-  Code: LuCode2,
+  Code: LuCode,
 };
 export const portfolioIconOptions = Object.keys(iconCatalog).sort((left, right) => left.localeCompare(right));
 
@@ -77,7 +78,7 @@ function asRecords(value: unknown): PortfolioRecord[] {
 
 function withIcon<T extends PortfolioRecord>(item: T, fallback?: IconType) {
   const iconKey = typeof item.iconKey === "string" ? item.iconKey : "";
-  return { ...item, Icon: iconCatalog[iconKey] ?? fallback ?? LuCode2 };
+  return { ...item, Icon: iconCatalog[iconKey] ?? fallback ?? LuCode };
 }
 
 function normalize(document: PortfolioDocument): RenderContent {
@@ -153,7 +154,8 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     if (saveTimer.current) clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
       saveQueue.current = saveQueue.current.then(async () => {
-        const { error } = await supabase.from("portfolio_content").update({ content: updated }).eq("id", "main");
+        const content = JSON.parse(JSON.stringify(updated)) as Json;
+        const { error } = await supabase.from("portfolio_content").update({ content }).eq("id", "main");
         setSaveState(error ? "error" : "saved");
         if (error) console.error("Portfolio changes could not be saved", error);
       }).catch((error: unknown) => {
