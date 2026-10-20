@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { usePortfolioContent } from "@/lib/portfolio-content";
 import { Briefcase, Sparkles, Building2, Calendar } from "lucide-react";
+import { sortNewestFirst } from "@/lib/portfolio-order";
 
 export function Experience() {
   const { content: { experience } } = usePortfolioContent();
+  const orderedExperience = sortNewestFirst(experience);
   return (
     <section id="experience" className="relative px-6 py-24 md:py-32">
       {/* Background glow logic */}
@@ -19,7 +21,7 @@ export function Experience() {
         />
 
         <div className="mt-16 space-y-32">
-          {experience.map((e, i) => (
+          {orderedExperience.map((e, i) => (
             <ExperienceEntry key={i} e={e} index={i} />
           ))}
         </div>

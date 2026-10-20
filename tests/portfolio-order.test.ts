@@ -22,4 +22,16 @@ describe("sortNewestFirst", () => {
       "2025 credential",
     ]);
   });
+
+  it("places ongoing experience before completed roles", () => {
+    const experience = [
+      { company: "Completed role", period: "Dec 2024 — Apr 2026" },
+      { company: "Current role", period: "Nov 2024 — Present", active: true },
+    ];
+
+    expect(sortNewestFirst(experience, 2026).map(({ company }) => company)).toEqual([
+      "Current role",
+      "Completed role",
+    ]);
+  });
 });

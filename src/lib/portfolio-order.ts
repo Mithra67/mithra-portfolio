@@ -1,6 +1,7 @@
 export type DatedPortfolioEntry = {
   year?: number | string;
   period?: string;
+  active?: boolean;
 };
 
 function entryYear(entry: DatedPortfolioEntry, currentYear: number): number {
@@ -16,7 +17,7 @@ function entryYear(entry: DatedPortfolioEntry, currentYear: number): number {
 
 export function sortNewestFirst<T extends DatedPortfolioEntry>(entries: readonly T[], currentYear = new Date().getFullYear()): T[] {
   return entries
-    .map((entry, index) => ({ entry, index, year: entryYear(entry, currentYear) }))
+    .map((entry, index) => ({ entry, index, year: entry.active ? currentYear + 1 : entryYear(entry, currentYear) }))
     .sort((left, right) => right.year - left.year || left.index - right.index)
     .map(({ entry }) => entry);
 }

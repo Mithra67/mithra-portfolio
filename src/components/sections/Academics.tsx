@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { usePortfolioContent } from "@/lib/portfolio-content";
 import { GraduationCap, Award, Trophy, Sparkles, Medal } from "lucide-react";
+import { sortNewestFirst } from "@/lib/portfolio-order";
 
 // Color-code each badge so the achievement reads at a glance
 const BADGE_STYLE: Record<string, { accent: string; Icon: typeof Award }> = {
@@ -13,6 +14,7 @@ const DEFAULT_STYLE = { accent: "#A855F7", Icon: Award };
 
 export function Academics() {
   const { content: { education } } = usePortfolioContent();
+  const orderedEducation = sortNewestFirst(education);
   return (
     <section id="academics" className="relative px-6 py-24">
       {/* Ambient background glow */}
@@ -25,7 +27,7 @@ export function Academics() {
           description="Three institutions. Top scores. Recognitions earned along the way."
         />
         <div className="grid gap-6 md:grid-cols-3">
-          {education.map((e, i) => {
+          {orderedEducation.map((e, i) => {
             const { accent, Icon: BadgeIcon } = BADGE_STYLE[e.badge ?? ""] ?? DEFAULT_STYLE;
             return (
               <Reveal key={e.school + e.degree} delay={i * 0.1} className="h-full">

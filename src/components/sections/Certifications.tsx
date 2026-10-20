@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { usePortfolioContent } from "@/lib/portfolio-content";
 import { CheckCircle2 } from "lucide-react";
+import { sortNewestFirst } from "@/lib/portfolio-order";
 
 export function Certifications() {
   const { content: { certifications } } = usePortfolioContent();
+  const orderedCertifications = sortNewestFirst(certifications);
   return (
     <section id="certifications" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
@@ -14,7 +16,7 @@ export function Certifications() {
           description="React, TypeScript, Python, and Prompt Engineering — each credential tied to tools I ship with daily."
         />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {certifications.map((c, i) => (
+          {orderedCertifications.map((c, i) => (
             <Reveal key={c.name} delay={i * 0.05}>
               <motion.div
                 whileHover={{ y: -4 }}
