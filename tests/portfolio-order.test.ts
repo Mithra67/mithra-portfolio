@@ -14,11 +14,11 @@ describe("sortNewestFirst", () => {
   it("puts 2026 certifications before previous-year credentials", () => {
     const certifications = [
       { name: "2025 credential", year: "2025" },
-      { name: "2026 credential", year: "2026" },
+      { name: "Oracle Agentic AI Foundations Associate", year: "2026" },
     ];
 
     expect(sortNewestFirst(certifications, 2026).map(({ name }) => name)).toEqual([
-      "2026 credential",
+      "Oracle Agentic AI Foundations Associate",
       "2025 credential",
     ]);
   });
