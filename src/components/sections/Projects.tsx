@@ -12,7 +12,7 @@ export function Projects() {
   const orderedProjects = sortNewestFirst(projects);
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
   return (
-    <section id="projects" className="relative overflow-hidden px-6 py-24">
+    <section id="projects" className="relative overflow-hidden scroll-mt-20 px-6 py-14">
       <div className="pointer-events-none absolute inset-0 -z-20 grid-fade opacity-40" />
       <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[50rem] w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" style={{ background: "oklch(0.55 0.22 300 / 0.12)" }} />
       <div className="mx-auto max-w-6xl">
@@ -22,11 +22,12 @@ export function Projects() {
           description="Each project moves through a deliberate lifecycle — from spec to production."
         />
 
-        <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+        <div className="grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
           {orderedProjects.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.08}>
               <TiltCard
                 project={p}
+                accent={PROJECT_ACCENTS[i % PROJECT_ACCENTS.length]}
                 isOpen={expandedProject === p.title}
                 onToggle={() => setExpandedProject((current) => current === p.title ? null : p.title)}
               />
@@ -38,7 +39,9 @@ export function Projects() {
   );
 }
 
-function TiltCard({ project: p, isOpen, onToggle }: { project: Project; isOpen: boolean; onToggle: () => void }) {
+const PROJECT_ACCENTS = ["#8B5CF6", "#06B6D4", "#10B981", "#F59E0B", "#EC4899"];
+
+function TiltCard({ project: p, accent, isOpen, onToggle }: { project: Project; accent: string; isOpen: boolean; onToggle: () => void }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const lastFrameRef = useRef(0);
 
@@ -74,13 +77,14 @@ function TiltCard({ project: p, isOpen, onToggle }: { project: Project; isOpen: 
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
-        ["--card-accent" as string]: "#A855F7",
+        ["--card-accent" as string]: accent,
       }}
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 240, damping: 18 }}
       className="card-hover-glow glass group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl cursor-pointer"
     >
+      <div className="absolute inset-x-0 top-0 z-10 h-0.5" style={{ background: accent }} />
       <div 
         style={{ transform: "translateZ(50px)" }}
         className="relative aspect-[16/10] overflow-hidden"
@@ -98,7 +102,7 @@ function TiltCard({ project: p, isOpen, onToggle }: { project: Project; isOpen: 
           {p.featured && (
             <span
               className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
-              style={{ background: "#A855F7" }}
+              style={{ background: accent }}
             >
               <Star className="h-3 w-3" /> Featured
             </span>
@@ -106,7 +110,7 @@ function TiltCard({ project: p, isOpen, onToggle }: { project: Project; isOpen: 
           {p.category && !p.featured && (
             <span
               className="inline-flex w-fit rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
-              style={{ background: "#A855F7" }}
+              style={{ background: accent }}
             >
               {p.category}
             </span>
@@ -124,14 +128,14 @@ function TiltCard({ project: p, isOpen, onToggle }: { project: Project; isOpen: 
           aria-expanded={isOpen}
           aria-label={`${isOpen ? "Collapse" : "Expand"} ${p.title}`}
           onClick={onToggle}
-          className="-mx-2 flex h-auto w-[calc(100%+1rem)] items-center justify-between rounded-lg px-2 py-1 text-left hover:bg-primary/5"
+          className="-mx-2 flex h-auto w-[calc(100%+1rem)] items-start justify-between gap-3 whitespace-normal rounded-lg px-2 py-1 text-left hover:bg-primary/5"
         >
-          <span className="min-w-0">
-            <span className="block text-xl font-bold leading-tight">{p.title}</span>
-            <span className="mt-1 block text-sm font-normal text-primary">{p.subtitle}</span>
+          <span className="min-w-0 flex-1">
+            <span className="block break-words text-xl font-bold leading-tight">{p.title}</span>
+            <span className="mt-1 block break-words text-sm font-normal text-primary">{p.subtitle}</span>
           </span>
-          <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }} className="ml-3 shrink-0">
-            <ChevronDown className="h-4 w-4 text-foreground/60" />
+          <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }} className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-glass-border bg-primary/10 text-primary">
+            <ChevronDown className="h-4 w-4" />
           </motion.span>
         </Button>
 
@@ -184,7 +188,7 @@ function TiltCard({ project: p, isOpen, onToggle }: { project: Project; isOpen: 
                   <Lock className="h-3 w-3" /> Enterprise Project · Private Repository
                 </div>
                 <p className="text-[11px] text-muted-foreground">
-                  Source unavailable due to company confidentiality. Case study available on request.
+                  Source unavailable due to company confidentiality. Architecture walkthrough available in interview.
                 </p>
                 <a
                   href={`mailto:duraisamysangamithra19@gmail.com?subject=Case%20study%20request%20%E2%80%94%20${encodeURIComponent(p.title)}`}

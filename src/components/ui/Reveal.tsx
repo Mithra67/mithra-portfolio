@@ -33,7 +33,7 @@ export function SectionHeading({
   description?: string;
 }) {
   return (
-    <Reveal className="mb-12 text-center">
+    <Reveal className="mb-8 text-center">
       <p className="mb-3 text-xs uppercase tracking-[0.3em] text-primary">{eyebrow}</p>
       <h2 className="text-4xl font-bold tracking-tight md:text-5xl">{title}</h2>
       {description && (

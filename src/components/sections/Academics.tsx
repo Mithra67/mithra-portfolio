@@ -9,6 +9,8 @@ const BADGE_STYLE: Record<string, { accent: string; Icon: typeof Award }> = {
   "Gold Medalist": { accent: "#F5B301", Icon: Trophy },
   "Pursuing": { accent: "#3B82F6", Icon: Sparkles },
   "Rank Holder": { accent: "#A855F7", Icon: Medal },
+  "University 7th Rank": { accent: "#A855F7", Icon: Medal },
+  "School 1st Rank": { accent: "#A855F7", Icon: Medal },
 };
 const DEFAULT_STYLE = { accent: "#A855F7", Icon: Award };
 
@@ -16,7 +18,7 @@ export function Academics() {
   const { content: { education } } = usePortfolioContent();
   const orderedEducation = sortNewestFirst(education);
   return (
-    <section id="academics" className="relative px-6 py-24">
+    <section id="academics" className="relative scroll-mt-20 px-6 py-14">
       {/* Ambient background glow */}
       <div className="pointer-events-none absolute -left-20 top-1/2 -z-10 h-72 w-72 rounded-full blur-3xl opacity-10" style={{ background: "oklch(0.62 0.27 300)" }} />
 
@@ -42,9 +44,9 @@ export function Academics() {
                   <div className="absolute inset-x-0 top-0 h-[2px]" style={{ background: accent }} />
 
                   {/* Header with Icon and Badge */}
-                  <div className="flex items-start justify-between">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
                     <div 
-                      className="flex h-10 w-10 items-center justify-center rounded-xl"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
                       style={{ 
                         background: `color-mix(in oklab, ${accent} 15%, transparent)`,
                         color: accent 
@@ -55,7 +57,7 @@ export function Academics() {
                     
                     {e.badge && (() => {
                       const isGold = e.badge === "Gold Medalist";
-                      const isRank = e.badge === "Rank Holder";
+                      const isRank = /rank/i.test(e.badge);
                       const shimmerClass = isGold
                         ? "badge-shimmer-gold"
                         : isRank
@@ -63,7 +65,7 @@ export function Academics() {
                         : "";
                       return (
                         <div
-                          className="relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.14em]"
+                          className="relative inline-flex max-w-full items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.1em]"
                           style={{
                             background: `color-mix(in oklab, ${accent} 14%, transparent)`,
                             border: `1px solid color-mix(in oklab, ${accent} 35%, transparent)`,

@@ -59,7 +59,7 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="relative px-6 py-24">
+    <section id="skills" className="relative scroll-mt-20 px-6 py-14">
       <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl opacity-50" />
 
       <div className="mx-auto max-w-5xl">
@@ -69,7 +69,7 @@ export function Skills() {
           description={description}
         />
 
-        <div className="mb-12 flex justify-center">
+        <div className="mb-8 flex justify-center">
           <div className="inline-flex flex-wrap justify-center rounded-2xl bg-card/30 p-1.5 border border-glass-border shadow-xl backdrop-blur-md">
             {(["all", "core", "production", "familiar"] as const).map((l) => (
               <button
@@ -95,7 +95,7 @@ export function Skills() {
         </div>
 
         {/* Secondary Category Pills */}
-        <div className="mb-12 flex flex-wrap justify-center gap-2">
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
           <FilterPill active={activeCategory === "all"} onClick={() => setActiveCategory("all")}>
             All
           </FilterPill>

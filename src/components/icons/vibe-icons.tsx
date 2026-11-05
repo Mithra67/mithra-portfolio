@@ -120,3 +120,18 @@ export function PostgreSQLIcon({ className, style, ...props }: any) {
 export function JavascriptIcon({ className, style, ...props }: any) {
   return <img suppressHydrationWarning src={javascriptLogo} alt="JavaScript" className={className} style={{ ...style, objectFit: "contain" }} {...props} />;
 }
+
+// Canva (Custom SVG — brand mark was removed from react-icons/simple-icons)
+export function CanvaIcon({ className, style, ...props }: SVGAttributes<SVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} style={style} {...props} aria-hidden="true">
+      <circle cx="12" cy="12" r="10" fill="#00C4CC" />
+      <path
+        d="M15.9 9.3c-.6-1.6-2-2.8-3.9-2.8-2.5 0-4.4 2.3-4.4 5.5s1.9 5.5 4.4 5.5c1.9 0 3.3-1.2 3.9-2.8"
+        stroke="#fff"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
