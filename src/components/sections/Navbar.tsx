@@ -37,13 +37,6 @@ export function Navbar() {
               alt="Sangamithra D" 
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" 
             />
-            {/* Status light in corner */}
-            <div className="absolute right-1 top-1 z-10">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inset-0 animate-ping rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary-rgb),0.8)]" />
-              </span>
-            </div>
             {/* Overlay glow */}
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
           </div>
