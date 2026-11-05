@@ -113,7 +113,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.97 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mt-2 max-w-6xl overflow-hidden rounded-2xl bg-background/95 p-2 shadow-2xl backdrop-blur-2xl md:hidden"
+            className="ml-auto mr-4 mt-2 w-56 overflow-hidden rounded-2xl border border-glass-border bg-background/95 p-2 sm:w-60 shadow-2xl backdrop-blur-2xl md:hidden"
           >
             {links.map((l, i) => (
               <motion.a

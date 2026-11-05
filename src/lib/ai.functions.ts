@@ -24,7 +24,7 @@ LINKEDIN: ${profile.links.linkedin}
 GITHUB: ${profile.links.github}
 
 AVAILABILITY:
-- Open to frontend engineering roles (full-time + select freelance/contract)
+- Open to frontend engineering and product engineering roles (full-time + select freelance/contract)
 - Remote-first from India, IST (GMT+5:30) — overlaps with EST, CET, GMT
 - Open to hybrid in India
 
@@ -38,7 +38,11 @@ TECHNICAL STRENGTHS:
 - Role-based UI access control (RBAC) for security-sensitive products
 - UX thinking — usability, empty states, error/loading flows, accessibility
 - AI integrations: Claude, Gemini, OpenAI, prompt design, RAG-style assistants
-- Performance optimisation and clean rendering patterns
+- Performance optimisation: bundle reduction, code-splitting, lazy loading, memoisation and render profiling
+- 2D/3D visualisations (charts, canvas, motion) built into React product surfaces
+- Responsive, mobile-first architectures and reusable design systems
+
+ROLES I'M TARGETING: Frontend Engineer and Product Engineer / Product Developer roles (React + TypeScript).
 
 SOFT SKILLS:
 - Leadership — comfortable leading features end-to-end and mentoring peers
