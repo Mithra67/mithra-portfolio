@@ -3,7 +3,21 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Send, Sparkles, X, ExternalLink, Mail } from "lucide-react";
 import { getAetherResponse } from "@/lib/ai.functions";
 import { profile } from "@/lib/data";
-import aetherAvatar from "@/assets/aether-avatar.jpg";
+import mithraPhoto from "@/assets/mithra-profile.png.asset.json";
+
+/** Render markdown-style **bold** inside a plain text segment. */
+function renderBold(segment: string, keyPrefix: string) {
+  const pieces = segment.split(/\*\*(.+?)\*\*/g);
+  return pieces.map((piece, i) =>
+    i % 2 === 1 ? (
+      <strong key={`${keyPrefix}-b${i}`} className="font-semibold text-foreground">
+        {piece}
+      </strong>
+    ) : (
+      piece
+    )
+  );
+}
 
 /**
  * A lightweight parser to turn markdown-style links and emails into clickable React elements.
@@ -17,7 +31,8 @@ function SafeLinkify({ text }: { text: string }) {
 
     while ((match = regex.exec(text)) !== null) {
       if (match.index > lastIndex) {
-        result.push(text.substring(lastIndex, match.index));
+        const seg = text.substring(lastIndex, match.index);
+        result.push(...renderBold(seg, `pre-${match.index}`));
       }
 
       const key = `${match.index}-${match[0]}`;
@@ -36,7 +51,7 @@ function SafeLinkify({ text }: { text: string }) {
               e.stopPropagation();
               window.location.assign(mailto + fullSubject);
             }}
-            className="inline-flex items-center gap-1.5 font-bold text-primary underline decoration-primary/20 underline-offset-4 transition-all hover:decoration-primary/60"
+            className="inline-flex items-center gap-1.5 font-bold text-primary underline decoration-primary/30 underline-offset-4 transition-all duration-300 hover:decoration-primary/80 hover:opacity-80 active:scale-[0.98]"
           >
             <Mail className="h-3 w-3" />
             {email}
@@ -53,7 +68,7 @@ function SafeLinkify({ text }: { text: string }) {
             rel="noopener noreferrer"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1 font-bold text-primary underline decoration-primary/20 underline-offset-4 transition-all hover:decoration-primary/60"
+            className="inline-flex items-center gap-1 font-bold text-primary underline decoration-primary/30 underline-offset-4 transition-all duration-300 hover:decoration-primary/80 hover:opacity-80 active:scale-[0.98]"
           >
             {label}
             <ExternalLink className="h-2.5 w-2.5" />
@@ -64,7 +79,7 @@ function SafeLinkify({ text }: { text: string }) {
     }
 
     if (lastIndex < text.length) {
-      result.push(text.substring(lastIndex));
+      result.push(...renderBold(text.substring(lastIndex), "tail"));
     }
     return result;
   }, [text]);
@@ -74,62 +89,70 @@ function SafeLinkify({ text }: { text: string }) {
 
 function localFallback(question: string): string {
   const q = question.toLowerCase();
-  
-  const ASSISTANT_INFO = `Greetings. I am Aether, Mithra's portfolio assistant. You may ask me about her engineering expertise, projects, or professional background.`;
 
   if (/\b(hi|hey|hello|yo)\b/.test(q))
-    return ASSISTANT_INFO;
-    
+    return `Hey! Great to meet you — I'm Mithra. Ask me about my projects, my React + TypeScript work, AI builds, or the roles I'm after. 👋`;
+
+  if (/\bui\b|interface|react|frontend|front-end|component|dashboard|figma|design system|responsive/.test(q))
+    return `I build **all kinds of UI on React** — enterprise dashboards with live charts, SaaS workflows and admin portals, reusable component libraries, responsive consumer sites, smooth animated interfaces, and AI chat UIs. I take designs from Figma to pixel-perfect, accessible **React + TypeScript** code.`;
+
   if (/stack|tech|tool|framework|language/.test(q))
-    return `Mithra's core stack revolves around **React, TypeScript**, and Redux Toolkit. She specializes in data visualization using ECharts and Three.js. Her infrastructure experience includes Docker, Kubernetes, and Kafka.`;
-    
+    return `My core stack is **React + TypeScript** with Redux Toolkit, Tailwind, and Framer Motion. I regularly integrate AI APIs (Claude, Gemini, OpenAI) and use ECharts / Three.js for data-heavy dashboards. What part are you curious about?`;
+
   if (/experience|job|work|career|company/.test(q))
-    return `She is currently a **Product Developer at DEVOPSLABS**, focused on RBAC-driven architectures and scalable enterprise dashboards. Her previous experience includes freelance consulting and internships at Stark Institutions.`;
-    
+    return `I'm currently a **Product Developer at DEVOPSLABS** (Dec 2024 – now), building scalable React + TypeScript frontends and RBAC-driven enterprise UI. Before that I freelanced as a Frontend Engineer and interned at Stark Institutions.`;
+
   if (/project|build|portfolio/.test(q))
-    return `Key projects include:\n- **Sprint Flow**: AI-integrated sprint management dashboard\n- **DevPerf Analyser**: Real-time developer productivity platform\n- **Smart Career**: High-performing web career portal`;
-    
-  if (/education|degree|college|gpa/.test(q))
-    return `Mithra holds an **M.Sc. in Computer Science** (9.0 CGPA) and a **B.Sc. in Computer Science** (9.014 GPA, Gold Medalist).`;
-    
+    return `A few I'm proud of:\n- **Sprint Flow** — AI-integrated sprint management dashboard\n- **DevPerf Analyser** — real-time developer productivity platform\n- **Smart Career** — high-performing web career portal\n\nWant details on any of these?`;
+
+  if (/education|degree|college|cgpa|gpa/.test(q))
+    return `I hold an **M.Sc. Computer Science** from SNMV — **University 7th Rank (9.031 CGPA)**, a **B.Sc. CS as Gold Medalist (9.014 CGPA)**, and I was **School 1st Rank** in 12th (95%).`;
+
   if (/cert/.test(q))
-    return `Her certifications include Full Stack Development, React Advanced Patterns, and Prompt Engineering for Developers.`;
-    
+    return `I'm certified in Full Stack Development, React Advanced Patterns, TypeScript Mastery, and Prompt Engineering — among others.`;
+
   if (/contact|email|reach|linkedin|github/.test(q))
-    return `You may reach Mithra via:\n📧 ${profile.email}\n💼 [LinkedIn](${profile.links.linkedin})\n🐙 [GitHub](${profile.links.github})`;
-    
+    return `Best ways to reach me:\n📧 **${profile.email}**\n💼 [LinkedIn](${profile.links.linkedin})\n🐙 [GitHub](${profile.links.github})`;
+
   if (/available|hire|open|collab|role|opportunity/.test(q))
-    return `Mithra is actively exploring product engineering opportunities for 2026. She is also available for high-impact freelance engagements.`;
-    
+    return `Yes — I'm actively looking for full-time product engineering roles in 2026, and open to select freelance/contract work. Drop me a line at **${profile.email}** and let's talk scope.`;
+
   if (/skill|rbac|security|architecture|speciali[sz]|strongest|strength/.test(q))
-    return `Her primary specialization is **RBAC / ABAC architecture**, designing scalable permission models for enterprise applications. This is typically implemented alongside React and deep data visualization layers.`;
-    
+    return `My sweet spot is **RBAC / ABAC architecture** — designing permission models that scale without turning into spaghetti. I've shipped it in production for security-sensitive enterprise products, alongside React and deep data-visualisation layers.`;
+
   if (/type|kind|looking for|prefer/.test(q))
-    return `She prefers working with Engineering-heavy teams in SaaS, FinTech, or AI-product spaces that prioritize security and high-performance UI.`;
-    
+    return `I'm looking for product engineering roles where I can own complex UI architecture — ideally enterprise SaaS, fintech, or AI-product teams that care about security and performance.`;
+
   if (/remote|location|timezone/.test(q))
-    return `She works remote-first from India (IST / GMT+5:30), with overlap for EST, CET, and GMT timezones.`;
-    
+    return `I'm remote-first from India (IST — GMT+5:30), which overlaps comfortably with EST, CET, and GMT. Open to hybrid in India too.`;
+
   if (/salary|pay|rate|ctc/.test(q))
-    return `Mithra prefers to discuss compensation directly based on the specific scope of the role.`;
-    
+    return `I prefer to discuss compensation directly based on the role scope and company — reach me at **${profile.email}** and let's talk properly.`;
+
+  if (/weakness|weak|flaw|struggle|improve|bad at/.test(q))
+    return `Honestly? There's nothing I feel I genuinely can't do. Anything I'm weak at, I treat as the next thing to master — I keep practising until that gap turns into a strength.`;
+
+  if (/soft skill|leadership|communication|teamwork|collaborat|personality|work style/.test(q))
+    return `A few that recruiters usually care about:\n- **Leadership** — I lead features end-to-end and mentor peers\n- **Strong communication** — I translate business intent into clean technical decisions\n- **Ownership & accountability** across design, backend, and QA\n- **Continuous learner** — I pick up new stacks and ship fast\n- **Calm under shipping pressure**`;
+
   if (/who|about|yourself/.test(q))
-    return `Mithra is a product-focused engineer with a deep interest in security-first UI and complex dashboard systems. I am her digital assistant, trained on her professional history.`;
-    
-  return `Not available in portfolio data. You may contact Mithra directly at ${profile.email} for this information.`;
+    return `${profile.bio} I care a lot about security-first UI, clean component architecture, and shipping things that actually work.`;
+
+  return `That's a good one — I don't have a polished answer ready right now. Hit me at **${profile.email}** and I'll get back to you properly.`;
 }
 
 type Msg = { id: number; role: "user" | "bot"; text: string; displayBuffer?: string };
 
-const ASSISTANT_NAME = "Aether";
+const ASSISTANT_NAME = "Mithra";
 
 export function AetherChat() {
   const [isMounted, setIsMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [showDots, setShowDots] = useState(false);
-  const INTRO = `Hey — I'm Mithra's AI assistant. Ask me about projects, frontend engineering, AI work, UX thinking, or roles Mithra is targeting.`;
+  const [isThinking, setIsThinking] = useState(false);
+  const [typingId, setTypingId] = useState<number | null>(null);
+  const INTRO = `Hey! I'm Mithra 👋 Ask me anything about my work — projects, frontend engineering, AI builds, or the roles I'm after.`;
   const [messages, setMessages] = useState<Msg[]>([
     {
       id: 0,
@@ -140,6 +163,7 @@ export function AetherChat() {
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<HTMLDivElement>(null);
+  const draggedRef = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
@@ -148,32 +172,35 @@ export function AetherChat() {
 
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
     }
-  }, [messages, open, showDots]);
+  }, [messages, open, isThinking]);
 
   useEffect(() => {
     return () => { abortRef.current?.abort(); };
   }, []);
 
+  // Smooth word-by-word reveal — reads like the answer is streaming in.
   const typeMessage = useCallback(async (msgId: number, fullText: string) => {
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
-    // Chunked reveal — fast, smooth, never blocks the UI for long
-    const CHUNK = 3;
-    for (let i = 0; i < fullText.length; i += CHUNK) {
+    const tokens = fullText.split(/(\s+)/); // keeps words and whitespace separate
+    let acc = "";
+    for (const token of tokens) {
       if (controller.signal.aborted) return;
-      const slice = fullText.slice(0, i + CHUNK);
+      acc += token;
+      const snapshot = acc;
       setMessages((m) =>
-        m.map((msg) => (msg.id === msgId ? { ...msg, displayBuffer: slice } : msg))
+        m.map((msg) => (msg.id === msgId ? { ...msg, displayBuffer: snapshot } : msg))
       );
+      const isWhitespace = /^\s+$/.test(token);
+      const delay = isWhitespace ? 10 : 34 + Math.random() * 26;
       await new Promise<void>((resolve) => {
-        const id = setTimeout(resolve, 14);
+        const id = setTimeout(resolve, delay);
         controller.signal.addEventListener("abort", () => clearTimeout(id), { once: true });
       });
     }
-    // Ensure full text is shown at the end
     if (!controller.signal.aborted) {
       setMessages((m) =>
         m.map((msg) => (msg.id === msgId ? { ...msg, displayBuffer: fullText } : msg))
@@ -189,8 +216,9 @@ export function AetherChat() {
     setMessages((m) => [...m, { id: userId, role: "user", text: q, displayBuffer: q }]);
     setInput("");
     setIsTyping(true);
-    setShowDots(true);
+    setIsThinking(true);
 
+    const startedAt = Date.now();
     let reply = "";
     try {
       const result = await Promise.race([
@@ -202,14 +230,22 @@ export function AetherChat() {
       reply = localFallback(q);
     }
 
-    setShowDots(false);
+    // Let the "typing" moment breathe for a beat before the answer streams in
+    const elapsed = Date.now() - startedAt;
+    if (elapsed < 700) {
+      await new Promise<void>((resolve) => setTimeout(resolve, 700 - elapsed));
+    }
+
+    setIsThinking(false);
     const botId = userId + 1;
     setMessages((m) => [...m, { id: botId, role: "bot", text: reply, displayBuffer: "" }]);
+    setTypingId(botId);
     try {
       await typeMessage(botId, reply);
     } catch {
-      // typewriter interrupted
+      // reveal interrupted
     } finally {
+      setTypingId(null);
       setIsTyping(false);
     }
   };
@@ -220,64 +256,59 @@ export function AetherChat() {
       <motion.button
         drag
         dragMomentum={false}
-        dragElastic={0.05}
+        dragElastic={0.1}
+        onDragStart={() => { draggedRef.current = true; }}
+        onDragEnd={() => { setTimeout(() => { draggedRef.current = false; }, 50); }}
         dragConstraints={isMounted ? dragRef : undefined}
-        whileTap={{ scale: 0.94 }}
-        whileHover={{ scale: 1.06 }}
-        onClick={() => setOpen((o) => !o)}
-        aria-label={open ? "Close chat assistant" : "Open chat assistant"}
-        className="pointer-events-auto fixed bottom-6 right-6 flex h-16 w-16 cursor-grab items-center justify-center rounded-full border border-white/20 shadow-2xl backdrop-blur-md active:cursor-grabbing"
-        style={{ 
-          background: "linear-gradient(135deg, oklch(0.6 0.28 300 / 0.9), oklch(0.7 0.2 310 / 0.8))",
-          boxShadow: "0 0 40px -10px oklch(0.6 0.28 300 / 0.5), inset 0 0 20px oklch(1 0 0 / 0.1)"
-        }}
+        whileTap={{ scale: 0.92 }}
+        whileHover={{ scale: 1.07 }}
+        onClick={() => { if (!draggedRef.current) setOpen((o) => !o); }}
+        aria-label={open ? "Close chat" : "Chat with Mithra"}
+        className="pointer-events-auto fixed bottom-6 right-6 flex h-16 w-16 cursor-grab items-center justify-center rounded-full border border-glass-border bg-gradient-to-br from-primary to-primary-glow shadow-2xl backdrop-blur-md transition-shadow duration-300 hover:brightness-110 active:cursor-grabbing"
       >
-        <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full bg-primary/20 blur-2xl" />
-        <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/30 p-0.5">
-           <img src={aetherAvatar} alt="Aether assistant avatar" className="h-full w-full rounded-full object-cover shadow-inner" />
+        <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full bg-primary/25 blur-2xl" />
+        <div className="float-bob relative h-14 w-14 overflow-hidden rounded-full border border-white/30 p-0.5 shadow-inner">
+          <img src={mithraPhoto.url} alt="Chat with Mithra" className="h-full w-full rounded-full object-cover" />
         </div>
-        <span className="pointer-events-none absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-primary shadow-lg ring-1 ring-white/20">
-          <Sparkles className="h-2.5 w-2.5 text-white" />
+        <span className="pointer-events-none absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-primary shadow-lg ring-1 ring-white/25">
+          <Sparkles className="h-2.5 w-2.5 text-primary-foreground" />
         </span>
       </motion.button>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.97, filter: "blur(10px)" }}
+            initial={{ opacity: 0, y: 32, scale: 0.96, filter: "blur(12px)" }}
             animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: 30, scale: 0.97, filter: "blur(10px)" }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="pointer-events-auto fixed bottom-28 right-6 flex h-[540px] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-[2.5rem] border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
-            style={{ 
-              background: "linear-gradient(165deg, rgba(15,15,20,0.85), rgba(25,25,35,0.7) 40%, rgba(10,10,15,0.9))",
-            }}
+            exit={{ opacity: 0, y: 32, scale: 0.96, filter: "blur(12px)" }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-auto fixed bottom-28 right-6 flex h-[540px] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-[2rem] border border-glass-border bg-popover/85 shadow-[0_32px_80px_-20px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
           >
-            {/* Header Area */}
-            <div className="relative border-b border-white/5 px-6 py-5">
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary-glow/5" />
+            {/* Header */}
+            <div className="relative border-b border-border/60 px-6 py-4">
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/8 via-transparent to-primary-glow/8" />
               <div className="relative flex items-center justify-between">
                 <div className="flex items-center gap-3.5">
                   <div className="relative">
-                    <div className="h-10 w-10 overflow-hidden rounded-full border border-primary/30 ring-2 ring-primary/10">
-                       <img src={aetherAvatar} alt="Aether assistant avatar" className="h-full w-full object-cover" />
+                    <div className="h-10 w-10 overflow-hidden rounded-full border border-primary/40 ring-2 ring-primary/15">
+                      <img src={mithraPhoto.url} alt="Mithra" className="h-full w-full object-cover" />
                     </div>
                     <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex h-3 w-3 rounded-full border border-black/40 bg-emerald-400" />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
+                      <span className="relative inline-flex h-3 w-3 rounded-full border border-background bg-primary" />
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-[15px] font-bold tracking-tight text-white">{ASSISTANT_NAME}</h3>
-                    <p className="text-[11px] font-medium text-muted-foreground/80 uppercase tracking-widest flex items-center gap-1.5">
-                      <span className="h-1 w-1 rounded-full bg-primary" /> Active Now
+                    <h3 className="text-[15px] font-bold tracking-tight text-foreground">Chat with Mithra</h3>
+                    <p className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
+                      <span className="h-1 w-1 animate-pulse rounded-full bg-primary" /> Active now
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close chat"
-                  className="rounded-full bg-white/5 p-2 text-muted-foreground transition-all hover:bg-white/10 hover:text-white"
+                  className="rounded-full bg-secondary/70 p-2 text-muted-foreground transition-all duration-300 hover:bg-primary/15 hover:text-primary active:scale-90"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -285,45 +316,55 @@ export function AetherChat() {
             </div>
 
             {/* Message Area */}
-            <div 
-              ref={scrollRef} 
-              className="flex-1 space-y-5 overflow-y-auto px-5 py-6 scrollbar-hide"
+            <div
+              ref={scrollRef}
+              className="flex-1 space-y-4 overflow-y-auto px-5 py-5 scrollbar-hide"
             >
               <AnimatePresence initial={false}>
                 {messages.map((m) => (
                   <motion.div
                     key={m.id}
-                    initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    initial={{ opacity: 0, y: 14, scale: 0.98, filter: "blur(6px)" }}
+                    animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                     className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`relative max-w-[88%] whitespace-pre-line px-4 py-3 text-[14px] leading-relaxed shadow-xl ${
+                      className={`relative max-w-[88%] whitespace-pre-line px-4 py-3 text-[14px] leading-relaxed shadow-md ${
                         m.role === "user"
-                          ? "rounded-2xl rounded-tr-sm bg-gradient-to-br from-primary to-primary-glow text-primary-foreground font-medium"
-                          : "rounded-2xl rounded-tl-sm border border-white/5 bg-white/5 text-foreground/95 backdrop-blur-md"
+                          ? "rounded-2xl rounded-tr-sm bg-gradient-to-br from-primary to-primary-glow font-medium text-primary-foreground"
+                          : "rounded-2xl rounded-tl-sm border border-border/70 bg-secondary/60 text-foreground backdrop-blur-md"
                       }`}
                     >
                       {m.role === "bot" && (
-                        <div className="absolute -left-0.5 top-3 h-4 w-1 rounded-full bg-primary/40" />
+                        <div className="absolute -left-0.5 top-3 h-4 w-1 rounded-full bg-primary/50" />
                       )}
                       <SafeLinkify text={m.displayBuffer !== undefined ? m.displayBuffer : m.text} />
+                      {m.role === "bot" && m.id === typingId && (
+                        <span className="ml-1 inline-block h-3.5 w-[2px] translate-y-0.5 animate-pulse rounded-full bg-primary align-middle" />
+                      )}
                     </div>
                   </motion.div>
                 ))}
 
-                {showDots && (
+                {isThinking && (
                   <motion.div
-                    key="typing"
+                    key="thinking"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
+                    exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
+                    transition={{ duration: 0.3 }}
                     className="flex justify-start"
                   >
-                    <div className="flex items-center gap-1.5 rounded-2xl rounded-tl-sm border border-white/5 bg-white/5 px-5 py-4 backdrop-blur-md">
-                      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/60" />
-                      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/60" style={{ animationDelay: "0.2s" }} />
-                      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/60" style={{ animationDelay: "0.4s" }} />
+                    <div className="flex items-center gap-3 rounded-2xl rounded-tl-sm border border-border/70 bg-secondary/60 px-4 py-3.5 backdrop-blur-md">
+                      <div className="flex items-center gap-1.5">
+                        <span className="typing-dot" />
+                        <span className="typing-dot" />
+                        <span className="typing-dot" />
+                      </div>
+                      <span className="badge-shimmer-violet text-[12px] font-bold uppercase tracking-widest">
+                        Typing…
+                      </span>
                     </div>
                   </motion.div>
                 )}
@@ -334,17 +375,17 @@ export function AetherChat() {
             {messages.length <= 1 && !isTyping && (
               <div className="flex flex-wrap gap-1.5 px-5 pb-3">
                 {[
-                  "What's Mithra's core stack?",
-                  "Walk me through her best project",
-                  "What are her strengths?",
-                  "What's her biggest weakness?",
-                  "Tell me about her soft skills",
-                  "Is she available for roles?",
+                  "What's your core stack?",
+                  "Walk me through your best project",
+                  "What are your strengths?",
+                  "What's your biggest weakness?",
+                  "Are you available for roles?",
+                  "How do I reach you?",
                 ].map((q) => (
                   <button
                     key={q}
                     onClick={() => send(q)}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-foreground/80 transition hover:border-primary/40 hover:bg-primary/15 hover:text-primary"
+                    className="rounded-full border border-glass-border bg-card/60 px-3 py-1.5 text-[11px] font-medium text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/12 hover:text-primary active:scale-95"
                   >
                     {q}
                   </button>
@@ -352,11 +393,11 @@ export function AetherChat() {
               </div>
             )}
 
-            {/* Input Island */}
-            <div className="p-5 pt-0">
+            {/* Input */}
+            <div className="p-5 pt-2">
               <form
                 onSubmit={(e) => { e.preventDefault(); send(input); }}
-                className="group relative flex items-center gap-2 overflow-hidden rounded-full border border-white/10 bg-white/5 p-1.5 pl-5 transition-all focus-within:border-primary/40 focus-within:ring-4 focus-within:ring-primary/10 backdrop-blur-xl"
+                className="group relative flex items-center gap-2 overflow-hidden rounded-full border border-glass-border bg-card/60 p-1.5 pl-5 transition-all duration-300 focus-within:border-primary/50 focus-within:bg-card/90 focus-within:ring-4 focus-within:ring-primary/15"
               >
                 <input
                   value={input}
@@ -364,15 +405,15 @@ export function AetherChat() {
                   placeholder={`Ask ${ASSISTANT_NAME}…`}
                   aria-label="Ask a question"
                   disabled={isTyping}
-                  className="flex-1 bg-transparent py-2 text-sm text-white outline-none placeholder:text-muted-foreground/60 disabled:opacity-60"
+                  className="flex-1 bg-transparent py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground/70 disabled:opacity-60"
                 />
                 <motion.button
                   type="submit"
                   disabled={isTyping || !input.trim()}
                   aria-label="Send message"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-colors hover:bg-primary-glow disabled:opacity-40 disabled:hover:scale-100"
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.92 }}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-lg transition-all duration-300 hover:brightness-110 hover:shadow-xl disabled:opacity-40"
                 >
                   <Send className="h-4 w-4" />
                 </motion.button>
@@ -384,4 +425,3 @@ export function AetherChat() {
     </div>
   );
 }
-

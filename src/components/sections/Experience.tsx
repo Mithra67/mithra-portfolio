@@ -8,7 +8,7 @@ export function Experience() {
   const { content: { experience } } = usePortfolioContent();
   const orderedExperience = sortNewestFirst(experience);
   return (
-    <section id="experience" className="relative px-6 py-24 md:py-32">
+    <section id="experience" className="relative scroll-mt-20 px-6 py-14 md:py-16">
       {/* Background glow logic */}
       <div className="pointer-events-none absolute left-0 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px]" />
       <div className="pointer-events-none absolute right-0 bottom-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-primary-glow/5 blur-[120px]" />
@@ -83,7 +83,7 @@ function ExperienceEntry({ e, index }: { e: any; index: number }) {
       {/* Right Column: Scrolling Details */}
       <div className="space-y-10">
         <Reveal delay={0.2}>
-          <div className="glass-strong card-hover-glow relative overflow-hidden rounded-3xl p-8 md:p-10">
+          <div className="glass-strong card-hover-glow relative overflow-hidden rounded-3xl p-8 md:p-10" style={{ ["--card-accent" as string]: accent }}>
             {/* Subtle corner glow */}
             <div 
               className="absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-[0.08] blur-[80px]" 

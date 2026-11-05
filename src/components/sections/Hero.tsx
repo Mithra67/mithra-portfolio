@@ -4,14 +4,14 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { useMemo } from "react";
 import { profile, heroStats, skills } from "@/lib/data";
-import avatarImg from "@/assets/image-hd.jpg";
+import mithraPhoto from "@/assets/mithra-profile.png.asset.json";
 
 export function Hero() {
   const marquee = useMemo(() => skills.slice(0, 18).map((s) => s.name), []);
   const nameChars = useMemo(() => profile.name.split(""), []);
 
   return (
-    <section id="top" className="relative overflow-hidden px-6 pb-28 pt-32 md:pt-40">
+    <section id="top" className="relative overflow-hidden scroll-mt-20 px-6 pb-16 pt-28 md:pt-32">
       <div className="pointer-events-none absolute inset-0 -z-20 grid-fade" />
 
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -131,12 +131,6 @@ export function Hero() {
               >
                 <Download className="h-4 w-4 text-primary" /> Request Resume
               </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full border border-glass-border bg-card/30 px-5 py-3 text-sm font-medium hover:bg-primary/10"
-              >
-                <Sparkles className="h-4 w-4 text-primary" /> Let's collaborate
-              </a>
               <div className="flex items-center gap-2">
                 <IconLink href={profile.links.linkedin} label="LinkedIn">
                   <FaLinkedin className="h-4 w-4" />
@@ -168,7 +162,7 @@ export function Hero() {
             >
               <div className="relative overflow-hidden rounded-[calc(2rem-2px)] bg-card">
                 <img
-                  src={avatarImg}
+                  src={mithraPhoto.url}
                   alt="Sangamithra D"
                   fetchPriority="high"
                   decoding="async"
@@ -185,6 +179,16 @@ export function Hero() {
                   }}
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card/80 to-transparent" />
+                {/* Open-to-work badge, part of the dev portrait */}
+                <div className="absolute inset-x-0 bottom-4 flex justify-center">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-glass-border bg-background/80 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-foreground shadow-lg backdrop-blur-md">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inset-0 animate-ping rounded-full bg-primary opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                    </span>
+                    Open to Frontend Roles
+                  </span>
+                </div>
               </div>
             </div>
           </motion.div>

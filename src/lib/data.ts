@@ -24,8 +24,6 @@ import {
   SiPostman,
   SiBruno,
   SiConfluence,
-  SiCanva,
-  SiOpenai,
   SiAnthropic,
   SiGoogle,
   SiPython,
@@ -53,7 +51,7 @@ import {
 } from "react-icons/lu";
 import type { IconType } from "react-icons";
 import { 
-  LovableIcon, BoltIcon, ClaudeIcon, CursorIcon, StitchIcon, GeminiIcon, ChatGPTIcon,
+  LovableIcon, BoltIcon, ClaudeIcon, CursorIcon, StitchIcon, GeminiIcon, ChatGPTIcon, CanvaIcon,
   WordIcon, ExcelIcon, PowerPointIcon, CopilotIcon, DeepseekIcon, KlingIcon,
   JavaIcon, PostgreSQLIcon, FigmaIcon, ThreeJsIcon, JavascriptIcon
 } from "@/components/icons/vibe-icons";
@@ -128,7 +126,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     company: "Freelance",
-    role: "Product Developer & Consultant",
+    role: "Freelance Frontend Engineer",
     period: "Nov 2024 — Present",
     active: true,
     description:
@@ -149,14 +147,14 @@ export const education = [
     school: "SNMV College of Arts and Science",
     degree: "M.Sc. Computer Science",
     period: "2024 – 2026",
-    score: "9.0 / 10 CGPA",
-    badge: "Rank Holder",
+    score: "9.031 CGPA",
+    badge: "University 7th Rank",
   },
   {
     school: "SNMV College of Arts and Science",
     degree: "B.Sc. Computer Science",
     period: "2020 – 2023",
-    score: "9.014 GPA",
+    score: "9.014 CGPA",
     badge: "Gold Medalist",
   },
   {
@@ -164,7 +162,7 @@ export const education = [
     degree: "Higher Secondary",
     period: "2018 – 2020",
     score: "95%",
-    badge: "Rank Holder",
+    badge: "School 1st Rank",
   },
 ];
 
@@ -228,7 +226,7 @@ export const skills: Skill[] = [
   { name: "Jira", Icon: SiJira, color: "#4F8FE0", category: "productivity", level: "production", url: "https://www.atlassian.com/software/jira" },
   { name: "Confluence", Icon: SiConfluence, color: "#4F8FE0", category: "productivity", level: "production", url: "https://www.atlassian.com/software/confluence" },
   { name: "Figma", Icon: FigmaIcon as IconType, color: "#F24E1E", category: "productivity", level: "core", url: "https://www.figma.com" },
-  { name: "Canva", Icon: SiCanva, color: "#00C4CC", category: "productivity", level: "production", url: "https://www.canva.com" },
+  { name: "Canva", Icon: CanvaIcon as IconType, color: "#00C4CC", category: "productivity", level: "production", url: "https://www.canva.com" },
   { name: "GitHub", Icon: SiGithub, color: "#E5E5E5", category: "productivity", level: "production", url: "https://github.com" },
 
   { name: "Claude", Icon: ClaudeIcon as IconType, color: "#D97757", category: "ai", level: "core", url: "https://claude.ai" },
@@ -375,7 +373,7 @@ export const projects: Project[] = [
       { label: "Lighthouse", value: "98" },
     ],
     stageTools: [
-      { name: "Design", Icon: SiCanva, color: "#00C4CC" },
+      { name: "Design", Icon: CanvaIcon as IconType, color: "#00C4CC" },
       { name: "Build", Icon: SiGithub, color: "#E5E5E5" },
     ],
     aiTools: [
@@ -419,7 +417,7 @@ export const projects: Project[] = [
 
 export const heroStats = [
   { value: "3+", label: "Years building", Icon: LuRocket },
-  { value: "9.0", label: "Master's CGPA", Icon: LuMedal },
+  { value: "9.031", label: "Master's CGPA", Icon: LuMedal },
   { value: "40+", label: "Tools mastered", Icon: LuZap },
   { value: "7", label: "Certifications", Icon: LuTrophy },
 ];

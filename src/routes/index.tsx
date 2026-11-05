@@ -83,9 +83,10 @@ function Index() {
           <main>
             <Hero />
             <Experience />
+            <Projects />
             <Academics />
             <Skills />
-            <Projects />
+            
             <Certifications />
             <Contact />
           </main>

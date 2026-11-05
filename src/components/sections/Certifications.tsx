@@ -8,7 +8,7 @@ export function Certifications() {
   const { content: { certifications } } = usePortfolioContent();
   const orderedCertifications = sortNewestFirst(certifications);
   return (
-    <section id="certifications" className="px-6 py-24">
+    <section id="certifications" className="scroll-mt-20 px-6 py-14">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Certifications"

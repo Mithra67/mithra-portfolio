@@ -191,6 +191,12 @@
   /* GitHub icon brand-correct contrast */
   :root.light .gh-icon { color: oklch(0.15 0.01 280); }
   :root.dark .gh-icon, :root .gh-icon { color: oklch(0.98 0 0); }
+  /* Hide scrollbars while keeping scrollability (chat panel) */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
   /* Typing dots for AI assistant */
   .typing-dot {
     width: 6px; height: 6px; border-radius: 9999px;
@@ -302,3 +308,6 @@
     -webkit-backdrop-filter: blur(8px) saturate(120%);
   }
 }
+
+@keyframes float-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.float-bob { animation: float-bob 3.2s ease-in-out infinite; }

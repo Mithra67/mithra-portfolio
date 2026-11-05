@@ -5,9 +5,9 @@ import { ChevronUp, ChevronDown } from "lucide-react";
 const SECTIONS: { id: string; label: string }[] = [
   { id: "top", label: "Home" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
   { id: "academics", label: "Academics" },
   { id: "skills", label: "Tech Stack" },
-  { id: "projects", label: "Projects" },
   { id: "certifications", label: "Certifications" },
   { id: "contact", label: "Contact" },
 ];
