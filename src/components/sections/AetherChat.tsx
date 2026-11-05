@@ -256,7 +256,9 @@ export function AetherChat() {
       <motion.button
         drag
         dragMomentum={false}
-        dragElastic={0.1}
+        dragElastic={0.05}
+        animate={{ y: [0, -6, 0] }}
+        transition={{ y: { duration: 4, repeat: Infinity, ease: "easeInOut" } }}
         onDragStart={() => { draggedRef.current = true; }}
         onDragEnd={() => { setTimeout(() => { draggedRef.current = false; }, 50); }}
         dragConstraints={isMounted ? dragRef : undefined}

@@ -186,7 +186,7 @@ export function Hero() {
                       <span className="absolute inset-0 animate-ping rounded-full bg-primary opacity-75" />
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                     </span>
-                    Open to Frontend Roles
+                    Open to Frontend & Product Roles
                   </span>
                 </div>
               </div>
