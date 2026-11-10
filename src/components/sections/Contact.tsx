@@ -31,70 +31,87 @@ export function Contact() {
           </p>
         </motion.div>
 
-        {/* Unified contact card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{ ["--card-accent" as string]: "#A855F7" }}
-          className="card-hover-glow glass mx-auto max-w-3xl overflow-hidden rounded-3xl"
-        >
-          <div className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="min-w-0">
+        {/* 3-box bento: email banner + location + status */}
+        <div className="grid gap-4 md:grid-cols-2">
+          <motion.a
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            href={`mailto:${profile.email}?subject=Inquiry from Portfolio — Sangamithra D&body=Hi Mithra,`}
+            style={{ ["--card-accent" as string]: "#A855F7" }}
+            className="card-hover-glow glass group relative flex flex-col justify-between overflow-hidden rounded-3xl p-6 md:col-span-2"
+          >
+            <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
-                <Mail className="h-3 w-3" /> Email · usually replies within a day
+                <Mail className="h-3 w-3" /> Email
               </span>
-              <a
-                href={`mailto:${profile.email}?subject=Inquiry from Portfolio — Sangamithra D&body=Hi Mithra,`}
-                className="mt-3 block break-all text-lg font-bold transition-colors hover:text-primary sm:text-xl"
-              >
-                {profile.email}
-              </a>
+              <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
             </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <button
-                type="button"
-                aria-label="Copy email"
-                title="Copy email"
-                onClick={() =>
-                  navigator.clipboard.writeText(profile.email).then(
-                    () => toast.success("Email copied to clipboard"),
-                    () => toast.error("Couldn't copy — please copy manually"),
-                  )
-                }
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-glass-border bg-primary/10 text-primary transition hover:bg-primary/25 active:scale-95"
-              >
-                <Copy className="h-4 w-4" />
-              </button>
-              <a
-                href={`mailto:${profile.email}?subject=Inquiry from Portfolio — Sangamithra D&body=Hi Mithra,`}
-                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary-glow"
-              >
-                Say hello <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 border-t border-glass-border sm:grid-cols-2">
-            <div className="flex items-center gap-3 px-6 py-4">
-              <MapPin className="h-4 w-4 shrink-0 text-primary" />
-              <div>
-                <p className="text-sm font-semibold">India · Remote</p>
-                <p className="text-xs text-muted-foreground">IST · overlaps EU & US hours</p>
+            <div className="mt-6 flex items-center justify-between gap-4">
+              <div className="min-w-0 flex-1">
+                <p className="text-xs text-muted-foreground">Usually a reply within a day.</p>
+                <div className="mt-1 flex items-center gap-2">
+                  <p className="break-all text-lg font-bold">{profile.email}</p>
+                  <button
+                    type="button"
+                    aria-label="Copy email"
+                    title="Copy email"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      navigator.clipboard.writeText(profile.email).then(
+                        () => toast.success("Email copied to clipboard"),
+                        () => toast.error("Couldn't copy — please copy manually"),
+                      );
+                    }}
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-glass-border bg-primary/10 text-primary transition hover:bg-primary/25 active:scale-95"
+                  >
+                    <Copy className="h-3.5 w-3.5" />
+                  </button>
+                </div>
               </div>
+              <div className="hidden h-8 w-px rounded-full bg-glass-border md:block" />
+              <p className="hidden text-right text-[10px] font-bold uppercase tracking-widest text-primary/60 md:block">
+                Direct Line
+              </p>
             </div>
-            <div className="flex items-center gap-3 border-t border-glass-border px-6 py-4 sm:border-l sm:border-t-0">
-              <span className="relative flex h-2.5 w-2.5 shrink-0">
+          </motion.a>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            style={{ ["--card-accent" as string]: "#06B6D4" }}
+            className="card-hover-glow glass rounded-3xl p-6"
+          >
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+              <MapPin className="h-3 w-3" /> Based in
+            </span>
+            <p className="mt-3 text-lg font-bold">India · Remote</p>
+            <p className="mt-1 text-xs text-muted-foreground">IST · overlaps EU & US hours.</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ ["--card-accent" as string]: "#10B981" }}
+            className="card-hover-glow glass rounded-3xl p-6"
+          >
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+              <span className="relative flex h-2 w-2">
                 <span className="absolute inset-0 animate-ping rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              <div>
-                <p className="text-sm font-semibold">Open to Frontend & Product roles</p>
-                <p className="text-xs text-muted-foreground">Full-time · 2026</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+              Available
+            </span>
+            <p className="mt-3 text-lg font-bold">Frontend & Product Roles</p>
+            <p className="mt-1 text-xs text-muted-foreground">Full-time · 2026</p>
+          </motion.div>
+        </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-glass-border pt-8 pb-24 text-xs text-muted-foreground sm:flex-row sm:pr-24 sm:pb-8">
           <div className="flex flex-col items-center gap-1 sm:items-start">
