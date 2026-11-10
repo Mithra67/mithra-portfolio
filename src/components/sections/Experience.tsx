@@ -3,6 +3,26 @@ import { Reveal, SectionHeading } from "@/components/ui/Reveal";
 import { usePortfolioContent } from "@/lib/portfolio-content";
 import { Briefcase, Sparkles, Building2, Calendar } from "lucide-react";
 import { sortNewestFirst } from "@/lib/portfolio-order";
+import { skills } from "@/lib/data";
+import type { IconType } from "react-icons";
+import { SiNodedotjs } from "react-icons/si";
+import { TbApi } from "react-icons/tb";
+import { LuSearch, LuCode } from "react-icons/lu";
+
+const EXTRA_LOGOS: Record<string, { Icon: IconType; color: string }> = {
+  node: { Icon: SiNodedotjs, color: "#5FA04E" },
+  "node.js": { Icon: SiNodedotjs, color: "#5FA04E" },
+  "rest apis": { Icon: TbApi, color: "#A855F7" },
+  seo: { Icon: LuSearch, color: "#10B981" },
+  echarts: { Icon: skills.find((k) => k.name === "Apache ECharts")!.Icon, color: "#AA0201" },
+};
+
+function logoFor(name: string) {
+  const key = name.toLowerCase();
+  const hit = skills.find((k) => k.name.toLowerCase() === key);
+  if (hit) return { Icon: hit.Icon, color: hit.color };
+  return EXTRA_LOGOS[key] ?? { Icon: LuCode as IconType, color: "currentColor" };
+}
 
 export function Experience() {
   const { content: { experience } } = usePortfolioContent();
@@ -130,14 +150,25 @@ function ExperienceEntry({ e, index }: { e: any; index: number }) {
                   Architected With
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {e.stack.map((s: string) => (
-                    <span 
-                      key={s}
-                      className="rounded-lg border border-glass-border bg-card/60 px-3 py-1.5 text-[11px] font-bold tracking-wide text-foreground/80 hover:border-primary/40 hover:text-primary transition-all"
-                    >
-                      {s}
-                    </span>
-                  ))}
+                  {e.stack.map((s: string) => {
+                    const { Icon, color } = logoFor(s);
+                    const tint = color === "#FFFFFF" || color === "#E5E5E5" ? undefined : color;
+                    return (
+                      <div key={s} className="group/logo relative">
+                        <div
+                          role="img"
+                          aria-label={s}
+                          tabIndex={0}
+                          className="flex h-11 w-11 items-center justify-center rounded-xl border border-glass-border bg-card/60 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        >
+                          <Icon className="h-5 w-5 object-contain" style={{ color: tint }} />
+                        </div>
+                        <span className="pointer-events-none absolute -top-9 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-md border border-glass-border bg-popover px-2 py-1 text-[11px] font-bold text-popover-foreground opacity-0 shadow-md transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-within/logo:opacity-100">
+                          {s}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
