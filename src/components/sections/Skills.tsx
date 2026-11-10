@@ -22,7 +22,7 @@ function buildPyramid<T>(items: T[]): T[][] {
 
 export function Skills() {
   const { content: { skills, skillCategories } } = usePortfolioContent();
-  const [activeLevel, setActiveLevel] = useState<SkillLevel | "all">("all");
+  const activeLevel = "all" as SkillLevel | "all";
   const [activeCategory, setActiveCategory] = useState<SkillCategory | "all">("all");
 
   const description =
@@ -68,31 +68,6 @@ export function Skills() {
           title={levelLabel[activeLevel]}
           description={description}
         />
-
-        <div className="mb-8 flex justify-center">
-          <div className="inline-flex flex-wrap justify-center rounded-2xl bg-card/30 p-1.5 border border-glass-border shadow-xl backdrop-blur-md">
-            {(["all", "core", "production", "familiar"] as const).map((l) => (
-              <button
-                key={l}
-                onClick={() => { setActiveLevel(l); setActiveCategory("all"); }}
-                className={`relative rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all duration-300 ${
-                  activeLevel === l
-                    ? "text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {activeLevel === l && (
-                  <motion.div
-                    layoutId="level-pill"
-                    className="absolute inset-0 bg-gradient-to-br from-primary to-primary-glow rounded-xl shadow-[0_0_20px_rgba(var(--primary),0.3)]"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10">{l === "all" ? "All Tools" : levelLabel[l]}</span>
-              </button>
-            ))}
-          </div>
-        </div>
 
         {/* Secondary Category Pills */}
         <div className="mb-8 flex flex-wrap justify-center gap-2">
