@@ -250,6 +250,13 @@ export function AetherChat() {
     }
   };
 
+  const [showHi, setShowHi] = useState(false);
+  useEffect(() => {
+    const t1 = setTimeout(() => setShowHi(true), 2500);
+    const t2 = setTimeout(() => setShowHi(false), 12000);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
   return (
     <div ref={dragRef} className="pointer-events-none fixed inset-0 z-[60]">
       {/* Floating Toggle Bubble */}
@@ -265,7 +272,7 @@ export function AetherChat() {
         whileTap={{ scale: 0.92 }}
         whileHover={{ scale: 1.07 }}
         onClick={() => { if (!draggedRef.current) setOpen((o) => !o); }}
-        aria-label={open ? "Close chat" : "Chat with Mithra"}
+        aria-label={open ? "Close chat" : "Chat with Mithra's AI assistant"}
         className="pointer-events-auto fixed bottom-6 right-6 flex h-16 w-16 cursor-grab items-center justify-center rounded-full border border-glass-border bg-gradient-to-br from-primary to-primary-glow shadow-2xl backdrop-blur-md transition-shadow duration-300 hover:brightness-110 active:cursor-grabbing"
       >
         <span className="pointer-events-none absolute inset-0 animate-pulse rounded-full bg-primary/25 blur-2xl" />
@@ -275,7 +282,26 @@ export function AetherChat() {
         <span className="pointer-events-none absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-primary shadow-lg ring-1 ring-white/25">
           <Sparkles className="h-2.5 w-2.5 text-primary-foreground" />
         </span>
+        <span className="pointer-events-none absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border border-background bg-foreground px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-background shadow-lg">AI</span>
       </motion.button>
+
+      <AnimatePresence>
+        {showHi && !open && (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.95 }}
+            className="pointer-events-auto fixed bottom-24 right-6 flex max-w-[240px] items-start gap-2 rounded-2xl border border-glass-border bg-popover/80 px-3.5 py-2.5 text-xs text-foreground shadow-xl backdrop-blur-xl"
+          >
+            <button onClick={() => setOpen(true)} className="text-left leading-snug">
+              Hi! I'm Mithra's AI — ask me anything 👋
+            </button>
+            <button onClick={() => setShowHi(false)} aria-label="Dismiss greeting" className="text-muted-foreground hover:text-foreground">
+              <X className="h-3 w-3" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {open && (
@@ -301,7 +327,7 @@ export function AetherChat() {
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-[15px] font-bold tracking-tight text-foreground">Chat with Mithra</h3>
+                    <h3 className="text-[15px] font-bold tracking-tight text-foreground">Mithra's AI Assistant</h3>
                     <p className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
                       <span className="h-1 w-1 animate-pulse rounded-full bg-primary" /> Active now
                     </p>
