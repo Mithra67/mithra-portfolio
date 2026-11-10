@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Send, Sparkles, X, ExternalLink, Mail } from "lucide-react";
+import { Send, X, ExternalLink, Mail } from "lucide-react";
 import { getAetherResponse } from "@/lib/ai.functions";
 import { profile } from "@/lib/data";
 import mithraPhoto from "@/assets/mithra-profile.png.asset.json";
@@ -279,10 +279,6 @@ export function AetherChat() {
         <div className="float-bob relative h-14 w-14 overflow-hidden rounded-full border border-white/30 p-0.5 shadow-inner">
           <img src={mithraPhoto.url} alt="Chat with Mithra" className="h-full w-full rounded-full object-cover" />
         </div>
-        <span className="pointer-events-none absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-primary shadow-lg ring-1 ring-white/25">
-          <Sparkles className="h-2.5 w-2.5 text-primary-foreground" />
-        </span>
-        <span className="pointer-events-none absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border border-background bg-foreground px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-background shadow-lg">AI</span>
       </motion.button>
 
       <AnimatePresence>

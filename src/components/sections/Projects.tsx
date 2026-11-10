@@ -22,9 +22,9 @@ export function Projects() {
           description="Each project moves through a deliberate lifecycle — from spec to production."
         />
 
-        <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
           {orderedProjects.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.08} className="h-full">
+            <Reveal key={p.title} delay={i * 0.08}>
               <TiltCard
                 project={p}
                 accent={PROJECT_ACCENTS[i % PROJECT_ACCENTS.length]}
@@ -82,7 +82,7 @@ function TiltCard({ project: p, accent, isOpen, onToggle }: { project: Project; 
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 240, damping: 18 }}
-      className="card-hover-glow glass group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl cursor-pointer"
+      className="card-hover-glow glass group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl cursor-pointer"
     >
       <div className="absolute inset-x-0 top-0 z-10 h-0.5" style={{ background: accent }} />
       <div 
