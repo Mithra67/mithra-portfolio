@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Send, Sparkles, X, ExternalLink, Mail } from "lucide-react";
+import { Send, X, ExternalLink, Mail } from "lucide-react";
 import { getAetherResponse } from "@/lib/ai.functions";
 import { profile } from "@/lib/data";
 import mithraPhoto from "@/assets/mithra-profile.png.asset.json";
