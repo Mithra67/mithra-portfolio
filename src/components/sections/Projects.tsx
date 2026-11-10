@@ -22,9 +22,9 @@ export function Projects() {
           description="Each project moves through a deliberate lifecycle — from spec to production."
         />
 
-        <div className="grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {orderedProjects.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.08}>
+            <Reveal key={p.title} delay={i * 0.08} className="h-full">
               <TiltCard
                 project={p}
                 accent={PROJECT_ACCENTS[i % PROJECT_ACCENTS.length]}
@@ -131,8 +131,8 @@ function TiltCard({ project: p, accent, isOpen, onToggle }: { project: Project; 
           className="-mx-2 flex h-auto w-[calc(100%+1rem)] items-start justify-between gap-3 whitespace-normal rounded-lg px-2 py-1 text-left hover:bg-primary/5"
         >
           <span className="min-w-0 flex-1">
-            <span className="block break-words text-xl font-bold leading-tight">{p.title}</span>
-            <span className="mt-1 block break-words text-sm font-normal text-primary">{p.subtitle}</span>
+            <span className="block line-clamp-2 min-h-[2.5em] break-words text-xl font-bold leading-tight">{p.title}</span>
+            <span className="mt-1 block line-clamp-2 min-h-[2.5em] break-words text-sm font-normal text-primary">{p.subtitle}</span>
           </span>
           <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }} className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-glass-border bg-primary/10 text-primary">
             <ChevronDown className="h-4 w-4" />
