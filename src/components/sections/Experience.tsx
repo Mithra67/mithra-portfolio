@@ -149,21 +149,21 @@ function ExperienceEntry({ e, index }: { e: any; index: number }) {
                 <div className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
                   Architected With
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-x-2 gap-y-5">
                   {e.stack.map((s: string) => {
                     const { Icon, color } = logoFor(s);
                     const tint = color === "#FFFFFF" || color === "#E5E5E5" ? undefined : color;
                     return (
-                      <div key={s} className="group/logo relative">
+                      <div key={s} className="group/logo relative flex w-16 flex-col items-center gap-1.5">
                         <div
                           role="img"
                           aria-label={s}
                           tabIndex={0}
-                          className="flex h-11 w-11 items-center justify-center rounded-xl border border-glass-border bg-card/60 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                          className="flex h-11 w-11 items-center justify-center rounded-xl border border-glass-border bg-card/60 transition-all duration-300 group-hover/logo:-translate-y-1 group-hover/logo:border-primary/40 group-hover/logo:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         >
                           <Icon className="h-5 w-5 object-contain" style={{ color: tint }} />
                         </div>
-                        <span className="pointer-events-none absolute -top-9 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-md border border-glass-border bg-popover px-2 py-1 text-[11px] font-bold text-popover-foreground opacity-0 shadow-md transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-within/logo:opacity-100">
+                        <span className="pointer-events-none absolute top-full left-1/2 z-20 mt-1 -translate-x-1/2 translate-y-1 whitespace-nowrap text-center text-[10px] font-bold leading-tight text-foreground opacity-0 transition-all duration-300 group-hover/logo:translate-y-0 group-hover/logo:opacity-100 group-focus-within/logo:translate-y-0 group-focus-within/logo:opacity-100 sm:text-[11px]">
                           {s}
                         </span>
                       </div>
