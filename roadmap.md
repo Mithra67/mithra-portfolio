@@ -4,3 +4,4 @@
 - [ ] Verify Aether’s real answer path and remove any behavior that can leave the chat stuck.
 - [ ] Publish the portfolio and make a public GitHub repository containing the project source, excluding secrets and generated files.
 - [ ] Sort dated portfolio cards newest-first, update the Algostrive site link, and mark the MSc distinction as Rank Holder.
+- [ ] Import the latest DEVOPSLABS tools and compact show-more experience display from the connected GitHub portfolio while preserving saved content.
